@@ -1,18 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:gravity="top|left"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="Welcome to Messsy!"
+        android:textColor="@color/white"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="35sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="395dp"
+        android:id="@+id/card_view"
+        app:cardCornerRadius="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/textView"
+        app:cardElevation="200dp"
+        android:layout_marginTop="60dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:text="For Admin"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
+
+        <EditText
+            android:id="@+id/EmailAddress"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/admin"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="25dp"
+            android:layout_height="60dp"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="15dp"
+            android:paddingLeft="25dp"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/EmailAddress"
+            android:background="@drawable/edit_text"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="15dp"
+            android:paddingLeft="25dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/Password"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button"
+            android:text="Log In"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:theme="@style/button" />
+
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="#EC9C00"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/login"
+            android:fontFamily="@font/roboto"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+
+<Button
+            android:id="@+id/login_member"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="40dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/button"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/roboto"
+            android:layout_marginBottom="95dp"
+            android:theme="@style/button"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            android:text="Login as Mess Member"
+                                 />
+
+            <TextView
+            android:id="@+id/dont_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="38dp"
+            android:textColor="@color/black"
+                android:fontFamily="@font/roboto"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignLeft="@id/login_member"
+            android:text="Don't have an account?" />
+
+            <TextView
+            android:id="@+id/create_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/dont_account"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="38dp"
+                android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#EC9C00"
+            android:textSize="18sp"
+            android:text="Create one" />
+
+    </RelativeLayout>
