@@ -2,6 +2,7 @@ package com.hackslash.messsyadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, MessMemberUI.class);
+                startActivity(intent);
+
             }
         });
 
@@ -96,21 +101,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-//            loginMM.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    if(conditionChecker.equalsIgnoreCase("Login as Admin")){
-//
-//                        forAdmin.setText("For Admin");
-//                        loginMM.setText("Login as Mess Member");
-//                        email.setText("");
-//                        password.setText("");
-//                        hasLoginAdmin = true;
-//                    }
-//
-//                }
-//            });
 
 
 
