@@ -45,20 +45,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        conditionChecker = loginMM.getText().toString();
         createOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(MainActivity.this, MessMemberUI.class);
-                startActivity(intent);
 
+                if(conditionChecker.equalsIgnoreCase("Login as Admin")) {
+                    Intent intentMM = new Intent(MainActivity.this, MessMemberUI.class);
+                    startActivity(intentMM);
+                }
+                else{
+                    Intent intentAdmin = new Intent(MainActivity.this,AdminUI.class);
+                    startActivity(intentAdmin);
+                }
             }
         });
 
 
-        conditionChecker = loginMM.getText().toString();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
