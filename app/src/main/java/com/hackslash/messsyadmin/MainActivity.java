@@ -19,18 +19,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_open_frame);
+        setContentView(R.layout.activity_main);
 
 
 
 
-        email = (EditText) findViewById(R.id.EmailAddress);
-        password = (EditText) findViewById(R.id.Password);
-        login = (Button) findViewById(R.id.login);
-        loginMM = (Button) findViewById(R.id.login_member);
-        forgotpass = (TextView) findViewById(R.id.forgotPassword);
-        createOne = (TextView) findViewById(R.id.create_one);
-        forAdmin= (TextView) findViewById(R.id.admin);
+        //email = (EditText) findViewById(R.id.EmailAddress);
+       // password = (EditText) findViewById(R.id.Password);
+        //login = (Button) findViewById(R.id.login);
+        //loginMM = (Button) findViewById(R.id.login_member);
+       // forgotpass = (TextView) findViewById(R.id.forgotPassword);
+        //createOne = (TextView) findViewById(R.id.create_one);
+      //  forAdmin= (TextView) findViewById(R.id.admin);
 
 
         forgotpass.setOnClickListener(new View.OnClickListener() {
