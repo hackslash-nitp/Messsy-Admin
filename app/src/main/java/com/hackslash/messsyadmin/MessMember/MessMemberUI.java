@@ -1,16 +1,16 @@
-package com.hackslash.messsyadmin;
+package com.hackslash.messsyadmin.MessMember;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.hackslash.messsyadmin.R;
 
 public class MessMemberUI extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.hackslash.messsyadmin;
+package com.hackslash.messsyadmin.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.hackslash.messsyadmin.R;
 
 public class AdminUI extends AppCompatActivity {
     Button login , addImage , register, visibility;

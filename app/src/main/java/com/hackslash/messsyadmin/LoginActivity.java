@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Member;
+import com.hackslash.messsyadmin.Admin.AdminUI;
+import com.hackslash.messsyadmin.MessMember.MessMemberUI;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     EditText email , password;
     Button login, loginMM;
     TextView forgotpass , createOne , forAdmin;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
 
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "Forgot password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Forgot password", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity {
         createOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
 
 
                 if(conditionChecker.equalsIgnoreCase("Login as Admin")) {
-                    Intent intentMM = new Intent(MainActivity.this, MessMemberUI.class);
+                    Intent intentMM = new Intent(LoginActivity.this, MessMemberUI.class);
                     startActivity(intentMM);
                 }
                 else{
-                    Intent intentAdmin = new Intent(MainActivity.this,AdminUI.class);
+                    Intent intentAdmin = new Intent(LoginActivity.this, AdminUI.class);
                     startActivity(intentAdmin);
                 }
             }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                  else{
                      hasLoginMM = true;
                  }
-                Toast.makeText(MainActivity.this, "Email:" + emailAdd +"\nPassword:"+ pass, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Email:" + emailAdd +"\nPassword:"+ pass, Toast.LENGTH_SHORT).show();
 
             }
 
