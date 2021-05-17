@@ -9,6 +9,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/frame1"></ImageView>
+       android:src="@drawable/frame1" ></ImageView>
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
