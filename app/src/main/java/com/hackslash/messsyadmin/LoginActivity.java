@@ -50,16 +50,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
-
-
-                if(conditionChecker.equalsIgnoreCase("Login as Admin")) {
-                    Intent intentMM = new Intent(LoginActivity.this, MessMemberUI.class);
-                    startActivity(intentMM);
-                }
-                else{
-                    Intent intentAdmin = new Intent(LoginActivity.this, AdminUI.class);
-                    startActivity(intentAdmin);
-                }
+                Toast.makeText(LoginActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
+                Intent intentReport = new Intent(LoginActivity.this,ReportAnIssueUI.class);
+                startActivity(intentReport);
+//
+//                if(conditionChecker.equalsIgnoreCase("Login as Admin")) {
+//                    Intent intentMM = new Intent(LoginActivity.this, MessMemberUI.class);
+//                    startActivity(intentMM);
+//                }
+//                else{
+//                    Intent intentAdmin = new Intent(LoginActivity.this, AdminUI.class);
+//                    startActivity(intentAdmin);
+//                }
             }
         });
 
