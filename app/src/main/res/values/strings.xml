@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MesssyAdmin</string>
-    <string name="information">Information about your device,account and this app will be automatically included in this report. To learn more about how your information is used,please see our <font color = '#0000FF'><u>Data Use Policy.</u></font> </string>
+    <string name="information">Information about your device,account and this app will be automatically included in this report. To learn more about how your information is used,please see our <font color='#0000FF'><u>Data Use Policy.</u></font> </string>
     <string name="report">Report</string>
-    <string name="info"><font color = '#0000FF'><u>Data Use Policy.</u></font></string>
+    <string name="info"><font color='#0000FF'><u>Data Use Policy.</u></font></string>
 </resources>
