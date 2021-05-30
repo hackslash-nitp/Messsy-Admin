@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".HomePageAdminActivityUI">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
         android:layout_height="195dp"
         android:id="@+id/card_view1"
         app:cardCornerRadius="35dp"
         android:layout_width="155dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="35dp"
         app:cardElevation="10dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="45dp"
         >
 
 
@@ -24,19 +29,19 @@
 
 
             <RelativeLayout
+                android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="99dp"
-                android:layout_marginTop="19dp"
-                android:id="@+id/calendar"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
                 android:background="@drawable/homepageiconshape"
-                android:backgroundTint="#9DFF3A"
-                >
+                android:backgroundTint="#9DFF3A">
+
                 <ImageView
-                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/calendar_icon" />
 
             </RelativeLayout>
@@ -45,16 +50,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/calendar"
-                android:text="Absentees List"
-                android:textAlignment="center"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_centerHorizontal="true"
-                android:textSize="18sp"
-                android:gravity="center_horizontal" />
+                android:fontFamily="@font/roboto"
+                android:gravity="center_horizontal"
+                android:text="Absentees List"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
 
         </RelativeLayout>
@@ -67,9 +72,9 @@
         app:cardCornerRadius="35dp"
         app:cardElevation="10dp"
         android:layout_width="155dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="25dp"
+        android:layout_alignTop="@id/card_view1"
         android:layout_toRightOf="@+id/card_view1"
-        android:layout_marginTop="55dp"
         >
 
 
@@ -121,9 +126,9 @@
         android:layout_height="195dp"
         android:id="@+id/card_view3"
         app:cardCornerRadius="35dp"
+        android:layout_alignRight="@id/card_view1"
         android:layout_width="155dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="40dp"
+        android:layout_alignLeft="@id/card_view1"
         android:layout_below="@+id/card_view1"
         app:cardElevation="10dp"
         android:layout_marginTop="35dp"
@@ -180,6 +185,8 @@
         android:id="@+id/card_view4"
         app:cardCornerRadius="35dp"
         android:layout_width="155dp"
+        android:layout_alignLeft="@id/card_view2"
+        android:layout_alignRight="@id/card_view2"
         android:layout_toRightOf="@id/card_view3"
         android:layout_below="@id/card_view2"
         app:cardElevation="10dp"
@@ -235,11 +242,12 @@
         android:id="@+id/card_view5"
         app:cardCornerRadius="35dp"
         android:layout_width="155dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="15dp"
+        android:layout_alignLeft="@id/card_view3"
+        android:layout_alignRight="@id/card_view3"
         android:layout_below="@id/card_view3"
         app:cardElevation="10dp"
         android:layout_marginTop="35dp"
+        android:layout_marginBottom="45dp"
         >
 
 
@@ -287,5 +295,5 @@
 
     </androidx.cardview.widget.CardView>
 
-
+</RelativeLayout>
 </RelativeLayout>
