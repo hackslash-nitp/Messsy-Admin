@@ -9,15 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-        <activity android:name=".ReportAnIssueUI"></activity>
-        <activity android:name=".Admin.AdminUI" />
-        <activity android:name=".MessMember.MessMemberUI" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".fragmentcontainer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".complaintBox" />
+        <activity android:name=".conversations" />
+        <activity android:name=".createNewNotice" />
+        <activity android:name=".studentTrack" />
+        <activity android:name=".absenteesList" />
+
+        <activity android:name=".ReportAnIssueUI" />
+        <activity android:name=".Admin.AdminUI" />
+        <activity android:name=".MessMember.MessMemberUI" />
+        <activity android:name=".LoginActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <meta-data
