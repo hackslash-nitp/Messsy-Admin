@@ -11,8 +11,10 @@
         android:textSize="32sp"
         android:fontFamily="@font/josefin_sans_semibold"
         android:textColor="@color/black"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:text="Profile" />
+
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -21,8 +23,9 @@
         android:layout_below="@+id/profile_title"
         android:layout_marginTop="45dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/admin_profile_fragment_img"
+        android:src="@drawable/mess_member_profile_image"
         />
+
 
     <TextView
         android:id="@+id/name"
@@ -45,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/josefin_sans_semibold"
-        android:text="Treasurer"
+        android:text="Senior Worker"
         android:textColor="@color/black"
         android:textSize="29sp" />
 
@@ -58,7 +61,7 @@
         android:fontFamily="@font/josefin_sans"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:text="adminxyz@nitp.ac.in"
+        android:text="messabc@nitp.ac.in"
         android:textColor="#3F3D56"
         android:textSize="29sp" />
 
@@ -69,11 +72,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="31sp"
         android:textStyle="bold"
         android:fontFamily="@font/josefin_sans_light"
         android:textColor="@color/black"
-        android:text="ADMIN" />
+        android:text="MESS MEMBER" />
 
     <TextView
         android:id="@+id/all_hostels"
@@ -83,7 +86,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/josefin_sans_semibold"
-        android:text="All Hostels"
+        android:text="Brahmaputra"
         android:textColor="@color/black"
         android:textSize="33sp" />
 
