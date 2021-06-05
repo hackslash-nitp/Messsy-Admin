@@ -24,7 +24,6 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layout_alignTop="@+id/report"
-
         android:background="@drawable/ic_baseline_arrow_back_24" />
 
     <androidx.cardview.widget.CardView
