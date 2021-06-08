@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:textColor="@color/black"
+        android:layout_marginTop="35dp"
+        android:text="Profile" />
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/profile_title"
+        android:layout_marginTop="45dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/mess_member_profile_image"
+        />
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/treasurer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Senior Worker"
+        android:textColor="@color/black"
+        android:textSize="29sp" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/treasurer"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:text="messabc@nitp.ac.in"
+        android:textColor="#3F3D56"
+        android:textSize="29sp" />
+
+    <TextView
+        android:id="@+id/admin_title"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:layout_height="wrap_content"
+        android:textSize="31sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/josefin_sans_light"
+        android:textColor="@color/black"
+        android:text="MESS MEMBER" />
+
+    <TextView
+        android:id="@+id/all_hostels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Brahmaputra"
+        android:textColor="@color/black"
+        android:textSize="33sp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/profile_title"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+</RelativeLayout>
