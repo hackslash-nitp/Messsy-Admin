@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hackslash.messsyadmin">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
+        <activity android:name=".ContactUs"></activity>
         <activity android:name=".fragmentcontainer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,16 +25,17 @@
         <activity android:name=".createNewNotice" />
         <activity android:name=".studentTrack" />
         <activity android:name=".absenteesList" />
-
         <activity android:name=".ReportAnIssueUI" />
         <activity android:name=".Admin.AdminUI" />
         <activity android:name=".MessMember.MessMemberUI" />
         <activity android:name=".LoginActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data

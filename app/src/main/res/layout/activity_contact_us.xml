@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactUs">
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:background="#3F3D56" />
+
+
+
+    <TextView
+        android:id="@+id/ContactUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Contact Us"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/ContactUs"
+        android:layout_alignBottom="@+id/ContactUs"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        android:backgroundTint="#FFFFFF"/>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/fbIcon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/fb_icon" />
+
+            <TextView
+                android:id="@+id/tvFacebookAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="OpenFbAddress"
+                android:padding="9dp"
+                android:text="@string/fbAddress"
+                android:textColor="#1250C8"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/email_icon" />
+
+            <TextView
+                android:id="@+id/tvEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="OpenMail"
+                android:padding="9dp"
+                android:text="@string/mailAddress"
+                android:textColor="#1250C8"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/IgIcon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/ig_icon" />
+
+            <TextView
+                android:id="@+id/tvIgAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="OpenIgAddress"
+                android:padding="9dp"
+                android:text="@string/igAddress"
+                android:textColor="#1250C8"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/telephoneIcon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/telephone_icon" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="OpenTelephoneAddress"
+                android:padding="9dp"
+                android:text="@string/telephoneAddress"
+                android:textColor="#1250C8"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

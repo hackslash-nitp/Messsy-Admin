@@ -3,4 +3,8 @@
     <string name="information">Information about your device,account and this app will be automatically included in this report. To learn more about how your information is used,please see our <font color='#0000FF'><u>Data Use Policy.</u></font> </string>
     <string name="report">Report</string>
     <string name="info"><font color='#0000FF'><u>Data Use Policy.</u></font></string>
+    <string name="fbAddress"><u>www.facebook.com/messsynitp</u></string>
+    <string name="mailAddress"><u>contact_messsynitp@gmail.com</u></string>
+    <string name="igAddress"><u>www.instagram.com/messsynitp</u></string>
+    <string name="telephoneAddress"><u>0612-210-1342</u></string>
 </resources>
