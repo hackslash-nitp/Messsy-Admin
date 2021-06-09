@@ -8,25 +8,46 @@
     tools:context=".HomePageMembersUI">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_purple">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            android:text="Messsy"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/menubar"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="485dp"
+        android:layout_centerInParent="true">
 
         <androidx.cardview.widget.CardView
-            android:layout_height="195dp"
             android:id="@+id/card_view1"
-            app:cardCornerRadius="35dp"
             android:layout_width="155dp"
+            android:layout_height="195dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="35dp"
-            app:cardElevation="10dp"
             android:layout_marginTop="45dp"
-            >
+            android:layout_marginRight="35dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="10dp">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 android:background="@color/white">
 
 
@@ -35,9 +56,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="99dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="19dp"
                     android:layout_marginTop="19dp"
-                    android:background="@drawable/ellipse_conversations"
-                    >
+                    android:layout_marginRight="19dp"
+                    android:background="@drawable/ellipse_conversations">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -69,16 +91,14 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_height="195dp"
             android:id="@+id/card_view2"
-            app:cardCornerRadius="35dp"
-            app:cardElevation="10dp"
             android:layout_width="155dp"
-            android:layout_marginRight="25dp"
+            android:layout_height="195dp"
             android:layout_alignTop="@id/card_view1"
+            android:layout_marginRight="25dp"
             android:layout_toRightOf="@+id/card_view1"
-            >
-
+            app:cardCornerRadius="35dp"
+            app:cardElevation="10dp">
 
 
             <RelativeLayout
@@ -88,19 +108,21 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/notice"
                     android:layout_width="match_parent"
                     android:layout_height="99dp"
-                    android:layout_marginTop="19dp"
-                    android:id="@+id/notice"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="19dp"
                     android:background="@drawable/ellipse_notice"
-                    android:backgroundTint="#3AE7FF"
-                    >
+                    android:backgroundTint="#3AE7FF">
+
                     <ImageView
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/notice" />
 
                 </RelativeLayout>
@@ -109,15 +131,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/notice"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:text="View Notice "
-                    android:gravity="center"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="13dp"
                     android:layout_centerHorizontal="true"
-                    android:textSize="18sp"/>
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="View Notice "
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
             </RelativeLayout>
@@ -126,17 +148,15 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_height="195dp"
             android:id="@+id/card_view3"
-            app:cardCornerRadius="35dp"
-            android:layout_alignRight="@id/card_view1"
             android:layout_width="155dp"
-            android:layout_alignLeft="@id/card_view1"
+            android:layout_height="195dp"
             android:layout_below="@+id/card_view1"
-            app:cardElevation="10dp"
+            android:layout_alignLeft="@id/card_view1"
+            android:layout_alignRight="@id/card_view1"
             android:layout_marginTop="35dp"
-            >
-
+            app:cardCornerRadius="35dp"
+            app:cardElevation="10dp">
 
 
             <RelativeLayout
@@ -146,37 +166,39 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/report_issue"
                     android:layout_width="match_parent"
                     android:layout_height="99dp"
-                    android:layout_marginTop="19dp"
-                    android:id="@+id/report_issue"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="19dp"
                     android:background="@drawable/ellipse_issue"
-                    android:backgroundTint="#FF6A3A"
-                    >
+                    android:backgroundTint="#FF6A3A">
+
                     <ImageView
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/edit_square" />
 
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_below="@id/report_issue"
-                    android:text="Report Issues"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto"
-                    android:layout_marginTop="13dp"
                     android:layout_centerHorizontal="true"
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="Report Issues"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
             </RelativeLayout>
@@ -185,18 +207,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_height="195dp"
             android:id="@+id/card_view4"
-            app:cardCornerRadius="35dp"
             android:layout_width="155dp"
+            android:layout_height="195dp"
+            android:layout_below="@id/card_view2"
             android:layout_alignLeft="@id/card_view2"
             android:layout_alignRight="@id/card_view2"
-            android:layout_toRightOf="@id/card_view3"
-            android:layout_below="@id/card_view2"
-            app:cardElevation="10dp"
             android:layout_marginTop="35dp"
-            >
-
+            android:layout_toRightOf="@id/card_view3"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="10dp">
 
 
             <RelativeLayout
@@ -206,19 +226,22 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/menu"
                     android:layout_width="match_parent"
                     android:layout_height="99dp"
-                    android:layout_marginTop="19dp"
-                    android:id="@+id/menu"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginRight="19dp"
                     android:background="@drawable/ellipse_calendar"
 
                     >
+
                     <ImageView
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/menu" />
 
                 </RelativeLayout>
@@ -227,15 +250,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/menu"
-                    android:text="Menu"
-                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginRight="15dp"
                     android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="Menu"
                     android:textColor="@color/black"
-                    android:layout_marginTop="13dp"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
 
             </RelativeLayout>
