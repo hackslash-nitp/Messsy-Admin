@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class studentTrack extends AppCompatActivity {
+public class activity_conversations extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_track);
-        Intent i2 = getIntent();
+        setContentView(R.layout.activity_conversations);
+        Intent conversationIntent = getIntent();
+
     }
 }

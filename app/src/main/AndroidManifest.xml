@@ -20,22 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".complaintBox" />
-        <activity android:name=".conversations" />
-        <activity android:name=".createNewNotice" />
-        <activity android:name=".studentTrack" />
-        <activity android:name=".absenteesList" />
-        <activity android:name=".ReportAnIssueUI" />
+        <activity android:name=".activity_complaintBox" />
+        <activity android:name=".activity_conversations" />
+        <activity android:name=".activity_createNewNotice" />
+        <activity android:name=".activity_studentTrack" />
+        <activity android:name=".activity_absenteesList" />
+
+        <activity android:name=".activity_ReportAnIssueUI" />
         <activity android:name=".Admin.AdminUI" />
         <activity android:name=".MessMember.MessMemberUI" />
-        <activity android:name=".LoginActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+        <activity android:name=".activity_Login">
         </activity>
 
         <meta-data

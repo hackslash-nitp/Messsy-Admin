@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,16 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ReportAnIssueUI extends AppCompatActivity {
+public class activity_ReportAnIssueUI extends AppCompatActivity {
 
-    Button back , send , uploadImage;
-    EditText issue , explaination;
-    TextView information;
+    Button backButton, sendButton, uploadImageButton;
+    EditText issueET, explainationET;
+    TextView informationTV;
     String sIssue , sExplaination ;
     private static int PICK_IMAGE = 1 ;
     @Override
@@ -34,40 +30,40 @@ public class ReportAnIssueUI extends AppCompatActivity {
         setContentView(R.layout.activity_report_an_issue_u_i);
         Intent intentReport = getIntent();
 
-        back = (Button) findViewById(R.id.backButton);
-        send = (Button) findViewById(R.id.sendButton);
-        uploadImage = (Button) findViewById(R.id.uploadimage);
-        issue = (EditText) findViewById(R.id.issue);
-        explaination = (EditText) findViewById(R.id.explaination);
-        information = (TextView) findViewById(R.id.information);
+        backButton = (Button) findViewById(R.id.backButton);
+        sendButton = (Button) findViewById(R.id.sendButton);
+        uploadImageButton = (Button) findViewById(R.id.uploadimage);
+        issueET = (EditText) findViewById(R.id.issue);
+        explainationET = (EditText) findViewById(R.id.explaination);
+        informationTV = (TextView) findViewById(R.id.information);
 
-        send.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sIssue = issue.getText().toString();
-                sExplaination = explaination.getText().toString();
-                Toast.makeText(ReportAnIssueUI.this, "Issue:" + sIssue + "\nExplaination:"+ sExplaination, Toast.LENGTH_SHORT).show();
+                sIssue = issueET.getText().toString();
+                sExplaination = explainationET.getText().toString();
+                Toast.makeText(activity_ReportAnIssueUI.this, "Issue:" + sIssue + "\nExplaination:"+ sExplaination, Toast.LENGTH_SHORT).show();
             }
         });
 
-        uploadImage.setOnClickListener(new View.OnClickListener() {
+        uploadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), PICK_IMAGE);
             }
         });
 
-        information.setOnClickListener(new View.OnClickListener() {
+        informationTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ReportAnIssueUI.this, "Clicked on Data Use Policy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_ReportAnIssueUI.this, "Clicked on Data Use Policy", Toast.LENGTH_SHORT).show();
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ReportAnIssueUI.this, "Clicked on back button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_ReportAnIssueUI.this, "Clicked on back button", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,7 +92,7 @@ public class ReportAnIssueUI extends AppCompatActivity {
             }
         }
 
-        uploadImage.setText("Image Uploaded");
-        uploadImage.setBackgroundResource(R.drawable.uploadimageafteruploaded);
+        uploadImageButton.setText("Image Uploaded");
+        uploadImageButton.setBackgroundResource(R.drawable.uploadimageafteruploaded);
     }
 }
