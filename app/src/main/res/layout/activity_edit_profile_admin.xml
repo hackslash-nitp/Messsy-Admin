@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.EditProfileAdmin">
+
+    <TextView
+        android:id="@+id/editDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Edit your details"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/editDetail"
+        android:layout_alignBottom="@+id/editDetail"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+
+    <ImageView
+        android:id="@+id/ivEditProfileAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/editDetail"
+        app:srcCompat="@drawable/edit_profileimage" />
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_below="@id/ivEditProfileAdmin">
+
+        <TextView
+            android:id="@+id/tvnameProfileAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Name"
+            android:textColor="#39374D"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="7dp"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvemailProfileAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Email Address"
+            android:textColor="#39374D"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Room Number"
+            android:textColor="#39374D"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="7dp"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Enter a Password"
+            android:textColor="#39374D"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:padding="7dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/registerbutton"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Save Details"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/info"/>
+
+
+
+</RelativeLayout>
+
+
