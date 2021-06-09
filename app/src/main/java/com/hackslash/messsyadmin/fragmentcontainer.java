@@ -14,11 +14,11 @@ public class fragmentcontainer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragmentcontainer);
+        setContentView(R.layout.fragmentcontainer);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fargment_container, new HomePageAdminActivityUI()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fargment_container, new fragment_home()).commit();
     }
     private  BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -28,16 +28,16 @@ public class fragmentcontainer extends AppCompatActivity {
             switch (item.getItemId()){
 
                 case R.id.home_icon :
-                    selectedFragment = new HomePageAdminActivityUI();
+                    selectedFragment = new fragment_home();
                     break;
                 case R.id.activity_icon :
-                    selectedFragment = new ActivityFragment();
+                    selectedFragment = new fragment_activity();
                     break;
                 case R.id.wallet_icon :
-                    selectedFragment = new WalletFragment();
+                    selectedFragment = new fragment_wallet();
                     break;
                 case R.id.profile_icon :
-                    selectedFragment = new ProfileFragment();
+                    selectedFragment = new fragment_profile();
                     break;
 
 
