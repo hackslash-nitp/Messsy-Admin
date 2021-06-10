@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.EditProfileAdmin">
+    tools:context=".MessMember.EditProfileMessMember">
 
     <TextView
         android:id="@+id/editDetail"
@@ -28,15 +28,26 @@
         android:background="@drawable/ic_baseline_arrow_back_24" />
 
     <ImageView
-        android:id="@+id/ivEditProfileAdmin"
+        android:id="@+id/ivEditProfileMessMember"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_height="165dp"
         android:layout_below="@id/editDetail"
-        app:srcCompat="@drawable/edit_profileimage" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/undraw_cookie_love" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_below="@id/ivEditProfileMessMember"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:fontFamily="@font/josefin_sans"
+        android:text="Mess in-charge\nGanga Hostel"/>
 
     <LinearLayout
         android:id="@+id/info"
@@ -48,10 +59,10 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp"
-        android:layout_below="@id/ivEditProfileAdmin">
+        android:layout_below="@id/tvDescription">
 
         <TextView
-            android:id="@+id/tvnameProfileAdmin"
+            android:id="@+id/tvnameProfileMessMember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/josefin_sans_semibold"
@@ -70,7 +81,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tvemailProfileAdmin"
+            android:id="@+id/tvemailProfileMessMember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/josefin_sans_semibold"
@@ -88,24 +99,6 @@
             android:padding="7dp"
             android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/tvRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/josefin_sans_semibold"
-            android:padding="5dp"
-            android:text="Room Number"
-            android:textColor="#39374D"
-            android:textSize="20sp"/>
-
-        <EditText
-            android:id="@+id/etRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="7dp"
-            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/tvPassword"
@@ -145,6 +138,5 @@
 
 
 
+
 </RelativeLayout>
-
-
