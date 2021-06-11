@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-        <activity android:name=".MessMember.EditProfileMessMember"></activity>
-        <activity android:name=".Admin.EditProfileAdmin" />
+        <activity android:name=".Admin.EditProfileAdmin"></activity>
         <activity android:name=".ContactUs" />
         <activity android:name=".fragmentcontainer">
             <intent-filter>
@@ -30,7 +29,7 @@
         <activity android:name=".activity_ReportAnIssueUI" />
         <activity android:name=".Admin.AdminUI" />
         <activity android:name=".MessMember.MessMemberUI" />
-        <activity android:name=".activity_Login" />
+        <activity android:name=".activity_Login"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
