@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.hackslash.messsyadmin.R;
 
 public class AdminUI extends AppCompatActivity {
-    Button login , addImage , register, visibility;
-    EditText name , emailAdd , mobileNumber  , password;
-    String  sName , sEmail , sMobile , sHostelName, sPassword , data;
+    Button loginButton, addImageButton, registerButton, visibilityButton;
+    EditText nameET, emailAddET, mobileNumberET, passwordET;
+    String  sName , sEmail , sMobile , sPassword , sData;
     Boolean hasVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,53 +24,53 @@ public class AdminUI extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        login = (Button) findViewById(R.id.login);
-        addImage = (Button) findViewById(R.id.addImage);
-        register = (Button) findViewById(R.id.register);
-        visibility = (Button) findViewById(R.id.visibility);
-        name = (EditText) findViewById(R.id.name);
-        emailAdd = (EditText) findViewById(R.id.EmailAddress);
-        mobileNumber = (EditText) findViewById(R.id.mobilenumber);
-        password = (EditText) findViewById(R.id.Password);
+        loginButton = (Button) findViewById(R.id.login);
+        addImageButton = (Button) findViewById(R.id.addImage);
+        registerButton = (Button) findViewById(R.id.register);
+        visibilityButton = (Button) findViewById(R.id.visibility);
+        nameET = (EditText) findViewById(R.id.name);
+        emailAddET = (EditText) findViewById(R.id.EmailAddress);
+        mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
+        passwordET = (EditText) findViewById(R.id.Password);
 
 
 
-        register.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sName = name.getText().toString();
-                sEmail = emailAdd.getText().toString();
-                sMobile = mobileNumber.getText().toString();
-                sPassword = password.getText().toString();
-                data = "Name: " + sName + "\nEmail: " + sEmail + "\nMobile No: " + sMobile + "\nPassword: " +sPassword;
-                Toast.makeText(AdminUI.this,data, Toast.LENGTH_SHORT).show();
+                sName = nameET.getText().toString();
+                sEmail = emailAddET.getText().toString();
+                sMobile = mobileNumberET.getText().toString();
+                sPassword = passwordET.getText().toString();
+                sData = "Name: " + sName + "\nEmail: " + sEmail + "\nMobile No: " + sMobile + "\nPassword: " +sPassword;
+                Toast.makeText(AdminUI.this, sData, Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        login.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        visibility.setOnClickListener(new View.OnClickListener() {
+        visibilityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(hasVisible){
-                    password.setTransformationMethod(new PasswordTransformationMethod());
+                    passwordET.setTransformationMethod(new PasswordTransformationMethod());
                     hasVisible = false ;
                 }
                 else{
-                    password.setTransformationMethod(null);
+                    passwordET.setTransformationMethod(null);
                     hasVisible = true;
 
                 }
             }
         });
 
-        addImage.setOnClickListener(new View.OnClickListener() {
+        addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(AdminUI.this, "Adding Image", Toast.LENGTH_SHORT).show();
