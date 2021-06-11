@@ -12,28 +12,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-        <activity android:name=".MessMember.fragmentcontainerMembers"/>
+        <activity android:name=".Activity.MessFragmentContainer">
+        </activity>
 
-        <activity android:name=".ContactUs"></activity>
-        <activity android:name=".fragmentcontainer">
-
+        <activity android:name=".Activity.ContactUs"/>
+        <activity android:name=".Activity.AdminFragmentContainer"/>
+        <activity android:name=".Activity.AdminComplaintActivity" />
+        <activity android:name=".Activity.AdminConversationActivity" />
+        <activity android:name=".Activity.AdminNoticeActivity" />
+        <activity android:name=".Activity.AdminStudentTrackActivity" />
+        <activity android:name=".Activity.AdminAbsenteesActivity" />
+        <activity android:name=".Activity.MessReportIssueActivity" />
+        <activity android:name=".Activity.AdminRegisterActivity" />
+        <activity android:name=".Activity.MessRegisterActivity" />
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_complaintBox" />
-        <activity android:name=".activity_conversations" />
-        <activity android:name=".activity_createNewNotice" />
-        <activity android:name=".activity_studentTrack" />
-        <activity android:name=".activity_absenteesList" />
-
-        <activity android:name=".activity_ReportAnIssueUI" />
-        <activity android:name=".Admin.AdminUI" />
-        <activity android:name=".MessMember.MessMemberUI" />
-        <activity android:name=".activity_Login">
-        </activity>
+        <activity android:name=".Activity.MessMenuActivity"/>
+        <activity android:name=".Activity.MessReportActivity"/>
+        <activity android:name=".Activity.MessConversationActivity"/>
+        <activity android:name=".Activity.MessNoticeActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

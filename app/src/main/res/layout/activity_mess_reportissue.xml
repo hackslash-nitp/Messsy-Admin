@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MessReportIssueActivity">
+
+    <TextView
+        android:id="@+id/report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:text="@string/report" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/report"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="65dp"
+        android:id="@+id/issue_cardview"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/report"
+        android:inputType="textPersonName"
+        android:elevation="800dp"
+        android:layout_marginTop="65dp"
+        >
+
+        <EditText
+            android:id="@+id/issue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="  Your issue..."
+            android:paddingTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textSize="22sp"
+            android:background="@null"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="220dp"
+        android:id="@+id/explaination_cardview"
+        app:cardCornerRadius="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/issue_cardview"
+        android:inputType="textPersonName"
+        android:elevation="800dp"
+        app:cardElevation="15dp"
+        android:layout_marginTop="65dp"
+        >
+
+        <EditText
+            android:id="@+id/explaination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type an explaination..."
+            android:paddingLeft="20dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:paddingTop="15dp"
+            android:textSize="22sp"
+            android:background="@null"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/uploadimage"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/explaination_cardview"
+        android:layout_alignLeft="@+id/explaination_cardview"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/white"
+        android:background="@drawable/uploadimagebutton"
+        android:layout_height="40dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:paddingTop="5dp"
+        android:elevation="1000dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:text="Upload Image" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_below="@+id/uploadimage"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignLeft="@id/explaination_cardview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignRight="@id/explaination_cardview"
+        android:layout_height="65dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:elevation="1000dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/registerbutton"
+        android:text="Send" />
+
+
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:fontFamily="@font/josefin_sans_semibold"
+        />
+
+
+</RelativeLayout>
