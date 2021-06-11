@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/josefin_sans"
+        android:fontFamily="@font/josefin_sans_semibold"
         android:text="Contact Us"
         android:textColor="#FFFFFF"
         android:textSize="32sp" />
