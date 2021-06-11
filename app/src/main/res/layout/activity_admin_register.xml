@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MessRegisterActivity">
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/loginbutton"
+        android:textColor="#7E7E7E"
+        android:text="LOGIN"
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/letsgetstarted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/login"
+        android:textColor="#7E7E7E"
+        android:layout_marginTop="50dp"
+        android:textSize="28sp"
+        android:text="Let's get Started" />
+
+
+    <RelativeLayout
+        android:id="@+id/imageview"
+        android:layout_width="120dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/letsgetstarted"
+        android:layout_centerHorizontal="true"
+        android:layout_height="120dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layerlist_admin_icon"
+
+            />
+
+        <Button
+            android:layout_marginTop="6dp"
+            android:id="@+id/addImage"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/layerlist_addicon"
+            />
+
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageview"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/EmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:hint="Email-ID"
+        android:inputType="textEmailAddress"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/countrycode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+91"
+        android:paddingTop="25dp"
+        android:layout_alignBottom="@id/mobilenumber"
+        android:layout_alignLeft="@id/EmailAddress"
+        android:layout_below="@id/EmailAddress"
+        android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/mobilenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EmailAddress"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@id/countrycode"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:hint="Mobile no."
+        android:inputType="phone"
+        android:textSize="25sp" />
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/password_relative_view"
+        android:layout_below="@id/mobilenumber"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="30dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/visibility"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/visibility_off_24"
+            android:layout_alignParentRight="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="83dp"
+        android:padding="5dp"
+        android:layout_height="60dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/password_relative_view"
+        android:background="@drawable/registerbutton"
+        android:textAllCaps="false"
+        android:text="Register" />
+
+
+</RelativeLayout>
