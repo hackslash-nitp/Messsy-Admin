@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
+        <activity android:name=".MessMember.fragmentcontainerMembers"/>
+
         <activity android:name=".ContactUs"></activity>
         <activity android:name=".fragmentcontainer">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
