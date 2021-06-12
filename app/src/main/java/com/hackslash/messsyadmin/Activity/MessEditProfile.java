@@ -29,7 +29,7 @@ public class MessEditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mess_edit_profile);
 
-        img2 = (ImageView)findViewById(R.id.ivEditProfileAdmin);
+        img2 = (ImageView)findViewById(R.id.ivEditProfileMessMember);
         Glide.with(this).load("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg").into(img2);
 
         Button AddImage;
