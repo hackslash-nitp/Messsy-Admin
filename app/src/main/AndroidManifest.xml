@@ -33,7 +33,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MessMenuActivity" />
-        <activity android:name=".Activity.MessReportActivity" />
         <activity android:name=".Activity.MessConversationActivity" />
         <activity android:name=".Activity.MessNoticeActivity" />
 
