@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-        <activity android:name=".Activity.MessFragmentContainer">
-        </activity>
-
-        <activity android:name=".Activity.ContactUs"/>
-        <activity android:name=".Activity.AdminFragmentContainer"/>
+        <activity android:name=".Activity.MessEditProfile"></activity>
+        <activity android:name=".Activity.AdminEditProfile" />
+        <activity android:name=".Activity.MessFragmentContainer" />
+        <activity android:name=".Activity.ContactUs" />
+        <activity android:name=".Activity.AdminFragmentContainer" />
         <activity android:name=".Activity.AdminComplaintActivity" />
         <activity android:name=".Activity.AdminConversationActivity" />
         <activity android:name=".Activity.AdminNoticeActivity" />
@@ -32,10 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MessMenuActivity"/>
-        <activity android:name=".Activity.MessReportActivity"/>
-        <activity android:name=".Activity.MessConversationActivity"/>
-        <activity android:name=".Activity.MessNoticeActivity"/>
+        <activity android:name=".Activity.MessMenuActivity" />
+        <activity android:name=".Activity.MessReportActivity" />
+        <activity android:name=".Activity.MessConversationActivity" />
+        <activity android:name=".Activity.MessNoticeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
