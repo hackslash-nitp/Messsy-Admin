@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 sEmailAddress = emailET.getText().toString();
                 sPassword = passwordET.getText().toString();
                 if (sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
-                    startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
+                    startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
                         hasLoginAdmin = true;
                  }
                  else{

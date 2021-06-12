@@ -1,21 +1,36 @@
 package com.hackslash.messsyadmin.Activity;
 
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerAppUpdate;
+import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerContactUs;
+import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerEditProfile;
+import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerNotification;
+import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerReportIssue;
 import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
 import com.hackslash.messsyadmin.Fragment.MessHomeFragment;
 import com.hackslash.messsyadmin.Fragment.MessProfileFragment;
 import com.hackslash.messsyadmin.Fragment.MessWalletFragment;
 import com.hackslash.messsyadmin.R;
 
-public class MessFragmentContainer extends AppCompatActivity {
-
+public class MessFragmentContainer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +38,33 @@ public class MessFragmentContainer extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_members, new MessHomeFragment()).commit();
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fargment_container, new MessHomeFragment()).commit();}
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+
     }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{ super.onBackPressed();}
+    }
+
     private  BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -48,11 +88,48 @@ public class MessFragmentContainer extends AppCompatActivity {
 
             }
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_members,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fargment_container,selectedFragment).commit();
             return true;
 
         }
     };
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.edit_profile:
+                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerEditProfile.class);
+                startActivity(navigationDrawerEditProfileIntent);
+                break;
+
+            case R.id.notification:
+                Intent navigationDrawerNotificationIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerNotification.class);
+                startActivity(navigationDrawerNotificationIntent);
+                break;
+
+            case R.id.report_issue:
+                Intent navigationDrawerReportIssueIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerReportIssue.class);
+                startActivity(navigationDrawerReportIssueIntent);
+                break;
+
+            case R.id.app_updates:
+                Intent navigationDrawerAppUpdatesIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerAppUpdate.class);
+                startActivity(navigationDrawerAppUpdatesIntent);
+                break;
+
+            case R.id.contact_us:
+                Intent navigationDrawerContactUsIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerContactUs.class);
+                startActivity(navigationDrawerContactUsIntent);
+                break;
+            case R.id.sign_out:
+                Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
-
-
