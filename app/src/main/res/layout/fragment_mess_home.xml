@@ -9,27 +9,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/light_purple">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="42sp"
-            android:text="Messsy"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/menubar"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="19dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="485dp"
         android:layout_centerInParent="true">
 

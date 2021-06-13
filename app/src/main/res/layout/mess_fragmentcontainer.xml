@@ -1,27 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.MessFragmentContainer">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".Activity.MessFragmentContainer"
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container_members"
-        android:layout_above="@+id/bottom_navigation"/>
+        >
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation"
-        android:id="@+id/bottom_navigation"
-        app:labelVisibilityMode="labeled"
-        app:itemIconTint="@drawable/home_activity_navigation_bar_members"
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="#3F3D56"
+            android:id="@+id/toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:elevation="4dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fargment_container"
+            >
+
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottom_navigation"
+            android:id="@+id/bottom_navigation"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="@drawable/homeactivity_navigationbar"
+            app:itemTextColor="@color/white"
+            android:background="@color/light_purple"
+            android:layout_height="wrap_content">
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:background="#3F3D56"
+        android:layout_gravity="start"
         app:itemTextColor="@color/white"
-        android:background="@color/light_purple"
-        android:layout_height="wrap_content">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:itemIconTint="@color/white"
+        android:theme="@style/text_style"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_drawer"
+        app:headerLayout="@layout/navigation_drawer_header_layout" >
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/app_version"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="34dp"
+                app:srcCompat="@drawable/bottom_image_navigation_drawer" />
+
+            <TextView
+                android:id="@+id/app_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/roboto"
+                android:text="App version 1.0.0"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
