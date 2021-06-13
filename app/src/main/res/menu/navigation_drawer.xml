@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" />
+    <item android:id="@+id/edit_profile"
+        android:icon="@drawable/navigation_drawer_edit_icon"
+        android:title="Edit Profile"
+
+        />
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/notification_icon_navigation_drawer"
+        android:title="Notification"
+            />
+
+    <item android:id="@+id/report_issue"
+        android:icon="@drawable/navigation_drawer_report_issue_icon"
+        android:title="Report Issue"/>
+
+    <item android:id="@+id/app_updates"
+        android:icon="@drawable/navigation_drawer_app_update_icon"
+        android:title="App Updates"/>
+
+    <item android:id="@+id/contact_us"
+        android:icon="@drawable/contact_us_icon_navigation_drawer"
+        android:title="Contact Us"/>
+
+    <item android:id="@+id/sign_out"
+        android:icon="@drawable/navigation_drawer_sign_out_icon"
+        android:title="Sign Out"/>
+
+
+</menu>

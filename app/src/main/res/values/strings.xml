@@ -7,4 +7,6 @@
     <string name="mailAddress"><u>contact_messsynitp@gmail.com</u></string>
     <string name="igAddress"><u>www.instagram.com/messsynitp</u></string>
     <string name="telephoneAddress"><u>0612-210-1342</u></string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
