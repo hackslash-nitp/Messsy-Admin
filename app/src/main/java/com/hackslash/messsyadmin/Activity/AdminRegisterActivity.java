@@ -2,7 +2,10 @@ package com.hackslash.messsyadmin.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -17,6 +20,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
     EditText nameET, emailAddET, mobileNumberET, passwordET;
     String  sName , sEmail , sMobile , sPassword , sData;
     Boolean hasVisible = false;
+    Dialog dialogSuccesfullyRegistered;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
         emailAddET = (EditText) findViewById(R.id.EmailAddress);
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         passwordET = (EditText) findViewById(R.id.Password);
+        dialogSuccesfullyRegistered = new Dialog(this);
 
 
 
@@ -44,6 +50,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
                 sPassword = passwordET.getText().toString();
                 sData = "Name: " + sName + "\nEmail: " + sEmail + "\nMobile No: " + sMobile + "\nPassword: " +sPassword;
                 Toast.makeText(AdminRegisterActivity.this, sData, Toast.LENGTH_SHORT).show();
+                OpenDialog();
             }
         });
 
@@ -77,6 +84,24 @@ public class AdminRegisterActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void OpenDialog(){
+        dialogSuccesfullyRegistered.setContentView(R.layout.successfully_registered_dialog);
+        dialogSuccesfullyRegistered.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button btnDone = dialogSuccesfullyRegistered.findViewById(R.id.btn_Done);
+
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                dialogSuccesfullyRegistered.dismiss();
+            }
+        });
+
+        dialogSuccesfullyRegistered.show();
 
     }
 }
