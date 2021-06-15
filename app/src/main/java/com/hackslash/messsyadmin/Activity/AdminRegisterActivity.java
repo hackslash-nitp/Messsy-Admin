@@ -48,8 +48,6 @@ public class AdminRegisterActivity extends AppCompatActivity {
                 sEmail = emailAddET.getText().toString();
                 sMobile = mobileNumberET.getText().toString();
                 sPassword = passwordET.getText().toString();
-                sData = "Name: " + sName + "\nEmail: " + sEmail + "\nMobile No: " + sMobile + "\nPassword: " +sPassword;
-                Toast.makeText(AdminRegisterActivity.this, sData, Toast.LENGTH_SHORT).show();
                 OpenDialog();
             }
         });
