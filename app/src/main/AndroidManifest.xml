@@ -7,14 +7,15 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-<<<<<<< HEAD
-        <activity android:name=".Activity.NoticeBoxActivity">
-=======
+
+        <activity android:name=".Activity.NoticeBoxActivity"/>
+        <activity android:name= ".SplashscreenActivity"/>
         <activity android:name=".Activity.MessFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
@@ -22,8 +23,6 @@
         <activity android:name=".Activity.ContactUs"/>
         <activity android:name=".Activity.AdminFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
->>>>>>> a59e86775dd68e9cea3827ecc70ea8aa6d6870f5
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,23 +32,11 @@
         <activity
             android:name=".Activity.MessFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Activity.ContactUs" />
         <activity
             android:name=".Activity.AdminFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Activity.MessEditProfile"></activity>
         <activity android:name=".Activity.AdminEditProfile" />
@@ -62,24 +49,6 @@
         <activity android:name=".Activity.AdminRegisterActivity" />
         <activity android:name=".Activity.MessRegisterActivity" />
         <activity android:name=".Activity.LoginActivity">
-<<<<<<< HEAD
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".Activity.MessMenuActivity" />
-        <activity android:name=".Activity.MessConversationActivity" />
-        <activity android:name=".Activity.MessNoticeActivity" />
-        <activity android:name=".Activity.NavigationDrawerContactUsActivity" />
-        <activity android:name=".Activity.NavigationDrawerAppUpdateActivity" />
-        <activity android:name=".Activity.NavigationDrawerReportIssueActivity" />
-        <activity android:name=".Activity.NavigationDrawerNotificationActivity" />
-        <activity android:name=".Activity.NavigationDrawerEditProfileActivity" />
-=======
         </activity>
         <activity android:name=".Activity.MessMenuActivity"/>
         <activity android:name=".Activity.MessConversationActivity"/>
@@ -90,7 +59,6 @@
         <activity android:name=".Activity.ActivityNavigationDrawerNotification"/>
         <activity android:name=".Activity.ActivityNavigationDrawerEditProfile"/>
 
->>>>>>> a59e86775dd68e9cea3827ecc70ea8aa6d6870f5
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
