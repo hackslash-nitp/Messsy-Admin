@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MessEditProfile">
+
+    <TextView
+        android:id="@+id/editDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Edit your details"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/editDetail"
+        android:layout_alignBottom="@+id/editDetail"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+
+    <RelativeLayout
+        android:id="@+id/imageaddoption"
+        android:layout_width="160dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/editDetail"
+        android:layout_centerHorizontal="true"
+        android:layout_height="160dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivEditProfileMessMember"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/addImage"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/layerlist_addicon"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_below="@id/imageaddoption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_marginTop="10dp"
+        android:text="Mess in-charge\nGanga Hostel"/>
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_below="@id/tvDescription">
+
+        <TextView
+            android:id="@+id/tvnameProfileMessMember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Name"
+            android:textColor="#39374D"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="7dp"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvemailProfileMessMember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Email Address"
+            android:textColor="#39374D"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:padding="5dp"
+            android:text="Enter a Password"
+            android:textColor="#39374D"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:padding="7dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/registerbutton"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="Save Details"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+
+</RelativeLayout>
