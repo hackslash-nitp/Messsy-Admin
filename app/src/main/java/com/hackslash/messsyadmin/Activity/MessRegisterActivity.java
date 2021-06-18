@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
 import com.hackslash.messsyadmin.R;
 
 public class MessRegisterActivity extends AppCompatActivity {
@@ -88,6 +89,8 @@ public class MessRegisterActivity extends AppCompatActivity {
     private void OpenDialog(){
         dialogSuccesfullyRegistered.setContentView(R.layout.successfully_registered_dialog);
         dialogSuccesfullyRegistered.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogSuccesfullyRegistered.setCancelable(false);
+        dialogSuccesfullyRegistered.setCanceledOnTouchOutside(false);
 
         Button btnDone = dialogSuccesfullyRegistered.findViewById(R.id.btn_Done);
 
@@ -96,6 +99,8 @@ public class MessRegisterActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 dialogSuccesfullyRegistered.dismiss();
+                Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
+                startActivity(sendToMessFragmentContainerIntent);
             }
         });
 

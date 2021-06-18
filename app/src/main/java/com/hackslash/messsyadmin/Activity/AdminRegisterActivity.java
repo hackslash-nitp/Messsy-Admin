@@ -88,6 +88,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
     private void OpenDialog(){
         dialogSuccesfullyRegistered.setContentView(R.layout.successfully_registered_dialog);
         dialogSuccesfullyRegistered.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogSuccesfullyRegistered.setCancelable(false);
+        dialogSuccesfullyRegistered.setCanceledOnTouchOutside(false);
 
         Button btnDone = dialogSuccesfullyRegistered.findViewById(R.id.btn_Done);
 
@@ -96,6 +98,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 dialogSuccesfullyRegistered.dismiss();
+                Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                startActivity(sendToAdminFragmentContainerIntent);
             }
         });
 
