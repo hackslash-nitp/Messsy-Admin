@@ -99,7 +99,7 @@ public class AdminFragmentContainer extends AppCompatActivity implements Navigat
         switch (item.getItemId()){
 
             case R.id.edit_profile:
-                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerEditProfile.class);
+                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), AdminEditProfile.class);
                 startActivity(navigationDrawerEditProfileIntent);
                 break;
 

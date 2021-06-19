@@ -1,28 +1,38 @@
 package com.hackslash.messsyadmin.Activity;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.hackslash.messsyadmin.R;
 
 import java.io.IOException;
 
 public class AdminEditProfile extends AppCompatActivity {
-
+      Button saveDetails;
+   Dialog dialog;
     private static final int PICK_IMAGE = 1;
     private ImageView img1;
     Uri imageUri;
     Bitmap bitmap;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,19 @@ public class AdminEditProfile extends AppCompatActivity {
 
         Button AddImage;
         AddImage = (Button)findViewById(R.id.addImage);
+
+        saveDetails=findViewById(R.id.saveDetails);
+        dialog =new Dialog(this);
+        saveDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+
+
+
+
 
         AddImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +68,19 @@ public class AdminEditProfile extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void openDialog() {
+        dialog.setContentView(R.layout.dialog_box_edit_profile);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button Done = dialog.findViewById(R.id.Done);
+        Done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     @Override

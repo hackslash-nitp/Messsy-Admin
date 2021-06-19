@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4D000000">
+    <RelativeLayout
+        android:layout_width="288dp"
+        android:layout_height="293dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_box_edit_profile"
+        >
+        <ImageView
+            android:id="@+id/image_edit_profile"
+            android:layout_width="122dp"
+            android:layout_height="125dp"
+            android:background="@drawable/background_image_dialog_box_edit_profile"
+            android:src="@drawable/message_edit_profile_dialog_box"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/text_view_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Changes Saved"
+            android:textSize="24sp"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/image_edit_profile"/>
+        <Button
+            android:id="@+id/Done"
+            android:layout_width="160dp"
+            android:layout_height="41dp"
+            android:background="@drawable/button_edit_profile_dialog_box"
+            android:text="Done"
+            android:layout_marginTop="42dp"
+            android:textSize="20sp"
+            android:layout_below="@id/text_view_edit_profile"
+            android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
+
+</RelativeLayout>
