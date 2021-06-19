@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
 
-        <activity android:name=".Activity.NoticeBoxActivity"/>
+        <activity android:name=".Activity.MessNoticeActivity"/>
         <activity android:name= ".SplashscreenActivity"/>
         <activity android:name=".Activity.MessFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -29,15 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.MessFragmentContainer"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity android:name=".Activity.ContactUs" />
-        <activity
-            android:name=".Activity.AdminFragmentContainer"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+
+
         <activity android:name=".Activity.MessEditProfile"></activity>
         <activity android:name=".Activity.AdminEditProfile" />
         <activity android:name=".Activity.AdminComplaintActivity" />
@@ -52,12 +45,11 @@
         </activity>
         <activity android:name=".Activity.MessMenuActivity"/>
         <activity android:name=".Activity.MessConversationActivity"/>
-        <activity android:name=".Activity.MessNoticeActivity"/>
-        <activity android:name=".Activity.ActivityNavigationDrawerContactUs"/>
-        <activity android:name=".Activity.ActivityNavigationDrawerAppUpdate"/>
-        <activity android:name=".Activity.ActivityNavigationDrawerReportIssue"/>
-        <activity android:name=".Activity.ActivityNavigationDrawerNotification"/>
-        <activity android:name=".Activity.ActivityNavigationDrawerEditProfile"/>
+        <activity android:name=".Activity.NavigationDrawerContactUsActivity"/>
+        <activity android:name=".Activity.NavigationDrawerAppUpdateActivity"/>
+        <activity android:name=".Activity.NavigationDrawerReportIssueActivity"/>
+        <activity android:name=".Activity.NavigationDrawerNotificationActivity"/>
+        <activity android:name=".Activity.NavigationDrawerEditProfileActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
