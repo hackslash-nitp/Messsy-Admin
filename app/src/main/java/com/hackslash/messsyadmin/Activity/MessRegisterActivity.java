@@ -2,7 +2,10 @@ package com.hackslash.messsyadmin.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
 import com.hackslash.messsyadmin.R;
 
 public class MessRegisterActivity extends AppCompatActivity {
@@ -18,6 +22,7 @@ public class MessRegisterActivity extends AppCompatActivity {
     EditText nameET, emailAddET, mobileNumberET, hostelNameET, passwordET; // ET stands for edittext
     String  sName , sEmail , sMobile , sHostelName, sPassword , sData; // s stands for string
     Boolean hasVisible = false;
+    Dialog dialogSuccesfullyRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,51 +39,74 @@ public class MessRegisterActivity extends AppCompatActivity {
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         hostelNameET = (EditText) findViewById(R.id.hostelname);
         passwordET = (EditText) findViewById(R.id.Password);
+        dialogSuccesfullyRegistered = new Dialog(this);
 
 
-
-     registerButton.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             sName = nameET.getText().toString();
-             sEmail = emailAddET.getText().toString();
-             sMobile = mobileNumberET.getText().toString();
-             sHostelName = hostelNameET.getText().toString();
-             sPassword = passwordET.getText().toString();
-             sData = "Name: " + sName + "\nEmail: " + sEmail + "\nMobile No: " + sMobile +"\nHostel name: " + sHostelName + "\nPassword: " +sPassword;
-             Toast.makeText(MessRegisterActivity.this, sData, Toast.LENGTH_SHORT).show();
-         }
-     });
-
-
-     loginButton.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             finish();
-         }
-     });
-
-    visibilityButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(hasVisible){
-                passwordET.setTransformationMethod(new PasswordTransformationMethod());
-                hasVisible = false ;
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sName = nameET.getText().toString();
+                sEmail = emailAddET.getText().toString();
+                sMobile = mobileNumberET.getText().toString();
+                sHostelName = hostelNameET.getText().toString();
+                sPassword = passwordET.getText().toString();
+                OpenDialog();
             }
-            else{
-                passwordET.setTransformationMethod(null);
-                hasVisible = true;
+        });
 
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        }
-    });
+        });
 
-    addImageButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(MessRegisterActivity.this, "Adding Image", Toast.LENGTH_SHORT).show();
-        }
-    });
+        visibilityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasVisible) {
+                    passwordET.setTransformationMethod(new PasswordTransformationMethod());
+                    hasVisible = false;
+                } else {
+                    passwordET.setTransformationMethod(null);
+                    hasVisible = true;
+
+                }
+            }
+        });
+
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MessRegisterActivity.this, "Adding Image", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
+
+
+    private void OpenDialog(){
+        dialogSuccesfullyRegistered.setContentView(R.layout.successfully_registered_dialog);
+        dialogSuccesfullyRegistered.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogSuccesfullyRegistered.setCancelable(false);
+        dialogSuccesfullyRegistered.setCanceledOnTouchOutside(false);
+
+        Button btnDone = dialogSuccesfullyRegistered.findViewById(R.id.btn_Done);
+
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                dialogSuccesfullyRegistered.dismiss();
+                Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
+                startActivity(sendToMessFragmentContainerIntent);
+            }
+        });
+
+        dialogSuccesfullyRegistered.show();
+
+    }
+
+
 }
