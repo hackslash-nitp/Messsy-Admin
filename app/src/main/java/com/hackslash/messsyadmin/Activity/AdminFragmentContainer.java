@@ -16,11 +16,6 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerAppUpdate;
-import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerContactUs;
-import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerEditProfile;
-import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerNotification;
-import com.hackslash.messsyadmin.Activity.ActivityNavigationDrawerReportIssue;
 import com.hackslash.messsyadmin.Fragment.AdminActivityFragment;
 import com.hackslash.messsyadmin.Fragment.AdminHomeFragment;
 import com.hackslash.messsyadmin.Fragment.AdminProfileFragment;
@@ -99,27 +94,27 @@ public class AdminFragmentContainer extends AppCompatActivity implements Navigat
         switch (item.getItemId()){
 
             case R.id.edit_profile:
-                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerEditProfile.class);
+                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), NavigationDrawerEditProfileActivity.class);
                 startActivity(navigationDrawerEditProfileIntent);
                 break;
 
             case R.id.notification:
-                Intent navigationDrawerNotificationIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerNotification.class);
+                Intent navigationDrawerNotificationIntent = new Intent(getApplicationContext(), NavigationDrawerNotificationActivity.class);
                 startActivity(navigationDrawerNotificationIntent);
                 break;
 
             case R.id.report_issue:
-                Intent navigationDrawerReportIssueIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerReportIssue.class);
+                Intent navigationDrawerReportIssueIntent = new Intent(getApplicationContext(), NavigationDrawerReportIssueActivity.class);
                 startActivity(navigationDrawerReportIssueIntent);
                 break;
 
             case R.id.app_updates:
-                Intent navigationDrawerAppUpdatesIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerAppUpdate.class);
+                Intent navigationDrawerAppUpdatesIntent = new Intent(getApplicationContext(), NavigationDrawerAppUpdateActivity.class);
                 startActivity(navigationDrawerAppUpdatesIntent);
                 break;
 
             case R.id.contact_us:
-                Intent navigationDrawerContactUsIntent = new Intent(getApplicationContext(), ActivityNavigationDrawerContactUs.class);
+                Intent navigationDrawerContactUsIntent = new Intent(getApplicationContext(), NavigationDrawerContactUsActivity.class);
                 startActivity(navigationDrawerContactUsIntent);
                 break;
             case R.id.sign_out:

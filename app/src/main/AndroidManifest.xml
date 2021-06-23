@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
 
+        <activity android:name=".Activity.MessNoticeActivity"/>
+       
+
         <activity android:name=".SplashscreenActivity" />
         <activity
             android:name=".Activity.MessFragmentContainer"
@@ -29,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MessEditProfile" />
+
         <activity android:name=".Activity.AdminEditProfile" />
         <activity android:name=".Activity.AdminComplaintActivity" />
         <activity android:name=".Activity.AdminConversationActivity" />
@@ -48,6 +52,7 @@
         <activity android:name=".Activity.ActivityNavigationDrawerReportIssue" />
         <activity android:name=".Activity.ActivityNavigationDrawerNotification" />
         <activity android:name=".Activity.ActivityNavigationDrawerEditProfile" />
+
 
         <meta-data
             android:name="preloaded_fonts"

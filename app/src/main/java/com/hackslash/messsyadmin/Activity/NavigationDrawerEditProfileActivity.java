@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hackslash.messsyadmin.R;
 
-public class ActivityNavigationDrawerEditProfile extends AppCompatActivity {
+public class NavigationDrawerEditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

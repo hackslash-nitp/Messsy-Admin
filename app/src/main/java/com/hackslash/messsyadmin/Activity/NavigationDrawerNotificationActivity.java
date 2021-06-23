@@ -7,14 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hackslash.messsyadmin.R;
 
-public class ActivityNavigationDrawerAppUpdate extends AppCompatActivity {
+public class NavigationDrawerNotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation_drawer_app_update);
-
-        Intent navigationDrawerAppUpdatesIntent = getIntent();
+        setContentView(R.layout.activity_navigation_drawer_notifiaction);
+        Intent navigationDrawerNotificationIntent = getIntent();
 
     }
 }
