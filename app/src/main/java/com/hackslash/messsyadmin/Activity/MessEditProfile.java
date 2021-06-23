@@ -64,9 +64,9 @@ public class MessEditProfile extends AppCompatActivity {
     }
 
     private void openDialog() {
-        dialog.setContentView(R.layout.dialog_box_edit_profile);
+        dialog.setContentView(R.layout.successfully_edited_profile);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button Done = dialog.findViewById(R.id.Done);
+        Button Done = dialog.findViewById(R.id.btn_Done);
         Done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
