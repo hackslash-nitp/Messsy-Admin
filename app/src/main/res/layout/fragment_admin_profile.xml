@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/profile_title"
+        android:id="@+id/complaint_box_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,7 +18,7 @@
         android:id="@+id/profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/profile_title"
+        android:layout_below="@+id/complaint_box_title"
         android:layout_marginTop="45dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/admin_profile_fragment_img"
@@ -93,6 +93,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
-        android:layout_alignTop="@+id/profile_title"
+        android:layout_alignTop="@+id/complaint_box_title"
         android:background="@drawable/ic_baseline_arrow_back_24" />
 </RelativeLayout>

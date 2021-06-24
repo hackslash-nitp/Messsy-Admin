@@ -7,11 +7,31 @@
     tools:context=".Activity.AdminComplaintActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/complaint_box_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:fontFamily="@font/josefin_sans_semibold"
         android:textColor="@color/black"
-        android:text="Complaint Box" />
+        android:layout_marginTop="35dp"
+        android:text="Complaint box" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/complaint_box_title"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recylerViewComplaintBox"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/complaint_box_title"/>
+
+
 </RelativeLayout>

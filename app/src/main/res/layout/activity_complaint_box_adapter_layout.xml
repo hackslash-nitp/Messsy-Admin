@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="15dp"
+    android:layout_height="wrap_content"
+   >
+<ImageView
+    android:id="@+id/person_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/complaint_box_boy_icon"/>
+
+    <TextView
+        android:id="@+id/name_of_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/person_icon"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@+id/person_icon"
+        android:text="Arjun Singh"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/date_complaint"
+        android:layout_below="@+id/name_of_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name_of_person"
+        android:textSize="20sp"
+        android:textColor="#F19A33"
+        android:text="12th April 2021" />
+
+    <TextView
+        android:id="@+id/headingOfComplain"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/person_icon"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:text="Heading Of Complain" />
+
+    <TextView
+        android:id="@+id/descriptionComplain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headingOfComplain"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="@string/complaintBoxDescription1" />
+ <view
+     android:layout_width="match_parent"
+     android:layout_height="2dp"
+     android:id="@+id/lineComplaint"
+     android:background="#AA9494"
+     android:layout_marginTop="5dp"
+     android:layout_below="@id/descriptionComplain"/>
+
+    <TextView
+        android:id="@+id/upvotesComplaint"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textColor="#AA9494"
+        android:layout_below="@id/lineComplaint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="165 Upvotes" />
+
+    <TextView
+        android:id="@+id/commentComplaint"
+        android:layout_toRightOf="@+id/upvotesComplaint"
+        android:layout_alignTop="@+id/upvotesComplaint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#AA9494"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp"
+        android:text="20 Comments" />
+
+</RelativeLayout>
