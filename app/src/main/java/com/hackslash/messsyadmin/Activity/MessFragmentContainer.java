@@ -95,7 +95,8 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
         switch (item.getItemId()){
 
             case R.id.edit_profile:
-                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), NavigationDrawerEditProfileActivity.class);
+
+                Intent navigationDrawerEditProfileIntent = new Intent(getApplicationContext(), MessEditProfile.class);
                 startActivity(navigationDrawerEditProfileIntent);
                 break;
 
