@@ -14,7 +14,7 @@
         android:textSize="32sp"
         android:fontFamily="@font/josefin_sans_semibold"
         android:textColor="@color/black"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:text="Complaint box" />
 
     <Button
@@ -30,7 +30,9 @@
         android:layout_width="match_parent"
         android:id="@+id/recylerViewComplaintBox"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:scrollbarSize="7sp"
+        android:scrollbars="vertical"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/complaint_box_title"/>
 
 

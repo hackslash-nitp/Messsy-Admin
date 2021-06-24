@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.hackslash.messsyadmin.Adapters.ComplaintBoxAdapter;
 import com.hackslash.messsyadmin.Model.ComplaintBoxAdapterClass;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 
 public class AdminComplaintActivity extends AppCompatActivity {
     RecyclerView recyclerView;
+    Button backButton;
     ComplaintBoxAdapter complaintBoxAdapter;
     ArrayList<ComplaintBoxAdapterClass> data = new ArrayList<>();
 
@@ -27,7 +31,7 @@ public class AdminComplaintActivity extends AppCompatActivity {
         Intent complaintBoxIntent = getIntent();
 
         recyclerView = findViewById(R.id.recylerViewComplaintBox);
-
+        backButton = findViewById(R.id.backButton);
 
         data.add(new ComplaintBoxAdapterClass(R.drawable.complaint_box_boy_icon, "Arjun Singh", "12th April 2021",
                 "Heading of Complain", R.string.complaintBoxDescription1, "165 Upvotes", "20 Comments"));
@@ -60,6 +64,13 @@ public class AdminComplaintActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(complaintBoxAdapter);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AdminComplaintActivity.this, "Clicked on Back Button", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
 
     }
 }
