@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
 import com.hackslash.messsyadmin.Adapters.AbsenteesListAdapter;
 import com.hackslash.messsyadmin.Model.AbsenteesListAdapterClass;
@@ -27,9 +30,40 @@ public class AdminAbsenteesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_absentees);
 
+        EditText search = findViewById(R.id.et_search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
         initData();
         initRecyclerView();
     }
+
+
+    private void filter(String text) {
+        ArrayList<AbsenteesListAdapterClass> filteredList = new ArrayList<>();
+
+        for (AbsenteesListAdapterClass item : userList) {
+            if ((item.getStudentName().toLowerCase().contains(text.toLowerCase())) || (item.getRollNumber().toLowerCase().contains(text.toLowerCase()))) {
+                filteredList.add(item);
+            }
+        }
+        adapter.filterList(filteredList);
+    }
+
 
     private void initData() {
         userList= new ArrayList<>();
@@ -59,6 +93,7 @@ public class AdminAbsenteesActivity extends AppCompatActivity {
         adapter= new AbsenteesListAdapter(userList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 
 }

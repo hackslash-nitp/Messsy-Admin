@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -90,7 +90,7 @@
         <LinearLayout
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/DetailHeader"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="65dp"
@@ -100,13 +100,14 @@
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_height="45dp"
                 android:padding="8dp"
                 android:src="@drawable/search_image"/>
 
             <EditText
+                android:id="@+id/et_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="45dp"
                 android:hint="Search by Roll no./Name"
                 android:textColorHint="#767676"
                 android:padding="10dp"/>
@@ -125,6 +126,35 @@
             android:layout_marginTop="10dp"
             />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="40dp">
+
+
+
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="*Tap on a Name to see details of an absentee"
+            android:textColor="#3F3D56"
+            android:fontFamily="@font/josefin_sans"
+            android:textSize="18sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hackslash.messsyadmin.Model.AbsenteesListAdapterClass;
 import com.hackslash.messsyadmin.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdapter.ViewHolder> implements Adapter
@@ -48,6 +49,13 @@ public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdap
     public int getItemCount() {
         return userList.size();
     }
+
+
+    public void filterList(ArrayList<AbsenteesListAdapterClass> filteredList) {
+        userList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
