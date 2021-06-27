@@ -20,7 +20,7 @@ import com.hackslash.messsyadmin.R;
 import java.io.IOException;
 
 public class MessEditProfile extends AppCompatActivity {
-     Button saveDetails;
+     Button saveDetails,backBtn;
      Dialog dialog;
 
     private static final int PICK_IMAGE = 1;
@@ -33,7 +33,7 @@ public class MessEditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mess_edit_profile);
-
+        backBtn=findViewById(R.id.mess_editProfile_backBtn);
         img2 = (ImageView)findViewById(R.id.ivEditProfileMessMember);
         Glide.with(this).load("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg").into(img2);
 
@@ -49,7 +49,12 @@ public class MessEditProfile extends AppCompatActivity {
                 openDialog();
             }
         });
-
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         AddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

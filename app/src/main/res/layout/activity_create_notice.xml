@@ -44,7 +44,7 @@
         android:inputType="textPersonName"
         android:elevation="800dp">
         <EditText
-            android:id="@+id/subject"
+            android:id="@+id/subject_edit_text"
             android:inputType="text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="45dp">
         <EditText
-            android:id="@+id/typenotice"
+            android:id="@+id/notice_description_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
@@ -88,7 +88,7 @@
             android:background="@null"/>
     </androidx.cardview.widget.CardView>
         <Button
-            android:id="@+id/sendButton"
+            android:id="@+id/create_notice"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_below="@id/typenoticecardview"

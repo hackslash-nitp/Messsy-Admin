@@ -32,7 +32,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mess_reportissue);
         Intent intentReport = getIntent();
 
-        backButton = (Button) findViewById(R.id.backButton);
+        backButton = (Button) findViewById(R.id.backButton_report);
         sendButton = (Button) findViewById(R.id.sendButton);
         uploadImageButton = (Button) findViewById(R.id.uploadimage);
         issueET = (EditText) findViewById(R.id.issue);
@@ -65,7 +65,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MessReportIssueActivity.this, "Clicked on back button", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

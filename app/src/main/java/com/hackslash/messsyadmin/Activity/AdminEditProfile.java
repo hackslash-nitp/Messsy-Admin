@@ -25,8 +25,8 @@ import com.hackslash.messsyadmin.R;
 import java.io.IOException;
 
 public class AdminEditProfile extends AppCompatActivity {
-      Button saveDetails;
-   Dialog dialog;
+    Button saveDetails,backButton;
+    Dialog dialog;
     private static final int PICK_IMAGE = 1;
     private ImageView img1;
     Uri imageUri;
@@ -37,25 +37,27 @@ public class AdminEditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_profile);
-
-        img1 = (ImageView)findViewById(R.id.ivEditProfileAdmin);
+        backButton=findViewById(R.id.admin_editProfile_backbtn);
+        img1 = (ImageView) findViewById(R.id.ivEditProfileAdmin);
         Glide.with(this).load("https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png").into(img1);
 
         Button AddImage;
-        AddImage = (Button)findViewById(R.id.addImage);
+        AddImage = (Button) findViewById(R.id.addImage);
 
-        saveDetails=findViewById(R.id.saveDetails);
-        dialog =new Dialog(this);
+        saveDetails = findViewById(R.id.saveDetails);
+        dialog = new Dialog(this);
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog();
             }
         });
-
-
-
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         AddImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,14 +89,12 @@ public class AdminEditProfile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==PICK_IMAGE && resultCode==RESULT_OK)
-        {
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
             imageUri = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 img1.setImageBitmap(bitmap);
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

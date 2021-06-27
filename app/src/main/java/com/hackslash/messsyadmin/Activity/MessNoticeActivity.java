@@ -36,10 +36,15 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
 
 
         recyclerView = findViewById(R.id.recyclerView);
-        floatingButton = findViewById(R.id.floating_action_button);
+        floatingButton = findViewById(R.id.create_notice_fab);
 
 
-
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MessNoticeActivity.this,CreateNoticeActivity.class));
+            }
+        });
         data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
         data.add(new NoticeBoxAdapterClass(R.drawable.brahmaputra_hostel_icon, "Brahmaputra Hostel Mess", R.string.noticeDescriptionBrahmaputraMess, "12-06-2021", "2:30PM"));
         data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
@@ -68,14 +73,6 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
 
         setUpSortSpinner(sortBySpinner);
         setUpGroupSpinner(groupBySpinner);
-
-
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MessNoticeActivity.this, "Floating button is pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 

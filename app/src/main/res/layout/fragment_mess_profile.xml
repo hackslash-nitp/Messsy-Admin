@@ -90,12 +90,4 @@
         android:textColor="@color/black"
         android:textSize="33sp" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:layout_alignTop="@+id/complaint_box_title"
-        android:background="@drawable/ic_baseline_arrow_back_24" />
 </RelativeLayout>
