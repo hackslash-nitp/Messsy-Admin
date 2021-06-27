@@ -17,6 +17,7 @@ import com.hackslash.messsyadmin.Activity.AdminComplaintActivity;
 import com.hackslash.messsyadmin.Activity.AdminConversationActivity;
 import com.hackslash.messsyadmin.Activity.AdminNoticeActivity;
 import com.hackslash.messsyadmin.Activity.AdminStudentTrackActivity;
+import com.hackslash.messsyadmin.Activity.CreateNoticeActivity;
 import com.hackslash.messsyadmin.R;
 
 public class AdminHomeFragment extends Fragment implements View.OnClickListener {
@@ -60,7 +61,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.card_view3 :
                 Toast.makeText(getActivity(), "Opening Create new notice", Toast.LENGTH_SHORT).show();
-                Intent createNewNoticeIntent = new Intent(getContext(), AdminNoticeActivity.class);
+                Intent createNewNoticeIntent = new Intent(getContext(), CreateNoticeActivity.class);
                  startActivity(createNewNoticeIntent);
                 break;
             case R.id.card_view4 :
