@@ -57,7 +57,6 @@ public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.view
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.timeDisplay);
         }
-
     }
 }
 
