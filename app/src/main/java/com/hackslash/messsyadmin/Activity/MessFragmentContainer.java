@@ -116,7 +116,7 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
                 break;
 
             case R.id.contact_us:
-                Intent navigationDrawerContactUsIntent = new Intent(getApplicationContext(), NavigationDrawerContactUsActivity.class);
+                Intent navigationDrawerContactUsIntent = new Intent(getApplicationContext(), ContactUs.class);
                 startActivity(navigationDrawerContactUsIntent);
                 break;
             case R.id.sign_out:

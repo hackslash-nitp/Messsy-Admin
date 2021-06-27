@@ -51,10 +51,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
                 Toast.makeText(LoginActivity.this, "Creating a new account", Toast.LENGTH_SHORT).show();
 
-                // fake intent created for checking the ui
-                Intent intentReport = new Intent(LoginActivity.this, MessReportIssueActivity.class);
-                startActivity(intentReport);
-//
                 if(sConditionChecker.equalsIgnoreCase("Login as Admin")) {
                     Intent intentMM = new Intent(LoginActivity.this, MessRegisterActivity.class);
                     startActivity(intentMM);
@@ -74,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 sEmailAddress = emailET.getText().toString();
                 sPassword = passwordET.getText().toString();
                 if (sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
-                    startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
+                    startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
                         hasLoginAdmin = true;
                  }
                  else{
