@@ -16,4 +16,13 @@ The Ganga Hostel Mess Team</string>
     <string name="noticeDescriptionBrahmaputraMess">To all the students of Arya Mess :
 Let me set the scene your friend John is rushing to get his daughter from school and his son to the soccer field, and he still needs to stop at the grocery store because there’s nothing in the fridge. In the midst of this everyday madness, he gets a text message from Google with a verification code. He
 thinks, “That’s weird. Maybe I should log in to my email and see what’s going on.”</string>
+    <string name="complaintBoxDescription1">No doubt, there is a kitchen committee whose duty is to l
+ook to the quality of food, but the mess manage....Read more</string>
+    <string name="complaintBoxDescription2">application for complaining about condition of food.
+respected sir / mam. I want to say you that....Read more</string>
+    <string name="complaintBoxDescription3">I will be out of station and will not avail Mess facility during
+ the period mentioned below. Reason....Read more</string>
+<string name="complaintBoxDescription4">I will be out of station and will not avail Mess facility during
+ the period mentioned below. Reason....Read more</string>
+
 </resources>
