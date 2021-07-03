@@ -13,25 +13,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
-        <activity android:name=".Activity.SplashscreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Activity.AdminWalletChatBoxActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".Activity.SplashscreenActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity android:name=".Activity.MessNoticeActivity" />
         <activity
             android:name=".Activity.MessFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
-
         <activity android:name=".Activity.ContactUs" />
         <activity
             android:name=".Activity.AdminFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".Activity.MessEditProfile" />
@@ -45,7 +51,7 @@
         <activity android:name=".Activity.MessReportIssueActivity" />
         <activity android:name=".Activity.AdminRegisterActivity" />
         <activity android:name=".Activity.MessRegisterActivity" />
-        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.MessMenuActivity" />
         <activity android:name=".Activity.MessConversationActivity" />
         <activity android:name=".Activity.NavigationDrawerAppUpdateActivity" />

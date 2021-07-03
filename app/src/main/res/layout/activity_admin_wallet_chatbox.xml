@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".Activity.AdminWalletChatBoxActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyclerViewMessage"
+        android:layout_height="match_parent"
+        android:layout_above="@id/messageEditText"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/messageEditText"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#E5E5E5"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_marginTop="5dp"
+            android:id="@+id/addButton"
+            android:layout_width="65dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/addbuttonnew"
+            android:layout_height="65dp"/>
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="25dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/addButton"
+            android:layout_height="65dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/userMessage"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:layout_alignBottom="@+id/button_send"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/button_send"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/send_button_image"
+            android:id="@+id/button_send"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

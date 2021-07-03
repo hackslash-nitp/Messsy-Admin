@@ -1,13 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:background="@color/white"
+    tools:context=".Activity.AdminStudentTrackActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <RelativeLayout
         android:layout_width="wrap_content"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
         android:layout_height="wrap_content"
-        android:text="Wallet Fragment"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/studentTrackTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Student's Track"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/soneHostel"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#3F3D56"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="25dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/soneHostelPic"
+                    android:layout_width="180dp"
+                    android:layout_height="155dp"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:src="@drawable/sone_hostel_pic_15x" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/soneHostelPic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Sone"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/brahmaputraHostel"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignTop="@id/soneHostel"
+            android:layout_toRightOf="@id/soneHostel"
+            android:backgroundTint="@color/white"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="25dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/brahmaputraHostelPic"
+                    android:layout_width="180dp"
+                    android:layout_height="155dp"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:src="@drawable/brahmaputra_hostel_pic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/brahmaputraHostelPic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Brahmaputra"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/gangaHostel"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/soneHostel"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="25dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/gangaHostelPic"
+                    android:layout_width="180dp"
+                    android:layout_height="155dp"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:src="@drawable/ganga_hostel_pic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/gangaHostelPic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Ganga"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:id="@+id/kosiHostel"
+            android:layout_marginBottom="15dp"
+            android:layout_below="@id/brahmaputraHostel"
+            android:layout_alignTop="@id/gangaHostel"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/soneHostel"
+            android:backgroundTint="#3F3D56"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="25dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/kosiHostelPic"
+                    android:layout_width="180dp"
+                    android:layout_height="155dp"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:src="@drawable/kosi_hoste_pic_new_2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/kosiHostelPic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Kosi"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/admin_wallet_bottom_image"
+            android:layout_below="@id/kosiHostel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
 </RelativeLayout>
