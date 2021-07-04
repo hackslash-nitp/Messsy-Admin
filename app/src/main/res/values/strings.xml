@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MesssyAdmin</string>
     <string name="information">Information about your device,account and this app will be automatically included in this report. To learn more about how your information is used,please see our <font color='#0000FF'><u>Data Use Policy.</u></font> </string>
     <string name="report">Report</string>
@@ -7,6 +7,12 @@
     <string name="mailAddress"><u>contact_messsynitp@gmail.com</u></string>
     <string name="igAddress"><u>www.instagram.com/messsynitp</u></string>
     <string name="telephoneAddress"><u>0612-210-1342</u></string>
+    <string name="first_slide_title">Fooding Made Easier</string>
+    <string name="second_slide_title">Personalized Experience</string>
+    <string name="third_slide_title">Be Informed</string>
+    <string name="first_slide_desc">Access NITPs mess bill, suggestion, items, latest information and more...</string>
+    <string name="second_slide_desc">Unified platform for payment of messs bills, reporting absence and reporting faults.... </string>
+    <string name="third_slide_desc">Get info about the changes in the menu and give feedback of the meals provided.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="noticeDescriptionGangaMess">To all the students of Arya Mess :
@@ -22,7 +28,7 @@ ook to the quality of food, but the mess manage....Read more</string>
 respected sir / mam. I want to say you that....Read more</string>
     <string name="complaintBoxDescription3">I will be out of station and will not avail Mess facility during
  the period mentioned below. Reason....Read more</string>
-<string name="complaintBoxDescription4">I will be out of station and will not avail Mess facility during
+    <string name="complaintBoxDescription4">I will be out of station and will not avail Mess facility during
  the period mentioned below. Reason....Read more</string>
 
 </resources>
