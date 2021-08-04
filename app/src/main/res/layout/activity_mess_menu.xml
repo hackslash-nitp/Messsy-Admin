@@ -1,17 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MessMenuActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".Activity.MessMenuActivity"
+    android:scrollbars="horizontal">
 
+    <RelativeLayout
+        android:id="@+id/RL1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/messmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+           android:layout_marginTop="20dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:text="Mess Menu" />
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/messmenu"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_baseline_arrow_back_24" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/messmenu"
+            android:src="@drawable/logo1" />
+
+
+    </RelativeLayout>
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/TVmeals"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RL1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="33dp"
+        android:textColor="#EC9C00"
+        android:textSize="32sp"
+        android:text="Meals"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:layout_margin="5dp"
+
+        />
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_meals_description"
+        android:layout_below="@+id/TVmeals"
+        app:cardBackgroundColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:text="Menu" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#B4FFFFFF"
+        app:cardCornerRadius="13dp"
+        android:layout_margin="5dp"
+        app:cardElevation="15dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:scrollbars="horizontal"
+            android:scrollbarSize="7sp"
+
+            android:fadeScrollbars="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scrollbarThumbHorizontal="@drawable/scrollbar"
+            />
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/TVtimings"
+        android:layout_below="@+id/CV_meals_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timings"
+        android:textSize="32sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:textColor="#EC9C00"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mealtiming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVtimings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="5dp"
+        android:elevation="800dp"
+        android:inputType="textPersonName"
+        app:cardCornerRadius="13dp"
+        app:cardElevation="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/breakfast"
+            android:textColor="#3F3D56"
+            android:text="Breakfast"
+            android:textSize="22dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timing1"
+            android:text="7:00-8:30 am"
+            android:textSize="22dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#3F3D56"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="200dp"/>
+        <TextView
+            android:id="@+id/lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/breakfast"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:text="Lunch"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#3F3D56"
+            android:textSize="22dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timing2"
+            android:text="12:30-2:00 pm"
+            android:textSize="22dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#3F3D56"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="200dp"/>
+        <TextView
+            android:id="@+id/snacks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lunch"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="70dp"
+            android:text="Snacks"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#3F3D56"
+            android:textSize="22dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timing3"
+            android:text="5:00-5:30 pm"
+            android:textSize="22dp"
+            android:textColor="#3F3D56"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="200dp"/>
+        <TextView
+            android:id="@+id/dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/snacks"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:text="Dinner"
+            android:textColor="#3F3D56"
+            android:textSize="22dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timing4"
+            android:text="8:00-9:45 pm"
+            android:textSize="22dp"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:textColor="#3F3D56"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="200dp"/>
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
+
+
+

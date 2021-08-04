@@ -62,8 +62,8 @@ public class MessHomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.card_view4:
                 Toast.makeText(getActivity(), "Opening Menu", Toast.LENGTH_SHORT).show();
-                Intent i4 = new Intent(getContext(), MessMenuActivity.class);
-                startActivity(i4);
+                Intent messMenu = new Intent(getContext(), MessMenuActivity.class);
+                startActivity(messMenu);
                 break;
 
 
