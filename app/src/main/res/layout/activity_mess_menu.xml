@@ -184,6 +184,7 @@
             android:layout_below="@+id/snacks"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="100dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/josefin_sans_semibold"
             android:text="Dinner"
             android:textColor="#3F3D56"
