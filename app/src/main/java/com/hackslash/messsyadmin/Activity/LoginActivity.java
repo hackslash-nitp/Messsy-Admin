@@ -5,17 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hackslash.messsyadmin.R;
+
+
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -27,11 +37,12 @@ public class LoginActivity extends AppCompatActivity
     boolean hasLoginAdmin = true , hasLoginMM = false;
 
 
+    String Designation;
+
+
     FirebaseAuth firebaseAuth;
-
-
-
-
+    private FirebaseFirestore db;
+    private FirebaseUser currUser;
 
 
     @Override
@@ -39,9 +50,13 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        currUser = firebaseAuth.getCurrentUser();
+
+
+
+
 
         emailET = (EditText) findViewById(R.id.EmailAddress);
         passwordET = (EditText) findViewById(R.id.Password);
@@ -56,7 +71,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(LoginActivity.this, "Forgot password", Toast.LENGTH_SHORT).show();
+
 
                 sEmailAddress = emailET.getText().toString();
 
@@ -133,22 +148,49 @@ public class LoginActivity extends AppCompatActivity
                         //Login Successful
 
 
+
+
+                        final String user_id = currUser.getUid();
+                        Task<DocumentSnapshot> userDetails = db.collection("UserInformation").document(user_id).get();
+                        userDetails.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot)
+                            {
+
+                                Designation = documentSnapshot.getString("sDesignation");
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
                         //send to admin fragment or mess fragment depending on mess member or admin
 
 
 
-                        if (sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
+                        if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
                             startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
                             finish();
                             hasLoginAdmin = true;
                             hasLoginMM = false;
                         }
-
-                        else{
+                        else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
                             startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
                             finish();
                             hasLoginMM = true;
                             hasLoginAdmin = false;
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -187,7 +229,7 @@ public class LoginActivity extends AppCompatActivity
                         hasLoginAdmin = true;
                         hasLoginMM = false;
                     }
-                    }
+                }
 
             });
 

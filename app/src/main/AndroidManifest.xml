@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MesssyAdmin">
 
-        <activity android:name=".Activity.AdminWalletChatBoxActivity">
+        <activity android:name=".Activity.AdminWalletChatBoxActivity"/>
 
         <activity android:name=".Activity.OnBoarding"></activity>
         <activity android:name=".Activity.SplashscreenActivity">
