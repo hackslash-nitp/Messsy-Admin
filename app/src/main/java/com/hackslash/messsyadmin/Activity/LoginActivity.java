@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
 
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        currUser = firebaseAuth.getCurrentUser();
 
 
 
@@ -150,7 +149,7 @@ public class LoginActivity extends AppCompatActivity
 
 
 
-                        currUser = firebaseAuth.getCurrentUser();
+
                         final String user_id = currUser.getUid();
                         Task<DocumentSnapshot> userDetails = db.collection("UserInformation").document(user_id).get();
                         userDetails.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -158,36 +157,7 @@ public class LoginActivity extends AppCompatActivity
                             public void onSuccess(DocumentSnapshot documentSnapshot)
                             {
 
-
-                                UserClass userInfo = documentSnapshot.toObject(UserClass.class);
-                                Designation = userInfo.getsDesignation();
-
-
-                                //send to admin fragment or mess fragment depending on mess member or admin
-
-
-
-                                if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
-                                    startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
-                                    finish();
-                                    hasLoginAdmin = true;
-                                    hasLoginMM = false;
-                                }
-                                else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
-                                {
-                                    Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
-                                    startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
-                                    finish();
-                                    hasLoginMM = true;
-                                    hasLoginAdmin = false;
-                                }
-                                else
-                                {
-                                    Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
-                                }
-
+                                Designation = documentSnapshot.getString("sDesignation");
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -198,8 +168,30 @@ public class LoginActivity extends AppCompatActivity
                         });
 
 
+                        //send to admin fragment or mess fragment depending on mess member or admin
 
 
+
+                        if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
+                            startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
+                            finish();
+                            hasLoginAdmin = true;
+                            hasLoginMM = false;
+                        }
+                        else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
+                            startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
+                            finish();
+                            hasLoginMM = true;
+                            hasLoginAdmin = false;
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
