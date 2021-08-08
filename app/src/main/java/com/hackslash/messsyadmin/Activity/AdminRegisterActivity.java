@@ -1,5 +1,6 @@
 package com.hackslash.messsyadmin.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -13,14 +14,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AdminRegisterActivity extends AppCompatActivity {
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, passwordET;
-    String  sName , sEmail , sMobile , sPassword , sData;
+    String  sName , sEmail , sMobile , sPassword , sDesignation = "Admin";
     Boolean hasVisible = false;
     Dialog dialogSuccesfullyRegistered;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    ArrayList<UserClass> userdata = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +54,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         passwordET = (EditText) findViewById(R.id.Password);
         dialogSuccesfullyRegistered = new Dialog(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -48,7 +66,64 @@ public class AdminRegisterActivity extends AppCompatActivity {
                 sEmail = emailAddET.getText().toString();
                 sMobile = mobileNumberET.getText().toString();
                 sPassword = passwordET.getText().toString();
-                OpenDialog();
+
+                if (sName.isEmpty()) {
+                    nameET.setError("Name is required");
+                    return;
+                }
+                if (sEmail.isEmpty()) {
+                    emailAddET.setError("Email Address is required");
+                    return;
+
+                }
+                if (sMobile.isEmpty()) {
+                    mobileNumberET.setError("Mobile Number is required");
+                    return;
+
+                }
+
+                if (sPassword.isEmpty()) {
+                    passwordET.setError("Not a valid Password");
+                    return;
+
+                }
+
+                UserClass userInfo = new UserClass(sName, sEmail, sMobile,  sDesignation);
+
+                if (currentUser != null) {
+                    Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                    startActivity(sendToAdminFragmentContainerIntent);
+                } else{
+                    firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+
+
+                            userdata.add(userInfo);
+
+                            firebaseFirestore.collection("UserInformation").document("User").set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    OpenDialog();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+
             }
         });
 

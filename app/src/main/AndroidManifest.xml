@@ -33,11 +33,11 @@
         <activity
             android:name=".Activity.AdminFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
 
         </activity>
         <activity android:name=".Activity.MessEditProfile" />
@@ -51,7 +51,14 @@
         <activity android:name=".Activity.MessReportIssueActivity" />
         <activity android:name=".Activity.AdminRegisterActivity" />
         <activity android:name=".Activity.MessRegisterActivity" />
-        <activity android:name=".Activity.LoginActivity" />
+
+        <activity android:name=".Activity.LoginActivity" >
+            <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Activity.MessMenuActivity" />
         <activity android:name=".Activity.MessConversationActivity" />
         <activity android:name=".Activity.NavigationDrawerAppUpdateActivity" />
