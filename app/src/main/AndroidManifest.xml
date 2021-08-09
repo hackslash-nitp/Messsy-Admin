@@ -29,6 +29,8 @@
             android:name=".Activity.MessFragmentContainer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+
+
         </activity>
         <activity android:name=".Activity.ContactUs" />
         <activity
@@ -49,7 +51,7 @@
         <activity android:name=".Activity.AdminRegisterActivity" />
         <activity android:name=".Activity.MessRegisterActivity" />
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.MessMenuActivity" />
+        <activity android:name=".Activity.MessMenuActivity"/>
         <activity android:name=".Activity.MessConversationActivity" />
         <activity android:name=".Activity.NavigationDrawerAppUpdateActivity" />
         <activity android:name=".Activity.NavigationDrawerReportIssueActivity" />
