@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/mealtime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_purple"
+            android:padding="10dp"
+            android:fontFamily="@font/josefin_sans"
+            android:text="Breakfast"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/mMonday"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/josefin_sans"
+            android:text="abcde"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/mTuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/mWednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/mThursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/mFriday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/mSaturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/mSunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:text="abcde"
+            android:fontFamily="@font/josefin_sans"
+            android:textColor="#000000"/>
+
+
+    </GridLayout>
+</RelativeLayout>
