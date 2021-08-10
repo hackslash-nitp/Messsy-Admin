@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
 
@@ -156,9 +157,8 @@ public class LoginActivity extends AppCompatActivity
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot)
                             {
-
-                                Designation = documentSnapshot.getString("sDesignation");
-
+                                UserClass userInfo = documentSnapshot.get(user_id,UserClass.class);
+                                Designation = userInfo.getsDesignation();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity
                                 Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
 
 
                         //send to admin fragment or mess fragment depending on mess member or admin
