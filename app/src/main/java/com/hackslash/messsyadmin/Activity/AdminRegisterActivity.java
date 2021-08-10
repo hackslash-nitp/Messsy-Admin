@@ -101,7 +101,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
 
                             userdata.add(userInfo);
 
-                            firebaseFirestore.collection("UserInformation").document("User").set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     OpenDialog();
