@@ -3,7 +3,6 @@ package com.hackslash.messsyadmin.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,11 +36,14 @@ public class LoginActivity extends AppCompatActivity
     String sEmailAddress;
     String sPassword, sConditionChecker;  // s stannds for string
     boolean hasLoginAdmin = true , hasLoginMM = false;
+
+
     String Designation;
+
+
     FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
     private FirebaseUser currUser;
-    ProgressDialog dialog;
 
 
     @Override
@@ -51,6 +53,11 @@ public class LoginActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        currUser = firebaseAuth.getCurrentUser();
+
+
+
+
 
         emailET = (EditText) findViewById(R.id.EmailAddress);
         passwordET = (EditText) findViewById(R.id.Password);
@@ -59,9 +66,6 @@ public class LoginActivity extends AppCompatActivity
         forgotPasswordTV = (TextView) findViewById(R.id.forgotPassword);
         createOneTV = (TextView) findViewById(R.id.create_one);
         forAdminTV = (TextView) findViewById(R.id.admin);
-        dialog=new ProgressDialog(this);
-        dialog.setMessage("Logging in...");
-        dialog.setCancelable(false);
 
 
         forgotPasswordTV.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +124,7 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 //Data extraction and validation
+
                 sEmailAddress = emailET.getText().toString();
                 sPassword = passwordET.getText().toString();
 
@@ -136,56 +141,24 @@ public class LoginActivity extends AppCompatActivity
                 }
 
                 //Login
-                dialog.show();
+
                 firebaseAuth.signInWithEmailAndPassword(sEmailAddress, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
 
                         //Login Successful
-                        dialog.setMessage("Getting your profile...");
 
 
-                        currUser = firebaseAuth.getCurrentUser();
+
+
                         final String user_id = currUser.getUid();
                         Task<DocumentSnapshot> userDetails = db.collection("UserInformation").document(user_id).get();
                         userDetails.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot)
                             {
-
-                                dialog.dismiss();
-                                UserClass userInfo = documentSnapshot.toObject(UserClass.class);
+                                UserClass userInfo = documentSnapshot.get(user_id,UserClass.class);
                                 Designation = userInfo.getsDesignation();
-
-
-                                //send to admin fragment or mess fragment depending on mess member or admin
-
-
-
-                                if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
-                                    startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
-                                    finish();
-                                    hasLoginAdmin = true;
-                                    hasLoginMM = false;
-                                }
-                                else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
-                                {
-                                    FirebaseAuth.getInstance().signOut();
-                                    Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
-                                    startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
-                                    finish();
-                                    hasLoginMM = true;
-                                    hasLoginAdmin = false;
-                                }
-                                else
-                                {
-                                    FirebaseAuth.getInstance().signOut();
-                                    Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
-                                }
-
-
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -196,13 +169,35 @@ public class LoginActivity extends AppCompatActivity
 
 
 
+                        //send to admin fragment or mess fragment depending on mess member or admin
 
+
+
+                        if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Mess Member")){
+                            startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
+                            finish();
+                            hasLoginAdmin = true;
+                            hasLoginMM = false;
+                        }
+                        else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
+                            startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
+                            finish();
+                            hasLoginMM = true;
+                            hasLoginAdmin = false;
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        dialog.dismiss();
                         Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
