@@ -42,7 +42,7 @@ public class SplashscreenActivity extends AppCompatActivity {
                     }
 
                     else{
-                        Intent i=new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                        Intent i=new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                         finish();
                     }

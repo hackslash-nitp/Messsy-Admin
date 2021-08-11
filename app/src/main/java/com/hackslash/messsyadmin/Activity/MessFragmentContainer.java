@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
 import com.hackslash.messsyadmin.Fragment.MessHomeFragment;
 import com.hackslash.messsyadmin.Fragment.MessProfileFragment;
@@ -120,7 +121,9 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
                 startActivity(navigationDrawerContactUsIntent);
                 break;
             case R.id.sign_out:
-                Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MessFragmentContainer.this,LoginActivity.class));
+                finishAffinity();
                 break;
 
         }

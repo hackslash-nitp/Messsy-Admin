@@ -103,7 +103,7 @@ public class MessRegisterActivity extends AppCompatActivity {
 
                         currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
-                            firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     OpenDialog();

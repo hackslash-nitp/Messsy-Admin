@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.hackslash.messsyadmin.Fragment.AdminActivityFragment;
 import com.hackslash.messsyadmin.Fragment.AdminHomeFragment;
 import com.hackslash.messsyadmin.Fragment.AdminProfileFragment;
@@ -118,6 +119,9 @@ public class AdminFragmentContainer extends AppCompatActivity implements Navigat
                 startActivity(navigationDrawerContactUsIntent);
                 break;
             case R.id.sign_out:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(AdminFragmentContainer.this,LoginActivity.class));
+                finishAffinity();
                 Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
                 break;
 
