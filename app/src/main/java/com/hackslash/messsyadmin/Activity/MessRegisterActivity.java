@@ -37,8 +37,6 @@ public class MessRegisterActivity extends AppCompatActivity {
     Dialog dialogSuccesfullyRegistered;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
-    ArrayList<UserClass> userdata = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +101,7 @@ public class MessRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
 
-                            userdata.add(userInfo);
-
+                        currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
