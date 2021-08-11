@@ -35,8 +35,6 @@ public class AdminRegisterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    ArrayList<UserClass> userdata = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +95,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-
-
-                            userdata.add(userInfo);
-
+                        currentUser=FirebaseAuth.getInstance().getCurrentUser();
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
