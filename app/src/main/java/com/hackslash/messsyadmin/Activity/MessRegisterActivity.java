@@ -1,5 +1,6 @@
 package com.hackslash.messsyadmin.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -13,16 +14,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MessRegisterActivity extends AppCompatActivity {
 
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, hostelNameET, passwordET; // ET stands for edittext
-    String  sName , sEmail , sMobile , sHostelName, sPassword , sData; // s stands for string
+    String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member"; // s stands for string
     Boolean hasVisible = false;
     Dialog dialogSuccesfullyRegistered;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+    ArrayList<UserClass> userdata = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +56,8 @@ public class MessRegisterActivity extends AppCompatActivity {
         hostelNameET = (EditText) findViewById(R.id.hostelname);
         passwordET = (EditText) findViewById(R.id.Password);
         dialogSuccesfullyRegistered = new Dialog(this);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +67,68 @@ public class MessRegisterActivity extends AppCompatActivity {
                 sMobile = mobileNumberET.getText().toString();
                 sHostelName = hostelNameET.getText().toString();
                 sPassword = passwordET.getText().toString();
-                OpenDialog();
+
+                if (sName.isEmpty()) {
+                    nameET.setError("Name is required");
+                    return;
+                }
+                if (sEmail.isEmpty()) {
+                    emailAddET.setError("Email Address is required");
+                    return;
+
+                }
+                if (sMobile.isEmpty()) {
+                    mobileNumberET.setError("Mobile Number is required");
+                    return;
+
+                }
+                if (sHostelName.isEmpty()) {
+                    hostelNameET.setError("Hostel Name is required");
+                    return;
+
+                }
+                if (sPassword.isEmpty()) {
+                    passwordET.setError("Not a valid Password");
+                    return;
+
+                }
+
+                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation);
+
+                if (currentUser != null) {
+                    Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
+                    startActivity(sendToMessFragmentContainerIntent);
+                } else{
+                    firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+
+                            userdata.add(userInfo);
+
+
+                            firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    OpenDialog();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(MessRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MessRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            }
+
             }
         });
 
