@@ -69,6 +69,7 @@
             android:drawablePadding="15dp"
             android:paddingLeft="25dp"
             android:hint="Email Address"
+            android:paddingRight="10dp"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -84,6 +85,7 @@
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="15dp"
             android:paddingLeft="25dp"
+            android:paddingRight="10dp"
             android:hint="Password"
             android:inputType="textPassword" />
 
