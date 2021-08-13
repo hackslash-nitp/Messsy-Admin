@@ -3,6 +3,7 @@ package com.hackslash.messsyadmin.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,14 +37,11 @@ public class LoginActivity extends AppCompatActivity
     String sEmailAddress;
     String sPassword, sConditionChecker;  // s stannds for string
     boolean hasLoginAdmin = true , hasLoginMM = false;
-
-
     String Designation;
-
-
     FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
     private FirebaseUser currUser;
+    ProgressDialog dialog;
 
 
     @Override
@@ -54,11 +52,6 @@ public class LoginActivity extends AppCompatActivity
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-
-
-
-
-
         emailET = (EditText) findViewById(R.id.EmailAddress);
         passwordET = (EditText) findViewById(R.id.Password);
         loginButton = (Button) findViewById(R.id.login);
@@ -66,6 +59,9 @@ public class LoginActivity extends AppCompatActivity
         forgotPasswordTV = (TextView) findViewById(R.id.forgotPassword);
         createOneTV = (TextView) findViewById(R.id.create_one);
         forAdminTV = (TextView) findViewById(R.id.admin);
+        dialog=new ProgressDialog(this);
+        dialog.setMessage("Logging in...");
+        dialog.setCancelable(false);
 
 
         forgotPasswordTV.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +120,6 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 //Data extraction and validation
-
                 sEmailAddress = emailET.getText().toString();
                 sPassword = passwordET.getText().toString();
 
@@ -141,13 +136,13 @@ public class LoginActivity extends AppCompatActivity
                 }
 
                 //Login
-
+                dialog.show();
                 firebaseAuth.signInWithEmailAndPassword(sEmailAddress, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
 
                         //Login Successful
-
+                        dialog.setMessage("Getting your profile...");
 
 
                         currUser = firebaseAuth.getCurrentUser();
@@ -158,7 +153,7 @@ public class LoginActivity extends AppCompatActivity
                             public void onSuccess(DocumentSnapshot documentSnapshot)
                             {
 
-
+                                dialog.dismiss();
                                 UserClass userInfo = documentSnapshot.toObject(UserClass.class);
                                 Designation = userInfo.getsDesignation();
 
@@ -175,6 +170,7 @@ public class LoginActivity extends AppCompatActivity
                                 }
                                 else if (Designation.equalsIgnoreCase("Admin") && sConditionChecker.equalsIgnoreCase("Login as Admin"))
                                 {
+                                    FirebaseAuth.getInstance().signOut();
                                     Toast.makeText(LoginActivity.this, "Please Login as Admin.", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (Designation.equalsIgnoreCase("Mess Member") && sConditionChecker.equalsIgnoreCase("Login as Admin")){
@@ -185,6 +181,7 @@ public class LoginActivity extends AppCompatActivity
                                 }
                                 else
                                 {
+                                    FirebaseAuth.getInstance().signOut();
                                     Toast.makeText(LoginActivity.this, "Please Login as Mess Member.", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -205,6 +202,7 @@ public class LoginActivity extends AppCompatActivity
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
                         Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
