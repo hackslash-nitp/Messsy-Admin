@@ -31,6 +31,7 @@ public class AdminProfileFragment extends Fragment {
     DocumentReference docref ;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
+    UserClass user;
 
     @Nullable
     @Override
@@ -55,17 +56,19 @@ public class AdminProfileFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
-                    UserClass user = documentSnapshot.toObject(UserClass.class);
+                     user = documentSnapshot.toObject(UserClass.class);
 
                    if(user != null) {
                        nameTV.setText(user.getsName());
                        emailTV.setText(user.getsEmail());
+                       String sImageUrl = user.getImageUrl();
+                       if(sImageUrl != null){
+                       Glide.with(getContext()).load(sImageUrl).into(profileImageIV);}
                    }
 
                 }else{
                     Toast.makeText(getActivity(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
                 }
-
 
 
 
@@ -76,6 +79,8 @@ public class AdminProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         return view;
 

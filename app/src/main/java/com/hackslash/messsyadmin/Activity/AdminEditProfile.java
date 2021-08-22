@@ -1,5 +1,6 @@
 package com.hackslash.messsyadmin.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,20 +18,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.R;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class AdminEditProfile extends AppCompatActivity {
     Button saveDetails,backButton;
     Dialog dialog;
     private static final int PICK_IMAGE = 1;
     private ImageView img1;
+    private TextView nameTV , emailTV , passwordTV;
     Uri imageUri;
     Bitmap bitmap;
+    String sName, sPassword ,sEmail , generatedFilePath;
+
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    DocumentReference documentReference;
+    FirebaseAuth firebaseAuth ;
+    FirebaseUser currentUser;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -39,7 +62,24 @@ public class AdminEditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_admin_edit_profile);
         backButton=findViewById(R.id.admin_editProfile_backbtn);
         img1 = (ImageView) findViewById(R.id.ivEditProfileAdmin);
+        nameTV = (TextView) findViewById(R.id.etName);
+        emailTV = (TextView) findViewById(R.id.etEmail);
+        passwordTV = (TextView) findViewById(R.id.etPassword);
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        documentReference = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
+        storageReference = storage.getReference().child("images").child(currentUser.getUid());
+
+
+
         Glide.with(this).load("https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png").into(img1);
+
+
+
+            Glide.with(this).load(storageReference.getDownloadUrl()).into(img1);
+
 
         Button AddImage;
         AddImage = (Button) findViewById(R.id.addImage);
@@ -48,10 +88,123 @@ public class AdminEditProfile extends AppCompatActivity {
         dialog = new Dialog(this);
         saveDetails.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {sName = nameTV.getText().toString();
+                sEmail = emailTV.getText().toString();
+                sPassword = passwordTV.getText().toString();
+
+
+
+                if(sName.isEmpty()){
+                    nameTV.setError("Write new name");
+                    return;
+                }
+                if(sEmail.isEmpty()){
+                    emailTV.setError("Write new email");
+                    return;
+                }
+                if(sPassword.isEmpty()){
+                    passwordTV.setError("Write new password");
+                    return;
+                }
+
+                currentUser.updateEmail(sEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AdminEditProfile.this, "Email Updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                currentUser.updatePassword(sPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AdminEditProfile.this, "Password Updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                documentReference.update("sName",sName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AdminEditProfile.this, "Name updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                documentReference.update("sEmail",sEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AdminEditProfile.this, "Email updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                if(imageUri != null) {
+                    storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(AdminEditProfile.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                generatedFilePath = uri.toString();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AdminEditProfile.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 openDialog();
             }
         });
+        if(generatedFilePath != null){
+        Glide.with(this).load(generatedFilePath).into(img1);}
+        else{
+            Glide.with(this).load("https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png").into(img1);
+
+        }
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

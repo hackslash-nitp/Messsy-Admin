@@ -32,7 +32,7 @@ public class MessRegisterActivity extends AppCompatActivity {
 
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, hostelNameET, passwordET; // ET stands for edittext
-    String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member"; // s stands for string
+    String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member" , sImageUrl = "null"; // s stands for string
     Boolean hasVisible = false;
     Dialog dialogSuccesfullyRegistered;
     FirebaseAuth firebaseAuth;
@@ -91,7 +91,7 @@ public class MessRegisterActivity extends AppCompatActivity {
 
                 }
 
-                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation);
+                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation,sImageUrl);
 
                 if (currentUser != null) {
                     Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
