@@ -1,14 +1,12 @@
 package com.hackslash.messsyadmin.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,30 +19,37 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.ReportIssue;
 import com.hackslash.messsyadmin.R;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 public class MessReportIssueActivity extends AppCompatActivity {
 
     Button backButton, sendButton, uploadImageButton;
     EditText issueET, explainationET;
     TextView informationTV;
-    String sIssue , sExplaination ;
+    String sIssue, sExplaination;
+
     ImageView sImage;
 
     Dialog dialogIssueReported;
 
-    FirebaseAuth firebaseAuth;
-    FirebaseUser currentUser;
-    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private Uri downloadURL;
 
-    private static int PICK_IMAGE = 1 ;
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    FirebaseAuth firebaseAuth ;
+    FirebaseUser currentUser;
+    StorageReference mstorageReference;
+
+
 
 
 
@@ -65,6 +70,10 @@ public class MessReportIssueActivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        mstorageReference= FirebaseStorage.getInstance().getReference().child("images");
+
+
 
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -87,15 +96,16 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     return;
                 }
 
-                ReportIssue ReportInfo = new ReportIssue(sIssue, sExplaination, sImage);
 
-                currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                ReportIssue ReportInfo = new ReportIssue(sIssue, sExplaination, String.valueOf(downloadURL));
+
 
                 firebaseFirestore.collection("Issues").document(currentUser.getUid()).set(ReportInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        OpenDialog();
+                        //OpenDialog();
+                        Toast.makeText(MessReportIssueActivity.this, "Complaint Sent.", Toast.LENGTH_SHORT).show();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -106,20 +116,11 @@ public class MessReportIssueActivity extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
 
 
-
-        uploadImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), PICK_IMAGE);
-
-            }
-
-        });
 
         informationTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,34 +140,69 @@ public class MessReportIssueActivity extends AppCompatActivity {
             }
         });
 
+        uploadImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                choosePicture();
+
+            }
+
+        });
+
+    }
+
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
     }
 
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-        //Detects request codes
-        if(requestCode== PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
+        {
+            Uri imageUri = data.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                sImage.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
+                Bitmap currentImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                sImage.setImageBitmap(currentImage);
+            }
+            catch (Exception e){
                 e.printStackTrace();
             }
+            StorageReference photoRef = mstorageReference.child(imageUri.getLastPathSegment());
+
+            photoRef.putFile(imageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                {
+                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!urlTask.isSuccessful());
+                    downloadURL = urlTask.getResult();
+                }
+
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MessReportIssueActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
         }
 
         uploadImageButton.setText("Image Uploaded");
         uploadImageButton.setBackgroundResource(R.drawable.uploadimageafteruploaded);
     }
+
+
+
+/*
 
     public void OpenDialog(){
         dialogIssueReported.setContentView(R.layout.report_sent_dialog);
@@ -189,5 +225,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         dialogIssueReported.show();
 
     }
+
+ */
 
 }
