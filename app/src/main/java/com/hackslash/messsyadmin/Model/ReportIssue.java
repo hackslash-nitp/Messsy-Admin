@@ -1,19 +1,17 @@
 package com.hackslash.messsyadmin.Model;
 
-import android.widget.ImageView;
-
 public class ReportIssue {
 
-    String Issue, Explanation;
-    ImageView ReportIssueImage;
+    String Issue, Explanation, ImageUrl;
 
     public ReportIssue(){}
 
-    public  ReportIssue(String sIssue, String sExplanation, ImageView sImage) {
 
+    public  ReportIssue(String sIssue, String sExplanation, String sImageUrl)
+    {
         this.Issue = sIssue;
         this.Explanation = sExplanation;
-        this.ReportIssueImage = sImage;
+        this.ImageUrl = sImageUrl;
     }
 
 
@@ -33,12 +31,7 @@ public class ReportIssue {
         Explanation = explanation;
     }
 
-    public ImageView getReportIssueImage() {
-        return ReportIssueImage;
-    }
+    public String getImageUrl() { return ImageUrl; }
 
-    public void setReportIssueImage(ImageView reportIssueImage) {
-        ReportIssueImage = reportIssueImage;
-    }
-
+    public void setImageUrl(String imageUrl) { ImageUrl = imageUrl; }
 }

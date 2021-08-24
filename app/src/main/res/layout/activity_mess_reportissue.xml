@@ -21,9 +21,9 @@
         android:id="@+id/backButton_report"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/report"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
-        android:layout_alignTop="@+id/report"
         android:background="@drawable/ic_baseline_arrow_back_24" />
 
     <androidx.cardview.widget.CardView
