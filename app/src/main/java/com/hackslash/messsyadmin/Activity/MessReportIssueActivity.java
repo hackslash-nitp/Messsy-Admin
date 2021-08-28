@@ -7,21 +7,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.ReportIssue;
 import com.hackslash.messsyadmin.R;
 
+import java.io.IOException;
 
 
 public class MessReportIssueActivity extends AppCompatActivity {
@@ -36,18 +38,22 @@ public class MessReportIssueActivity extends AppCompatActivity {
     Button backButton, sendButton, uploadImageButton;
     EditText issueET, explainationET;
     TextView informationTV;
-    String sIssue, sExplaination;
-
-    ImageView sImage;
+    String sIssue, sExplaination, generatedFilePath;
 
     Dialog dialogIssueReported;
 
-    private Uri downloadURL;
+    private Uri imageUri;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    DocumentReference documentReference;
     FirebaseAuth firebaseAuth ;
     FirebaseUser currentUser;
-    StorageReference mstorageReference;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference;
+
+    private static final int PICK_IMAGE = 1;
+
+    Bitmap bitmap;
 
 
 
@@ -58,6 +64,8 @@ public class MessReportIssueActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mess_reportissue);
+
+
         Intent intentReport = getIntent();
 
 
@@ -71,7 +79,8 @@ public class MessReportIssueActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-        mstorageReference= FirebaseStorage.getInstance().getReference().child("images");
+        documentReference = FirebaseFirestore.getInstance().collection("Issues").document(currentUser.getUid());
+        storageReference = storage.getReference().child("images").child(currentUser.getUid());
 
 
 
@@ -96,9 +105,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     return;
                 }
 
-
-                ReportIssue ReportInfo = new ReportIssue(sIssue, sExplaination, String.valueOf(downloadURL));
-
+                ReportIssue ReportInfo = new ReportIssue(sIssue, sExplaination, String.valueOf(imageUri));
 
                 firebaseFirestore.collection("Issues").document(currentUser.getUid()).set(ReportInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -117,8 +124,47 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     }
                 });
 
+                if(imageUri != null) {
+                    storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(MessReportIssueActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    generatedFilePath = uri.toString();
+
+                                    documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(MessReportIssueActivity.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(MessReportIssueActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(MessReportIssueActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MessReportIssueActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
+
 
 
 
@@ -161,38 +207,20 @@ public class MessReportIssueActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
+        if(requestCode==PICK_IMAGE && resultCode==RESULT_OK)
         {
-            Uri imageUri = data.getData();
+            imageUri = data.getData();
             try {
-                Bitmap currentImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                sImage.setImageBitmap(currentImage);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
             }
-            catch (Exception e){
+            catch (IOException e) {
                 e.printStackTrace();
             }
-            StorageReference photoRef = mstorageReference.child(imageUri.getLastPathSegment());
-
-            photoRef.putFile(imageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                {
-                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!urlTask.isSuccessful());
-                    downloadURL = urlTask.getResult();
-                }
-
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(MessReportIssueActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
 
         }
 
@@ -200,10 +228,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         uploadImageButton.setBackgroundResource(R.drawable.uploadimageafteruploaded);
     }
 
-
-
 /*
-
     public void OpenDialog(){
         dialogIssueReported.setContentView(R.layout.report_sent_dialog);
         dialogIssueReported.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -217,15 +242,12 @@ public class MessReportIssueActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 dialogIssueReported.dismiss();
-                Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
-                startActivity(sendToMessFragmentContainerIntent);
             }
         });
 
         dialogIssueReported.show();
 
     }
-
- */
+*/
 
 }
