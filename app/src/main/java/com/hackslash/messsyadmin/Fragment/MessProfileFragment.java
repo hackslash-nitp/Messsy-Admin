@@ -25,6 +25,8 @@ import com.hackslash.messsyadmin.R;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
+
 public class MessProfileFragment extends Fragment {
     private ImageView profileImageIV;    // IV stands for imageview
     private TextView nameTV, emailTV, hostelNameTV ;
@@ -52,7 +54,7 @@ public class MessProfileFragment extends Fragment {
 
 
 
-        Glide.with(getContext()).load(url).into(profileImageIV);
+        Glide.with(Objects.requireNonNull(getContext())).load(url).into(profileImageIV);
 
         docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -67,7 +69,7 @@ public class MessProfileFragment extends Fragment {
                         String sImageUrl = user.getImageUrl();
 
                         if(sImageUrl != null){
-                            Glide.with(getContext()).load(sImageUrl).into(profileImageIV);}
+                            Glide.with(Objects.requireNonNull(getContext())).load(sImageUrl).into(profileImageIV);}
 
                     }
 

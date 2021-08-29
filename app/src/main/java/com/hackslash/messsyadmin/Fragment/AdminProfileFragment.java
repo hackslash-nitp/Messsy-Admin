@@ -25,6 +25,8 @@ import com.hackslash.messsyadmin.R;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
+
 public class AdminProfileFragment extends Fragment {
     private ImageView profileImageIV;    // IV stands for imageview
     private TextView nameTV, emailTV ;
@@ -50,7 +52,7 @@ public class AdminProfileFragment extends Fragment {
 
         docref = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
 
-        Glide.with(getContext()).load(url).into(profileImageIV);
+        Glide.with(Objects.requireNonNull(getContext())).load(url).into(profileImageIV);
 
         docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -63,7 +65,7 @@ public class AdminProfileFragment extends Fragment {
                        emailTV.setText(user.getsEmail());
                        String sImageUrl = user.getImageUrl();
                        if(sImageUrl != null){
-                       Glide.with(getContext()).load(sImageUrl).into(profileImageIV);}
+                       Glide.with(Objects.requireNonNull(getContext())).load(sImageUrl).into(profileImageIV);}
                    }
 
                 }else{

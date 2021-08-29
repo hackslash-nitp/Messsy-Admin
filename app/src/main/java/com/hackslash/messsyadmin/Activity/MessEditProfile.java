@@ -69,7 +69,6 @@ public class MessEditProfile extends AppCompatActivity {
 
 
 
-        Glide.with(this).load("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg").into(img2);
 
         Button AddImage;
         AddImage = (Button)findViewById(R.id.addImage);
@@ -160,6 +159,18 @@ public class MessEditProfile extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     generatedFilePath = uri.toString();
+                                    documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(MessEditProfile.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(MessEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -177,23 +188,18 @@ public class MessEditProfile extends AppCompatActivity {
                     });
                 }
 
-                documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MessEditProfile.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MessEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
 
 
                 openDialog();
             }
         });
+        if(generatedFilePath != null){
+            Glide.with(this).load(generatedFilePath).into(img2);}
+        else{
+            Glide.with(this).load("https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png").into(img2);
+
+        }
 
 
 

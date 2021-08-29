@@ -74,12 +74,6 @@ public class AdminEditProfile extends AppCompatActivity {
 
 
 
-        Glide.with(this).load("https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png").into(img1);
-
-
-
-            Glide.with(this).load(storageReference.getDownloadUrl()).into(img1);
-
 
         Button AddImage;
         AddImage = (Button) findViewById(R.id.addImage);
@@ -165,6 +159,18 @@ public class AdminEditProfile extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                 generatedFilePath = uri.toString();
+
+                                    documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(AdminEditProfile.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -182,17 +188,6 @@ public class AdminEditProfile extends AppCompatActivity {
                     });
                 }
 
-                documentReference.update("imageUrl",generatedFilePath).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(AdminEditProfile.this, "Image Url Saved On Firebase", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
                 openDialog();
             }
