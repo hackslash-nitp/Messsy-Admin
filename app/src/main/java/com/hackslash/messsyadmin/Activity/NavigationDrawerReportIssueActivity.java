@@ -13,7 +13,8 @@ public class NavigationDrawerReportIssueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer_report_issue);
-        Intent navigationDrawerReportIssueIntent = getIntent();
+        Intent navigationDrawerReportIssueIntent = new Intent(getApplicationContext(), MessReportIssueActivity.class);
+        startActivity(navigationDrawerReportIssueIntent);
 
     }
 }
