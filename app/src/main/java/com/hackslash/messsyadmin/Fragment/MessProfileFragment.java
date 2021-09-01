@@ -39,7 +39,7 @@ public class MessProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_mess_profile,container,false);
 
         profileImageIV = (ImageView)view.findViewById(R.id.profile_image);
         nameTV = (TextView) view.findViewById(R.id.name);
@@ -47,6 +47,8 @@ public class MessProfileFragment extends Fragment {
         hostelNameTV = (TextView) view.findViewById(R.id.hostel_name) ;
 
         String url = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+        Glide.with(Objects.requireNonNull(getContext())).load(url).into(profileImageIV);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -68,7 +70,7 @@ public class MessProfileFragment extends Fragment {
                         hostelNameTV.setText(user.getsHostelName());
                         String sImageUrl = user.getImageUrl();
 
-                        if(sImageUrl != null){
+                        if(sImageUrl != null && !(sImageUrl.equalsIgnoreCase("null"))){
                             Glide.with(Objects.requireNonNull(getContext())).load(sImageUrl).into(profileImageIV);}
 
                     }

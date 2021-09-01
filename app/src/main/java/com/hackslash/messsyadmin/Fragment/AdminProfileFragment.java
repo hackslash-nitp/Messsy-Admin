@@ -46,8 +46,10 @@ public class AdminProfileFragment extends Fragment {
 
 
              String url = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+            Glide.with(Objects.requireNonNull(getContext())).load(url).into(profileImageIV);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
+    firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         docref = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
@@ -64,7 +66,7 @@ public class AdminProfileFragment extends Fragment {
                        nameTV.setText(user.getsName());
                        emailTV.setText(user.getsEmail());
                        String sImageUrl = user.getImageUrl();
-                       if(sImageUrl != null){
+                       if(sImageUrl != null && !(sImageUrl.equalsIgnoreCase("null"))){
                        Glide.with(Objects.requireNonNull(getContext())).load(sImageUrl).into(profileImageIV);}
                    }
 

@@ -228,6 +228,8 @@ public class AdminEditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                startActivity(sendToAdminFragmentContainerIntent);
             }
         });
         dialog.show();
