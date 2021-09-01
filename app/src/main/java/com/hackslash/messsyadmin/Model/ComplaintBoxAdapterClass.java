@@ -2,76 +2,54 @@ package com.hackslash.messsyadmin.Model;
 
 public class ComplaintBoxAdapterClass {
 
-    private  String sName , sDate, sHeading, sUpvotes , sComments;
-    private int mImageResourceId , sDescription;
+    String Issue, Explanation, ImageUrl, Date;
+    //private  String sName , sDate, sHeading, sUpvotes , sComments, sComplainImage, sDescription;
+    //private int mImageResourceId ;
 
-    public ComplaintBoxAdapterClass(int imageResourceId , String name , String date, String heading , int description, String upvotes, String comments){
+    ComplaintBoxAdapterClass() {}
 
-        this.mImageResourceId = imageResourceId;
-        this.sName = name;
-        this.sComments =comments;
-        this.sDate = date;
-        this.sHeading = heading;
-        this.sDescription = description;
-        this.sUpvotes = upvotes;
+    public ComplaintBoxAdapterClass(String sIssue, String sExplanation, String sImageUrl, String sDate){
+
+        this.Issue = sIssue;
+        this.Explanation = sExplanation;
+        this.ImageUrl = sImageUrl;
+        this.Date = sDate;
 
     }
 
-    public String getsName() {
-        return sName;
+    public String getIssue() {
+        return Issue;
     }
 
-    public void setsName(String sName) {
-        this.sName = sName;
+    public void setIssue(String issue) {
+        Issue = issue;
     }
 
-    public String getsDate() {
-        return sDate;
+    public String getExplanation() {
+        return Explanation;
     }
 
-    public void setsDate(String sDate) {
-        this.sDate = sDate;
+    public void setExplanation(String explanation) {
+        Explanation = explanation;
     }
 
-    public String getsHeading() {
-        return sHeading;
+    public String getImageUrl() {
+        return ImageUrl;
     }
 
-    public void setsHeading(String sHeading) {
-        this.sHeading = sHeading;
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
     }
 
-    public int getsDescription() {
-        return sDescription;
+    public String getDate() {
+        return Date;
     }
 
-    public void setsDescription(int sDescription) {
-        this.sDescription = sDescription;
+    public void setDate(String date) {
+        Date = date;
     }
 
-    public String getsUpvotes() {
-        return sUpvotes;
-    }
 
-    public void setsUpvotes(String sUpvotes) {
-        this.sUpvotes = sUpvotes;
-    }
-
-    public String getsComments() {
-        return sComments;
-    }
-
-    public void setsComments(String sComments) {
-        this.sComments = sComments;
-    }
-
-    public int getmImageResourceId() {
-        return mImageResourceId;
-    }
-
-    public void setmImageResourceId(int mImageResourceId) {
-        this.mImageResourceId = mImageResourceId;
-    }
 }
 
 
