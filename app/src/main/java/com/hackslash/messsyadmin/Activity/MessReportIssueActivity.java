@@ -27,10 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hackslash.messsyadmin.Model.ComplaintBoxAdapterClass;
 import com.hackslash.messsyadmin.Model.ReportIssue;
 import com.hackslash.messsyadmin.R;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 
 public class MessReportIssueActivity extends AppCompatActivity {
@@ -105,9 +108,12 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     return;
                 }
 
-                ReportIssue ReportInfo = new ReportIssue(sIssue, sExplaination, String.valueOf(imageUri));
+                Calendar calendar= Calendar.getInstance();
+                String sDate = DateFormat.getDateInstance().format(calendar.getTime());
 
-                firebaseFirestore.collection("Issues").document(currentUser.getUid()).set(ReportInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                ComplaintBoxAdapterClass complain = new ComplaintBoxAdapterClass(sIssue, sExplaination, String.valueOf(imageUri), sDate);
+
+                firebaseFirestore.collection("Issues").document(currentUser.getUid()).set(complain).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 

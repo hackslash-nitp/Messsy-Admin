@@ -70,6 +70,14 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
+            <ImageView
+                android:id="@+id/imageComplain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/lineComplaint"
+                android:layout_below="@id/descriptionComplain"
+                android:padding="30dp"/>
+
             <View
                 android:id="@+id/lineComplaint"
                 android:layout_width="match_parent"
