@@ -73,16 +73,17 @@
             <ImageView
                 android:id="@+id/imageComplain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/lineComplaint"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/descriptionComplain"
-                android:padding="30dp"/>
+                android:padding="8dp"/>
 
             <View
                 android:id="@+id/lineComplaint"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/descriptionComplain"
+                android:layout_below="@id/imageComplain"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
@@ -96,7 +97,6 @@
                 android:layout_alignLeft="@+id/descriptionComplain"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="5dp"
                 android:text="165 Upvotes"
                 android:textColor="#AA9494"
                 android:textSize="15sp" />
