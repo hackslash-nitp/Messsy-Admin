@@ -1,6 +1,6 @@
 package com.hackslash.messsyadmin.Model;
 
-public class CreateNewNotice {
+public class CreateNewNoticeClass {
     private String subject;
     private String Description;
 
@@ -8,7 +8,7 @@ public class CreateNewNotice {
     private String UserInfo;
     private String date;
 
-    public CreateNewNotice(String subject, String Description, String UserInfo, String date, long timestamp){
+    public CreateNewNoticeClass(String subject, String Description, String UserInfo, String date, long timestamp){
 
         this.subject=subject;
         this.Description= Description;
@@ -17,7 +17,7 @@ public class CreateNewNotice {
         this.timestamp=timestamp;
 
     }
-    public CreateNewNotice(){
+    public CreateNewNoticeClass(){
 
     }
     public String getSubject(){

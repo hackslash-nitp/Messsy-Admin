@@ -75,7 +75,7 @@
         android:layout_marginLeft="45dp">
         <EditText
             android:id="@+id/notice_description_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:hint="Type the Notice"
@@ -83,7 +83,8 @@
             android:layout_marginStart="25dp"
             android:fontFamily="@font/josefin_sans_semibold"
             android:textSize="22sp"
-            android:inputType="text"
+             android:ems="10"
+            android:inputType="textMultiLine"
             android:importantForAutofill="no"
             android:background="@null"/>
     </androidx.cardview.widget.CardView>
