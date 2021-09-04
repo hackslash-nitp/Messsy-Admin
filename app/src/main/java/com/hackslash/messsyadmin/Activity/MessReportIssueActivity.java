@@ -23,12 +23,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.ComplaintBoxAdapterClass;
 import com.hackslash.messsyadmin.Model.ReportIssue;
+import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
 import java.io.IOException;
@@ -43,12 +45,14 @@ public class MessReportIssueActivity extends AppCompatActivity {
     TextView informationTV;
     String sIssue, sExplaination, generatedFilePath;
 
+    String sComplainerName, sComplainerProfileImage;
+    
     Dialog dialogIssueReported;
 
     private Uri imageUri;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    DocumentReference documentReference;
+    DocumentReference documentReference, documentReference2;
     FirebaseAuth firebaseAuth ;
     FirebaseUser currentUser;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -83,10 +87,44 @@ public class MessReportIssueActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         documentReference = FirebaseFirestore.getInstance().collection("Issues").document(currentUser.getUid());
+        documentReference2 = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
         storageReference = storage.getReference().child("images").child(currentUser.getUid());
 
 
 
+        documentReference2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists())
+                {
+                    UserClass user = documentSnapshot.toObject(UserClass.class);
+                    sComplainerName = user.getsName();
+                    sComplainerProfileImage = user.getImageUrl();
+                    
+                    if(sComplainerProfileImage.equalsIgnoreCase("null"))
+                    {
+                        sComplainerProfileImage = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+                    }
+                }
+                
+                else 
+                {
+                    sComplainerName = "Unknown";
+                    sComplainerProfileImage = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+                    Toast.makeText(MessReportIssueActivity.this, "Something went Wrong!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                sComplainerName = "Unknown";
+                sComplainerProfileImage = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+                Toast.makeText(MessReportIssueActivity.this, "Error!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        
+        
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +149,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
                 Calendar calendar= Calendar.getInstance();
                 String sDate = DateFormat.getDateInstance().format(calendar.getTime());
 
-                ComplaintBoxAdapterClass complain = new ComplaintBoxAdapterClass(sIssue, sExplaination, String.valueOf(imageUri), sDate);
+                ComplaintBoxAdapterClass complain = new ComplaintBoxAdapterClass(sComplainerName, sComplainerProfileImage, sIssue, sExplaination, String.valueOf(imageUri), sDate);
 
                 firebaseFirestore.collection("Issues").document(currentUser.getUid()).set(complain).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
