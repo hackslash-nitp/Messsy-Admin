@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AdminFeeSpecificStudent">
+
+    <ImageView
+        android:id="@+id/mainImage_imageView_id"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/girl_image" />
+
+    <TextView
+        android:id="@+id/name_textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="147dp"
+        android:fontFamily="@font/josefin_sans"
+        android:gravity="center"
+        android:text="Alka Kumari"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainImage_imageView_id" />
+
+    <TextView
+        android:id="@+id/branch_textView_id"
+        android:layout_width="101dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/josefin_sans"
+        android:gravity="center"
+        android:text="B.Tech EE"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView_id" />
+
+    <TextView
+        android:id="@+id/hostel_textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:fontFamily="@font/josefin_sans"
+        android:gravity="center"
+        android:text="Hostel-Sone"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView_id" />
+
+    <TextView
+        android:id="@+id/email_textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/josefin_sans"
+        android:gravity="center"
+        android:text="alkak.ug21.ee@nitp.ac.in"
+        android:textColor="#3F3D56"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hostel_textView_id" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCiew_id"
+        android:layout_width="366dp"
+        android:layout_height="281dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:alwaysDrawnWithCache="false"
+        android:animateLayoutChanges="false"
+        android:animationCache="false"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_textView_id"
+        tools:ignore="MissingConstraints">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="18dp"
+                android:background="@android:color/tertiary_text_light"
+                app:layout_constraintBottom_toTopOf="@+id/status_textView_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/mutton_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="Mutton Biryani"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/eggRoll_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="Egg Roll"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="@+id/mutton_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/mutton_textView_id" />
+
+            <TextView
+                android:id="@+id/total_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="Total"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/eggRoll_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/eggRoll_textView_id" />
+
+            <TextView
+                android:id="@+id/status_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="Status"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/total_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/total_textView_id" />
+
+            <TextView
+                android:id="@+id/muttonPrice_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_marginRight="56dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:text="$12"
+                android:textColor="#070707"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/mutton_textView_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/mutton_textView_id" />
+
+            <TextView
+                android:id="@+id/eggRollPrice_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="$5"
+                android:textColor="#070707"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/eggRoll_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/muttonPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/muttonPrice_textView_id" />
+
+            <TextView
+                android:id="@+id/totalPrice_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="$17"
+                android:textColor="#131313"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/total_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/eggRollPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/eggRollPrice_textView_id" />
+
+            <TextView
+                android:id="@+id/paid_textView_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="paid"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/status_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/totalPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/totalPrice_textView_id" />
+
+            <ImageView
+                android:id="@+id/paid_imageView_id"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toTopOf="@+id/paid_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/paid_textView_id"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="@+id/paid_textView_id"
+                app:srcCompat="@drawable/paid2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/feeProfile_textView_id"
+        android:layout_width="105dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="71dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginRight="184dp"
+        android:fontFamily="@font/josefin_sans"
+        android:text="Fee Profile"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back_button_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="22sp" />
+
+    <ImageButton
+        android:id="@+id/back_button_id"
+        android:layout_width="31dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_button_image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
