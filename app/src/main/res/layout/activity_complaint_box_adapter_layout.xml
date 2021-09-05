@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/person_icon"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
@@ -52,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/person_icon"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="7dp"
                 android:fontFamily="@font/roboto"
                 android:text="Heading Of Complain"
@@ -66,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/headingOfComplain"
                 android:layout_marginLeft="7dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/complaintBoxDescription1"
                 android:textColor="@color/black"
                 android:textSize="16sp" />

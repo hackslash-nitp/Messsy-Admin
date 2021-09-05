@@ -31,7 +31,7 @@ public class AdminComplaintActivity extends AppCompatActivity {
     ComplaintBoxAdapter complaintBoxAdapter;
     ArrayList<ComplaintBoxAdapterClass> data = new ArrayList<>();
 
-    String issue, explanation, date, imageurl;
+    String issue, explanation, date, imageurl, complainerName, complainerImage;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference notebookRef = db.collection("Issues");
@@ -55,8 +55,10 @@ public class AdminComplaintActivity extends AppCompatActivity {
                     explanation = documentSnapshot.getString("explanation");
                     date = documentSnapshot.getString("date");
                     imageurl = documentSnapshot.getString("imageUrl");
+                    complainerName = documentSnapshot.getString("compName");
+                    complainerImage = documentSnapshot.getString("compProfileImage");
 
-                    data.add(new ComplaintBoxAdapterClass(issue, explanation, imageurl, date));
+                    data.add(new ComplaintBoxAdapterClass(complainerName, complainerImage, issue, explanation, imageurl, date));
                 }
                 complaintBoxAdapter.notifyDataSetChanged();
             }

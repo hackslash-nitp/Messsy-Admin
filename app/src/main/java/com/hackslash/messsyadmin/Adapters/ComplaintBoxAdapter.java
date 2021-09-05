@@ -35,14 +35,14 @@ public class ComplaintBoxAdapter extends RecyclerView.Adapter<ComplaintBoxAdapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.imageiconIV.setImageResource(R.drawable.complaint_box_boy_icon);
+        Glide.with(holder.imageiconIV.getContext()).load(data.get(position).getCompProfileImage()).into(holder.imageiconIV);
         holder.descriptionTV.setText(data.get(position).getExplanation());
-        holder.nameTV.setText("Arjun Singh");
+        holder.nameTV.setText(data.get(position).getCompName());
         holder.headingTV.setText(data.get(position).getIssue());
         holder.dateTV.setText(data.get(position).getDate());
         holder.upVotesTV.setText("165 Upvotes");
         holder.commentTV.setText("20 Comments");
-        if(!data.get(position).getImageUrl().equals("null"))
+        if(!data.get(position).getImageUrl().equalsIgnoreCase("null"))
         {
             Glide.with(holder.complainImageIV.getContext()).load(data.get(position).getImageUrl()).into(holder.complainImageIV);
         }
