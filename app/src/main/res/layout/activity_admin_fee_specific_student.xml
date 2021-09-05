@@ -7,7 +7,7 @@
     tools:context=".Activity.AdminFeeSpecificStudent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/mainImage_imageView_id"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="110dp"
@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/girl_image" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/name_textView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="147dp"
@@ -33,10 +33,10 @@
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/mainImage_imageView_id" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/branch_textView_id"
         android:layout_width="101dp"
         android:layout_height="38dp"
         android:layout_marginTop="5dp"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/name_textView_id" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/hostel_textView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
@@ -63,10 +63,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/name_textView_id" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/email_textView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
@@ -77,9 +77,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/hostel_textView_id" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardCiew_id"
         android:layout_width="366dp"
         android:layout_height="281dp"
         android:layout_marginStart="23dp"
@@ -96,7 +97,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/email_textView_id"
         tools:ignore="MissingConstraints">
 
 
@@ -114,27 +115,27 @@
                 android:layout_marginRight="17dp"
                 android:layout_marginBottom="18dp"
                 android:background="@android:color/tertiary_text_light"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintBottom_toTopOf="@+id/status_textView_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/mutton_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="22dp"
                 android:fontFamily="@font/josefin_sans"
                 android:gravity="center"
                 android:text="Mutton Biryani"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="16dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/eggRoll_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -142,11 +143,11 @@
                 android:gravity="center"
                 android:text="Egg Roll"
                 android:textSize="25dp"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintStart_toStartOf="@+id/mutton_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/mutton_textView_id" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/total_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -154,11 +155,11 @@
                 android:gravity="center"
                 android:text="Total"
                 android:textSize="25sp"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintStart_toStartOf="@+id/eggRoll_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/eggRoll_textView_id" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/status_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="68dp"
@@ -166,75 +167,76 @@
                 android:gravity="center"
                 android:text="Status"
                 android:textSize="25sp"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintStart_toStartOf="@+id/total_textView_id"
+                app:layout_constraintTop_toBottomOf="@+id/total_textView_id" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/muttonPrice_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="56dp"
+                android:layout_marginRight="56dp"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:text="$12"
                 android:textColor="#070707"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                app:layout_constraintBottom_toBottomOf="@+id/mutton_textView_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView12" />
+                app:layout_constraintStart_toEndOf="@+id/mutton_textView_id" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/eggRollPrice_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="$5"
                 android:textColor="#070707"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
-                app:layout_constraintStart_toStartOf="@+id/textView17" />
+                app:layout_constraintBottom_toBottomOf="@+id/eggRoll_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/muttonPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/muttonPrice_textView_id" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/totalPrice_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="$17"
                 android:textColor="#131313"
                 android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView15"
-                app:layout_constraintEnd_toEndOf="@+id/textView19"
-                app:layout_constraintStart_toStartOf="@+id/textView19" />
+                app:layout_constraintBottom_toBottomOf="@+id/total_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/eggRollPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/eggRollPrice_textView_id" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/paid_textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/josefin_sans"
                 android:gravity="center"
                 android:text="paid"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                app:layout_constraintEnd_toEndOf="@+id/textView20"
-                app:layout_constraintStart_toStartOf="@+id/textView20" />
+                app:layout_constraintBottom_toBottomOf="@+id/status_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/totalPrice_textView_id"
+                app:layout_constraintStart_toStartOf="@+id/totalPrice_textView_id" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/paid_imageView_id"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView21"
-                app:layout_constraintEnd_toEndOf="@+id/textView21"
+                app:layout_constraintBottom_toTopOf="@+id/paid_textView_id"
+                app:layout_constraintEnd_toEndOf="@+id/paid_textView_id"
                 app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintStart_toStartOf="@+id/paid_textView_id"
                 app:srcCompat="@drawable/paid2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/feeProfile_textView_id"
         android:layout_width="105dp"
         android:layout_height="27dp"
         android:layout_marginStart="71dp"
@@ -246,14 +248,14 @@
         android:text="Fee Profile"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/back_button_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="22sp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/back_button_id"
         android:layout_width="31dp"
         android:layout_height="21dp"
         android:layout_marginStart="15dp"
