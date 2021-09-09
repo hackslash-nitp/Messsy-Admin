@@ -41,7 +41,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/btn_Done"
+                android:id="@+id/btn_Done1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_below="@+id/tvNoticeUploaded"
