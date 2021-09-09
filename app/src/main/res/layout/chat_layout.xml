@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="5dp"
+        android:id="@+id/profileImage"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:src="@drawable/admin_profile_fragment_img"
+        />
+
+    <TextView
+        android:id="@+id/name1"
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@+id/profileImage"
+        android:layout_alignTop="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:text="Raj Kothari" />
+
+    <TextView
+        android:id="@+id/last_message"
+        android:layout_below="@id/name1"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:textColor="#949494"
+        android:layout_alignLeft="@+id/name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hello" />
+
+    <TextView
+        android:id="@+id/time1"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/name1"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto"
+        android:layout_marginRight="15dp"
+        android:textColor="#949494"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Just Now" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/profileImage"
+            android:layout_alignRight="@id/time1"
+            android:background="#D7D7D7"
+            android:layout_marginBottom="1dp"
+            android:layout_alignLeft="@+id/name1"/>
+
+
+
+</RelativeLayout>
+</RelativeLayout>
