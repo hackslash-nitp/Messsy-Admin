@@ -28,7 +28,7 @@ import java.text.DateFormat;
 
     public class CreateNoticeActivity extends AppCompatActivity  {
     private Button backButton,createNotice;
-    Dialog dialog;
+    Dialog dialog ;
     String subject,description;
     EditText subEdit,desEdit;
     FirebaseFirestore db;
@@ -43,13 +43,19 @@ import java.text.DateFormat;
         backButton = (Button) findViewById(R.id.backButton);
         subEdit=findViewById(R.id.subject_edit_text);
         desEdit=findViewById(R.id.notice_description_edit);
+        dialog = new Dialog(this);
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+
         createNotice=findViewById(R.id.create_notice);
+
         createNotice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,16 +83,11 @@ import java.text.DateFormat;
         });
 
     }
-
-
-
         private void createNotice() {
         subject=subEdit.getText().toString().trim();
         description=desEdit.getText().toString().trim();
 
     }
-
-
 
 
     @SuppressLint("SimpleDateFormat")
@@ -112,10 +113,9 @@ import java.text.DateFormat;
         dbNotice.add(Notice).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-              openDialog();
+                Toast.makeText(CreateNoticeActivity.this, "Sucessfully added notice on firebase", Toast.LENGTH_SHORT).show();
+                openDialog();
             }
-
-
 
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -123,25 +123,25 @@ import java.text.DateFormat;
                 Toast.makeText(CreateNoticeActivity.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-
-
 
         private void openDialog() {
             dialog.setContentView(R.layout.successfully_notice_uploaded);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            Button Done = dialog.findViewById(R.id.btn_Done);
+
+            Button Done = dialog.findViewById(R.id.btn_Done1);
             Done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(dialog != null && dialog.isShowing()){
                     dialog.dismiss();
+                    Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                    startActivity(sendToAdminFragmentContainerIntent);}
                 }
             });
+            dialog.show();
 
         }
 
