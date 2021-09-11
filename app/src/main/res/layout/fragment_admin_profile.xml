@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:fontFamily="@font/josefin_sans_semibold"
-        android:text="Name"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="34dp"
         android:textStyle="bold" />
@@ -58,7 +58,7 @@
         android:fontFamily="@font/josefin_sans"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:text="adminxyz@nitp.ac.in"
+        android:text=""
         android:textColor="#3F3D56"
         android:textSize="29sp" />
 
