@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -23,7 +25,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
@@ -42,6 +49,13 @@ public class AdminRegisterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
+    Uri selectedImage;
+    DocumentReference documentReference;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    String ImagePath;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +76,9 @@ public class AdminRegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        storage=FirebaseStorage.getInstance();
+        storageReference=storage.getReference().child("images").child(currentUser.getUid());
+        documentReference=FirebaseFirestore.getInstance().collection("User Information").document(currentUser.getUid());
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +141,41 @@ public class AdminRegisterActivity extends AppCompatActivity {
                         }
                     });
 
+                    storageReference.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(AdminRegisterActivity.this, "Image Saved", Toast.LENGTH_SHORT).show();
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    ImagePath=uri.toString();
+                                    documentReference.update("imageUrl", ImagePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(AdminRegisterActivity.this, "Url Saved", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
                 }
 
             }
@@ -155,12 +207,13 @@ public class AdminRegisterActivity extends AppCompatActivity {
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminRegisterActivity.this, "Adding Image", Toast.LENGTH_SHORT).show();
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), PICK_IMAGE);
+                Intent intent1= new Intent();
+                intent1.setType("image/*");
+                intent1.setAction(Intent.ACTION_GET_CONTENT);
 
+                startActivityForResult(Intent.createChooser(intent1,"Add Image"),PICK_IMAGE);
             }
         });
-
 
     }
 
@@ -188,19 +241,14 @@ public class AdminRegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-        //Detects request codes
         if(requestCode== PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+            selectedImage = data.getData();
+            bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
