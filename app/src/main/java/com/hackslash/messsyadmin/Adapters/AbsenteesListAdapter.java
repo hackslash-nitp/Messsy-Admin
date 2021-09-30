@@ -11,19 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.hackslash.messsyadmin.Model.AbsenteesListAdapterClass;
 import com.hackslash.messsyadmin.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdapter.ViewHolder> implements Adapter
-{
+public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdapter.ViewHolder>{
 
     private List<AbsenteesListAdapterClass> userList;
 
     public AbsenteesListAdapter (List<AbsenteesListAdapterClass>userList){ this.userList=userList;}
-
 
     @NonNull
     @Override
@@ -34,14 +33,19 @@ public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AbsenteesListAdapter.ViewHolder holder, int position) {
-        String serial_number =userList.get(position).getSerialNumber();
-        String student_name = userList.get(position).getStudentName();
-        int hostel_icon = userList.get(position).getHostelIcon();
-        String rollNumber = userList.get(position).getRollNumber();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
-        holder.setData(serial_number, student_name, hostel_icon, rollNumber);
+        holder.SNo.setText(String.valueOf(" "+(position+1)));
+        holder.Name.setText(userList.get(position).getStudentName());
+        holder.Roll.setText(userList.get(position).getRollNumber());
+        if (userList.get(position).getHostelIcon().equalsIgnoreCase("Brahmputra"))
+            holder.Hostel.setImageResource(R.drawable.brahmputra_icon);
+        else if (userList.get(position).getHostelIcon().equalsIgnoreCase("Kosi"))
+            holder.Hostel.setImageResource(R.drawable.kosi_icon);
+        else if (userList.get(position).getHostelIcon().equalsIgnoreCase("Sone"))
+            holder.Hostel.setImageResource(R.drawable.sone_icon);
+        else if (userList.get(position).getHostelIcon().equalsIgnoreCase("Ganga"))
+            holder.Hostel.setImageResource(R.drawable.ganga_icon);
 
     }
 
@@ -57,48 +61,10 @@ public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdap
     }
 
 
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public int getCount() {
-        return 0;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView SNo;
-        private TextView Name;
-        private TextView Roll;
-        private ImageView Hostel;
+        TextView SNo, Name, Roll;
+        ImageView Hostel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,12 +76,6 @@ public class AbsenteesListAdapter extends RecyclerView.Adapter<AbsenteesListAdap
 
         }
 
-        public void setData(String serial_number, String student_name, int hostel_icon, String rollNumber) {
-            SNo.setText(serial_number);
-            Name.setText(student_name);
-            Hostel.setImageResource(hostel_icon);
-            Roll.setText(rollNumber);
-        }
     }
 
 }
