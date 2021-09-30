@@ -63,4 +63,10 @@ public class FeeDetailsAdapter extends RecyclerView.Adapter<FeeDetailsAdapter.Vi
     public int getItemCount() {
          return userList.size();
     }
+
+    public void filterlist(ArrayList<FeeDetailsAdapterClass> filteredlist)
+    {
+        userList=filteredlist;
+        notifyDataSetChanged();
+    }
 }
