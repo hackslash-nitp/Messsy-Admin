@@ -63,10 +63,22 @@
                 android:background="#D7D7D7"/>
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lineGanga"
+                android:layout_marginTop="10dp"
+                android:textColor="#4D4D4D"
+                android:fontFamily="@font/roboto"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Subject" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subject"
                 android:layout_marginTop="10dp"
                 android:textColor="#4D4D4D"
                 android:fontFamily="@font/roboto"

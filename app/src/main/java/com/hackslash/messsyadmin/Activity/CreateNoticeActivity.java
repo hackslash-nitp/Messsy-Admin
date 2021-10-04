@@ -24,7 +24,10 @@ import com.hackslash.messsyadmin.Model.CreateNewNoticeClass;
 import com.hackslash.messsyadmin.R;
 
 import java.text.DateFormat;
+    import java.text.SimpleDateFormat;
     import java.util.Calendar;
+    import java.util.Date;
+    import java.util.Locale;
 
     public class CreateNoticeActivity extends AppCompatActivity  {
     private Button backButton,createNotice;
@@ -93,20 +96,20 @@ import java.text.DateFormat;
     @SuppressLint("SimpleDateFormat")
     public void NewNotice(String subject, String description) {
         Calendar calendar= Calendar.getInstance();
-        long timestamp= Timestamp.now().getSeconds();
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         String date= DateFormat.getDateInstance().format(calendar.getTime());
 
         // String userInfo = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         CollectionReference dbNotice = db.collection("MessssyNotice");
-        CreateNewNoticeClass Notice = new CreateNewNoticeClass(subject,description,"jessica",date,timestamp);
+        CreateNewNoticeClass Notice = new CreateNewNoticeClass(subject,description,"Brahmputra Hostel Mess",date,currentTime);
         System.out.println(subject);
         System.out.println(description);
         System.out.println(date);
-        System.out.println(timestamp);
+        System.out.println(currentTime);
         System.out.println(subject);
         Notice.setSubject(subject);
         Notice.setDescription(description);
-        Notice.setTimestamp(timestamp);
+        Notice.setTimestamp(currentTime);
         Notice.setDate(date);
 
 

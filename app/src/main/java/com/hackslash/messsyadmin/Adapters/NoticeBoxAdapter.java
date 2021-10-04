@@ -9,15 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hackslash.messsyadmin.Model.CreateNewNoticeClass;
 import com.hackslash.messsyadmin.Model.NoticeBoxAdapterClass;
 import com.hackslash.messsyadmin.R;
 
 import java.util.List;
 
 public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.viewHolder> {
-    private List<NoticeBoxAdapterClass> data;
+    private List<CreateNewNoticeClass> data;
 
-    public NoticeBoxAdapter(List<NoticeBoxAdapterClass> data) {
+    public NoticeBoxAdapter(List<CreateNewNoticeClass> data) {
         this.data = data;
     }
 
@@ -33,11 +34,12 @@ public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.view
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.description.setText(data.get(position).getsDescription());
-        holder.hostelMessName.setText(data.get(position).getsHostelMessName());
-        holder.imageView.setImageResource(data.get(position).getmImageResourceId());
-        holder.date.setText(data.get(position).getsDate());
-        holder.time.setText(data.get(position).getsTime());
+        holder.subject.setText(data.get(position).getSubject());
+        holder.description.setText(data.get(position).getDescription());
+        holder.hostelMessName.setText(data.get(position).getUserInfo());
+        holder.imageView.setImageResource(R.drawable.brahmaputra_hostel_icon);
+        holder.date.setText(data.get(position).getDate());
+        holder.time.setText(data.get(position).getTimestamp());
     }
 
     @Override
@@ -47,7 +49,7 @@ public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.view
 
     public class viewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView hostelMessName, description, date, time;
+        TextView hostelMessName, description, date, time, subject;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +58,7 @@ public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.view
             description = itemView.findViewById(R.id.description);
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.timeDisplay);
+            subject = itemView.findViewById(R.id.subject);
         }
     }
 }

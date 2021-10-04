@@ -3,33 +3,30 @@ package com.hackslash.messsyadmin.Model;
 public class AbsenteesListAdapterClass
 {
 
-    private String serialNumber;
-    private String studentName;
-    private int hostelIcon;
-    private String rollNumber;
+    String studentName;
+    String hostelIcon;
+    String rollNumber;
 
-    public AbsenteesListAdapterClass(String serialNumber, String studentName, int hostelIcon, String rollNumber)
+    AbsenteesListAdapterClass() {}
+
+    public AbsenteesListAdapterClass( String studentName, String hostelIcon, String rollNumber)
     {
-        this.serialNumber=serialNumber;
         this.studentName=studentName;
         this.hostelIcon=hostelIcon;
         this.rollNumber=rollNumber;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
+    public String getStudentName() { return studentName; }
 
-    public String getStudentName() {
-        return studentName;
-    }
+    public String getHostelIcon() { return hostelIcon; }
 
-    public int getHostelIcon() {
-        return hostelIcon;
-    }
+    public String getRollNumber() { return rollNumber; }
 
-    public String getRollNumber() {
-        return rollNumber;
-    }
+    public void setStudentName(String studentName) { this.studentName = studentName; }
+
+    public void setHostelIcon(String hostelIcon) { this.hostelIcon = hostelIcon; }
+
+    public void setRollNumber(String rollNumber) { this.rollNumber = rollNumber; }
+
 
 }
