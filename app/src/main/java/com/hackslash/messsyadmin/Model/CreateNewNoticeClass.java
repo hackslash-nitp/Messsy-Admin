@@ -4,11 +4,12 @@ public class CreateNewNoticeClass {
     private String subject;
     private String Description;
 
-    long timestamp;
+    String timestamp;
     private String UserInfo;
     private String date;
 
-    public CreateNewNoticeClass(String subject, String Description, String UserInfo, String date, long timestamp){
+
+    public CreateNewNoticeClass(String subject, String Description, String UserInfo, String date, String timestamp){
 
         this.subject=subject;
         this.Description= Description;
@@ -38,16 +39,18 @@ public class CreateNewNoticeClass {
     public void setUserInfo(String UserInfo){
         this.subject=subject;
     }
-    public long getTimestamp(){
-        return timestamp;
-    }
-    public void setTimestamp(long timestamp){
-        this.timestamp=timestamp;
-    }
     public String getDate(){
         return date;
     }
     public void setDate(String date){
         this.date=date;
     }
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
 }
