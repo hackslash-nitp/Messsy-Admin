@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    tools:context=".Activity.AdminWalletChatBoxActivity">
+    tools:context=".Activity.GroupChatActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -28,20 +28,20 @@
         <ImageButton
             android:layout_marginTop="5dp"
             android:id="@+id/addButton"
-            android:layout_width="65dp"
+            android:layout_width="50dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/addbuttonnew"
-            android:layout_height="65dp"/>
+            android:layout_height="50dp"/>
 
         <androidx.cardview.widget.CardView
-            app:cardCornerRadius="25dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
             android:layout_toRightOf="@id/addButton"
-            android:layout_height="65dp">
+            android:layout_height="55dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -51,16 +51,17 @@
             android:layout_width="match_parent"
             android:background="@null"
             android:layout_alignBottom="@+id/button_send"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:hint="Type a message"
             android:layout_marginRight="5dp"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/button_send"
             android:layout_centerVertical="true"/>
 
         <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="7dp"
             android:background="@drawable/send_button_image"

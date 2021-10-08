@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
 <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_marginTop="8dp"
     android:layout_alignParentEnd="true"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true">
@@ -18,7 +19,7 @@
         android:layout_marginLeft="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:visibility="visible"
         android:id="@+id/hostel_image" />
 
@@ -28,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username"
-        android:layout_marginTop="2dp"
         android:textColor="@color/black"
         android:textSize="13sp"
         android:layout_alignTop="@id/hostel_image"
@@ -42,11 +42,13 @@
         android:layout_toLeftOf="@+id/hostel_image"
         android:layout_below="@+id/username"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="5dp"
         android:text="Hello"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:padding="6dp"
+        android:textSize="17sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
         android:background="@drawable/admin_wallet_chatbox_textshape_right_background"/>
 
 

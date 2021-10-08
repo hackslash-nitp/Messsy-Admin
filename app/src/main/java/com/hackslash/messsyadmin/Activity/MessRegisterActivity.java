@@ -3,11 +3,15 @@ package com.hackslash.messsyadmin.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
@@ -19,10 +23,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,11 +43,21 @@ public class MessRegisterActivity extends AppCompatActivity {
 
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, hostelNameET, passwordET; // ET stands for edittext
-    String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member" , sImageUrl = "null"; // s stands for string
+    String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member" , sImageUrl = "null",sUId ="null"; // s stands for string
     Boolean hasVisible = false;
     Dialog dialogSuccesfullyRegistered;
+    private static int PICK_IMAGE = 1 ;
+    UserClass userInfo;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
+
+    Uri selectedImage;
+    FirebaseStorage storage;
+    String ImagePath;
+    Bitmap bitmap;
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DocumentReference documentReference;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +77,8 @@ public class MessRegisterActivity extends AppCompatActivity {
         dialogSuccesfullyRegistered = new Dialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        storage=FirebaseStorage.getInstance();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +114,8 @@ public class MessRegisterActivity extends AppCompatActivity {
 
                 }
 
-                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation,sImageUrl);
+                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
+
 
                 if (currentUser != null) {
                     Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
@@ -100,14 +124,55 @@ public class MessRegisterActivity extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-
-                        currentUser=FirebaseAuth.getInstance().getCurrentUser();
-
+                            currentUser=FirebaseAuth.getInstance().getCurrentUser();
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    OpenDialog();
+                                    Toast.makeText(MessRegisterActivity.this, "Information uploaded on firebase", Toast.LENGTH_SHORT).show();
+                                    if(selectedImage != null){
+                                        storageReference = storage.getReference().child("images").child(currentUser.getUid());
+                                        documentReference = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
+                                        storageReference.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                Toast.makeText(MessRegisterActivity.this, "Image Saved", Toast.LENGTH_SHORT).show();
+                                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    @Override
+                                                    public void onSuccess(Uri uri) {
+                                                        ImagePath = uri.toString();
+                                                        documentReference.update("imageUrl", ImagePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Toast.makeText(MessRegisterActivity.this, "Url Saved", Toast.LENGTH_SHORT).show();
+                                                                OpenDialog();
 
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(MessRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                            }
+                                                        });
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(MessRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(MessRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        OpenDialog();
+                                    }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -124,7 +189,7 @@ public class MessRegisterActivity extends AppCompatActivity {
                         }
                     });
 
-            }
+                }
 
             }
         });
@@ -155,6 +220,11 @@ public class MessRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MessRegisterActivity.this, "Adding Image", Toast.LENGTH_SHORT).show();
+                Intent intent1= new Intent();
+                intent1.setType("image/*");
+                intent1.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent1,"Add Image"),PICK_IMAGE);
             }
         });
 
@@ -182,6 +252,21 @@ public class MessRegisterActivity extends AppCompatActivity {
         dialogSuccesfullyRegistered.show();
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode== PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            selectedImage = data.getData();
+            bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
+    }
 }

@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.hackslash.messsyadmin.Activity.AdminWalletChatBoxActivity;
+import com.hackslash.messsyadmin.Activity.GroupChatActivity;
 import com.hackslash.messsyadmin.R;
 
 public class AdminWalletFragment extends Fragment implements View.OnClickListener{
@@ -45,7 +45,7 @@ public class AdminWalletFragment extends Fragment implements View.OnClickListene
 
             case R.id.kosiHostel:
                 Toast.makeText(getActivity(), "Opening chatbox for kosi hostel", Toast.LENGTH_SHORT).show();
-                Intent kosiHostelChatBox = new Intent(getContext(), AdminWalletChatBoxActivity.class);
+                Intent kosiHostelChatBox = new Intent(getContext(), GroupChatActivity.class);
                 kosiHostelChatBox.putExtra("hostelPicResourceId",R.drawable.kosi_hoste_pic_new_2);
                 kosiHostelChatBox.putExtra("nameOfHostel","Kosi Hostel");
                 startActivity(kosiHostelChatBox);
@@ -53,7 +53,7 @@ public class AdminWalletFragment extends Fragment implements View.OnClickListene
 
             case R.id.brahmaputraHostel:
                 Toast.makeText(getActivity(), "Opening chatbox for brahmaputra hostel", Toast.LENGTH_SHORT).show();
-                Intent brahmaputraHostelChatBox = new Intent(getContext(), AdminWalletChatBoxActivity.class);
+                Intent brahmaputraHostelChatBox = new Intent(getContext(), GroupChatActivity.class);
                 brahmaputraHostelChatBox.putExtra("hostelPicResourceId",R.drawable.brahmaputra_hostel_pic);
                 brahmaputraHostelChatBox.putExtra("nameOfHostel","Brahmaputra Hostel");
                 startActivity(brahmaputraHostelChatBox);
@@ -61,7 +61,7 @@ public class AdminWalletFragment extends Fragment implements View.OnClickListene
 
             case R.id.gangaHostel:
                 Toast.makeText(getActivity(), "Opening chatbox for ganga hostel", Toast.LENGTH_SHORT).show();
-                Intent gangaHostelChatBox = new Intent(getContext(), AdminWalletChatBoxActivity.class );
+                Intent gangaHostelChatBox = new Intent(getContext(), GroupChatActivity.class );
                 gangaHostelChatBox.putExtra("hostelPicResourceId",R.drawable.ganga_hostel_pic);
                 gangaHostelChatBox.putExtra("nameOfHostel","Ganga Hostel");
                 startActivity(gangaHostelChatBox);
@@ -69,7 +69,7 @@ public class AdminWalletFragment extends Fragment implements View.OnClickListene
 
             case R.id.soneHostel:
                 Toast.makeText(getActivity(), "Opening chatbox for sone hostel", Toast.LENGTH_SHORT).show();
-                Intent soneHostelChatBox = new Intent(getContext(), AdminWalletChatBoxActivity.class );
+                Intent soneHostelChatBox = new Intent(getContext(), GroupChatActivity.class );
                 soneHostelChatBox.putExtra("hostelPicResourceId",R.drawable.sone_hostel_pic_15x);
                 soneHostelChatBox.putExtra("nameOfHostel","Brahmaputra Hostel");
                 startActivity(soneHostelChatBox);

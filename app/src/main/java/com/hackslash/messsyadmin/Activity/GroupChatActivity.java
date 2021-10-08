@@ -1,19 +1,16 @@
-package com.hackslash.messsyadmin.Fragment;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+package com.hackslash.messsyadmin.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,7 +32,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MessTalkFragment extends Fragment {
+public class GroupChatActivity extends AppCompatActivity {
+
     List<MessageClass> messageClassArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     MessageGroupAdapter messageGroupAdapter;
@@ -47,16 +45,17 @@ public class MessTalkFragment extends Fragment {
     EditText userMessageET;
     String senderMessage , senderUid , name , profileImageUrl;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mess_messtalk,container,false);
-        userMessageET = view.findViewById(R.id.userMessage);
-        sendButton = view.findViewById(R.id.button_send);
-        addButton = view.findViewById(R.id.addButton);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_group_chat);
 
-        recyclerView = view.findViewById(R.id.recyclerViewMessage);
-        messageGroupAdapter = new MessageGroupAdapter(getActivity() , messageClassArrayList);
+        userMessageET = findViewById(R.id.userMessage);
+        sendButton = findViewById(R.id.button_send);
+        addButton = findViewById(R.id.addButton);
+        messageGroupAdapter = new MessageGroupAdapter(getApplicationContext() , messageClassArrayList);
+
+        recyclerView = findViewById(R.id.recyclerViewMessage);
         database = FirebaseDatabase.getInstance();
         senderUid = FirebaseAuth.getInstance().getUid();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -73,19 +72,19 @@ public class MessTalkFragment extends Fragment {
                     profileImageUrl = user.getImageUrl();
                 }
                 else{
-                    Toast.makeText(getActivity(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
 
 
-        database.getReference().child("globalGroupChat")
+        database.getReference().child("adminGroupChat")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,12 +95,12 @@ public class MessTalkFragment extends Fragment {
                             messageClassArrayList.add(message);
 
                         }
-                        messageGroupAdapter.notifyDataSetChanged();
+                    messageGroupAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GroupChatActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -121,17 +120,17 @@ public class MessTalkFragment extends Fragment {
                 String randomKey = database.getReference().push().getKey();
 
                 assert randomKey != null;
-                database.getReference().child("globalGroupChat")
+                database.getReference().child("adminGroupChat")
                         .child(randomKey)
                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getActivity(), "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GroupChatActivity.this, "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GroupChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -141,15 +140,15 @@ public class MessTalkFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Clicked on Add Button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GroupChatActivity.this, "Clicked on Add Button", Toast.LENGTH_SHORT).show();
             }
         });
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(messageGroupAdapter);
 
-        return view;
+
     }
 }
