@@ -206,6 +206,8 @@ public class MessReportIssueActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+                OpenDialog();
             }
         });
 
@@ -272,7 +274,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         uploadImageButton.setBackgroundResource(R.drawable.uploadimageafteruploaded);
     }
 
-/*
+
     public void OpenDialog(){
         dialogIssueReported.setContentView(R.layout.report_sent_dialog);
         dialogIssueReported.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -286,12 +288,14 @@ public class MessReportIssueActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 dialogIssueReported.dismiss();
+                Intent sendBackToMessReport = new Intent(getApplicationContext(), MessReportIssueActivity.class);
+                startActivity(sendBackToMessReport);
             }
         });
 
         dialogIssueReported.show();
 
     }
-*/
+
 
 }

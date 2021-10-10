@@ -3,27 +3,27 @@
 
 
     <item android:id="@+id/home_icon"
-        android:icon="@drawable/home_icon"
+        android:icon="@drawable/home_new_icon"
         android:title="Home">
     </item>
 
     <item android:id="@+id/activity_icon"
-        android:icon="@drawable/activity"
+        android:icon="@drawable/chat_new_icon"
         android:iconTint="@color/white"
-        android:title="Activity"
+        android:title="Conversation"
 
         >
     </item>
 
     <item android:id="@+id/wallet_icon"
-        android:icon="@drawable/wallet"
+        android:icon="@drawable/mess_new_icon"
         android:iconTint="@color/white"
         android:title="Wallet">
     </item>
 
     <item android:id="@+id/profile_icon"
         android:iconTint="@color/white"
-        android:icon="@drawable/profile_icon_new"
+        android:icon="@drawable/profile_new_icon"
         android:title="Profile">
     </item>
 
