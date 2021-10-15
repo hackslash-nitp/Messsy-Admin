@@ -83,6 +83,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
         explainationET = (EditText) findViewById(R.id.explaination);
         informationTV = (TextView) findViewById(R.id.information);
 
+        dialogIssueReported = new Dialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -155,7 +156,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
 
-                        //OpenDialog();
+                        OpenDialog();
                         Toast.makeText(MessReportIssueActivity.this, "Complaint Sent.", Toast.LENGTH_SHORT).show();
 
                     }
@@ -207,7 +208,7 @@ public class MessReportIssueActivity extends AppCompatActivity {
                     });
                 }
 
-                OpenDialog();
+                //OpenDialog();
             }
         });
 
@@ -288,8 +289,8 @@ public class MessReportIssueActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 dialogIssueReported.dismiss();
-                Intent sendBackToMessReport = new Intent(getApplicationContext(), MessReportIssueActivity.class);
-                startActivity(sendBackToMessReport);
+                Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
+                startActivity(sendToMessFragmentContainerIntent);
             }
         });
 
