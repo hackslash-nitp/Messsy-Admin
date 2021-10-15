@@ -35,7 +35,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
         conversationCV = (CardView) view.findViewById(R.id.card_view4);
 
         absenteesListCV.setOnClickListener(this);
-        studentTrackCV.setOnClickListener(this);
+        //studentTrackCV.setOnClickListener(this);
         createNewNoticeCV.setOnClickListener(this);
         complaintBoxCV.setOnClickListener(this);
         conversationCV.setOnClickListener(this);
