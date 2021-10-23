@@ -1,11 +1,13 @@
 package com.hackslash.messsyadmin.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,9 +24,14 @@ import com.hackslash.messsyadmin.Adapters.AbsenteesListAdapter;
 import com.hackslash.messsyadmin.Model.AbsenteesListAdapterClass;
 import com.hackslash.messsyadmin.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AdminAbsenteesActivity extends AppCompatActivity {
 
@@ -33,11 +40,15 @@ public class AdminAbsenteesActivity extends AppCompatActivity {
     ArrayList<AbsenteesListAdapterClass> userList = new ArrayList<>();
     AbsenteesListAdapter adapter;
 
-    String name, hostel, roll;
-
+    String name, hostel, roll,startdate,enddate,currentDate;
+    Date sdate,endate,date;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference notebookRef = db.collection("AbsenceNotification");
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +78,44 @@ public class AdminAbsenteesActivity extends AppCompatActivity {
 
 
         notebookRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-
+                    startdate=documentSnapshot.getString("startdate");
+                    enddate=documentSnapshot.getString("enddate");
                     name = documentSnapshot.getString("sName");
                     roll = documentSnapshot.getString("roll");
                     hostel = documentSnapshot.getString("hostel");
 
-                    userList.add(new AbsenteesListAdapterClass(name, hostel, roll));
+
+
+                    Date c =Calendar.getInstance().getTime();
+                    SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yy");
+
+                    currentDate=sdf.format(c);
+
+
+                    try {
+                         date= sdf.parse(currentDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        sdate= sdf.parse(startdate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        endate = sdf.parse(enddate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                       if ((date.after(sdate) && date.before(endate))|| date.equals(sdate)|| date.equals(endate))
+                       userList.add(new AbsenteesListAdapterClass(name, hostel, roll));
 
                 }
                 adapter.notifyDataSetChanged();
