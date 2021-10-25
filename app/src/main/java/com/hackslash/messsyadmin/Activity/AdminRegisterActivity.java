@@ -18,6 +18,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,13 +46,15 @@ import java.util.Random;
 public class AdminRegisterActivity extends AppCompatActivity {
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, passwordET;
-    String  sName , sEmail , sMobile , sPassword ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null";
+    ImageView profileImage;
+    String  sName , sEmail , sMobile , sPassword ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null" , sUId;
     Boolean hasVisible = false;
     private static int PICK_IMAGE = 1 ;
     Dialog dialogSuccesfullyRegistered;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    UserClass userInfo;
 
     Uri selectedImage;
     FirebaseStorage storage;
@@ -60,6 +63,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DocumentReference documentReference;
     StorageReference storageReference;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +81,15 @@ public class AdminRegisterActivity extends AppCompatActivity {
         emailAddET = (EditText) findViewById(R.id.EmailAddress);
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         passwordET = (EditText) findViewById(R.id.Password);
+        profileImage = (ImageView) findViewById(R.id.image);
         dialogSuccesfullyRegistered = new Dialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         storage=FirebaseStorage.getInstance();
+        progressDialog = new ProgressDialog(AdminRegisterActivity.this);
+        progressDialog.setTitle("Registering");
+        progressDialog.setMessage("Please Wait");
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +121,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
 
                 }
 
-                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
+//                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
 
                 if (currentUser != null) {
                     Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
@@ -121,7 +130,12 @@ public class AdminRegisterActivity extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            progressDialog.show();
                             currentUser=FirebaseAuth.getInstance().getCurrentUser();
+                            assert currentUser != null;
+                            sUId = currentUser.getUid();
+                            userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl , sUId);
+
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -141,6 +155,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(Void unused) {
                                                             Toast.makeText(AdminRegisterActivity.this, "Url Saved", Toast.LENGTH_SHORT).show();
+                                                            progressDialog.dismiss();
                                                             OpenDialog();
 
                                                         }
@@ -168,6 +183,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
                                     });
                                 }
                                     else{
+                                        progressDialog.dismiss();
                                         OpenDialog();
                                     }
                                 }
@@ -257,6 +273,8 @@ public class AdminRegisterActivity extends AppCompatActivity {
             bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                profileImage.setImageBitmap(bitmap);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

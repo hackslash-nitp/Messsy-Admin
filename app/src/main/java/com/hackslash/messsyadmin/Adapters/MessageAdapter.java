@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hackslash.messsyadmin.Model.MessageClass;
 import com.hackslash.messsyadmin.R;
@@ -39,14 +40,26 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.viewHold
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_receive_layout_2_persons, parent, false);
             return new viewHolder(view);
-
-
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.messageTV.setText(messages.get(position).getMessage());
+        String message = messages.get(position).getMessage();
+        String ImageUrl = messages.get(position).getImageUrl();
+        if(message.equals("")) {
+            holder.messageTV.setHeight(0);
+            holder.messageTV.setWidth(0);
+            holder.messageTV.setVisibility(View.INVISIBLE);
+        }else{
+            holder.messageTV.setText(message);
+        }
+
+        if(ImageUrl != null)
+            if(!ImageUrl.equals("null")){
+                holder.imageView.setVisibility(View.VISIBLE);
+                Glide.with(context).load(ImageUrl).into(holder.imageView);
+            }
     }
 
 
@@ -57,10 +70,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.viewHold
 
     public class viewHolder extends RecyclerView.ViewHolder {
         TextView messageTV;
+        ImageView imageView;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             messageTV = itemView.findViewById(R.id.senderMessage);
+            imageView = itemView.findViewById(R.id.image1);
 
         }
     }

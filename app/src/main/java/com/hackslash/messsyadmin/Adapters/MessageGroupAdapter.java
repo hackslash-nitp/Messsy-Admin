@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.hackslash.messsyadmin.Model.AdminWalletChatBoxAdapterClass;
 import com.hackslash.messsyadmin.Model.MessageClass;
 import com.hackslash.messsyadmin.R;
 
@@ -54,9 +53,26 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        String message = messageData.get(position).getMessage();
+        String ImageUrl = messageData.get(position).getImageUrl();
+
     holder.usernameTV.setText(messageData.get(position).getName());
-    holder.messageTV.setText(messageData.get(position).getMessage());
     Glide.with(context).load(messageData.get(position).getProfileImage()).placeholder(R.drawable.image).into(holder.profilePicIV);
+
+
+        if(message.equals("")) {
+            holder.messageTV.setHeight(0);
+            holder.messageTV.setWidth(0);
+            holder.messageTV.setVisibility(View.INVISIBLE);
+        }else{
+            holder.messageTV.setText(message);
+        }
+
+            if (!ImageUrl.equals("null")) {
+                holder.ImageIV.setVisibility(View.VISIBLE);
+                Glide.with(context).load(ImageUrl).into(holder.ImageIV);
+            }
+
     }
 
 
@@ -67,7 +83,7 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
 
     public class viewHolder extends RecyclerView.ViewHolder{
 
-        ImageView profilePicIV;
+        ImageView profilePicIV , ImageIV;
         TextView messageTV , usernameTV;
 
         public viewHolder(@NonNull View itemView) {
@@ -76,6 +92,7 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
             profilePicIV = itemView.findViewById(R.id.hostel_image);
             messageTV = itemView.findViewById(R.id.senderMessage);
             usernameTV = itemView.findViewById(R.id.username);
+            ImageIV = itemView.findViewById(R.id.image4);
 
 
         }

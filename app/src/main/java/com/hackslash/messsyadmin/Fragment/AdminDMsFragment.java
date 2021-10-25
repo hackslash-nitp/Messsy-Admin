@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,19 +34,22 @@ public class AdminDMsFragment extends Fragment {
     private FirebaseFirestore firebaseFirestore =  FirebaseFirestore.getInstance() ;
     private final CollectionReference userInfoReference = firebaseFirestore.collection("UserInformation");
     String  sName , sEmail , sMobile  ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null" , sUId ;
+    FirebaseUser currentUser ;
 
 
 
     ArrayList<UserClass> users = new ArrayList<>();
     private RecyclerView recyclerView;
-    FloatingActionButton floatingActionButton;
+//    FloatingActionButton floatingActionButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_dm,container,false);
         recyclerView = view.findViewById(R.id.recyclerView1);
-        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+//        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         usersAdapter = new UsersAdapter(users , getContext());
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         userInfoReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -60,9 +65,14 @@ public class AdminDMsFragment extends Fragment {
                    sMobile = documentSnapshot.getString("sMobile");
                    sHostelName = documentSnapshot.getString("sHostelName");
                    sUId = documentSnapshot.getString("uid");
+                   if(sUId != null){
+                    if(sUId.equalsIgnoreCase(currentUser.getUid())){
+                        continue;}
+                    }
 //                if(sDesignation.equalsIgnoreCase("admin")){
                    users.add(new UserClass(sName, sEmail,sMobile,sHostelName,sDesignation,sImageUrl,sUId));
 //                }
+
 
                 }
                 usersAdapter.notifyDataSetChanged();

@@ -3,24 +3,45 @@ package com.hackslash.messsyadmin.Model;
 
 public class MessageClass {
 
-    private String messageId , message , senderId , name , profileImage;
-    private long timestamp;
+    private String messageId , message , senderId , name , profileImage , imageUrl , messageTime , messageDate; // imageUrl is the image send by the user during chats
 
     public MessageClass(){}
 
-    public MessageClass(String message, String senderId, long timestamp) {
+    public MessageClass(String message, String senderId, String messageTime , String messageDate) {
         this.message = message;
         this.senderId = senderId;
-        this.timestamp = timestamp;
+        this.messageTime = messageTime;
+        this.messageDate = messageDate;
     }
 
-    public MessageClass( String message, String senderId, String name, String profileImage, long timestamp) {
+    public MessageClass(String message, String senderId, String messageTime , String messageDate , String imageUrl) {
+        this.message = message;
+        this.senderId = senderId;
+        this.messageTime = messageTime;
+        this.messageDate = messageDate;
+        this.imageUrl = imageUrl;
+    }
+
+    public MessageClass( String message, String senderId, String name, String profileImage, String messageTime , String messageDate) {
+        this.message = message;
+        this.senderId = senderId;
+        this.name = name;
+        this.messageTime = messageTime;
+        this.messageDate = messageDate;
+        this.profileImage = profileImage;
+    }
+
+    public MessageClass( String message, String senderId, String name, String profileImage,String messageTime , String messageDate , String imageUrl) {
         this.message = message;
         this.senderId = senderId;
         this.name = name;
         this.profileImage = profileImage;
-        this.timestamp = timestamp;
+        this.messageTime = messageTime;
+        this.messageDate = messageDate;
+        this.imageUrl = imageUrl;
+
     }
+
 
     public String getName() {
         return name;
@@ -58,15 +79,31 @@ public class MessageClass {
         return senderId;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public void setSenderId(String senderId) {
         this.senderId = senderId;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public String getMessageTime() {
+        return messageTime;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setMessageTime(String messageTime) {
+        this.messageTime = messageTime;
+    }
+
+    public String getMessageDate() {
+        return messageDate;
+    }
+
+    public void setMessageDate(String messageDate) {
+        this.messageDate = messageDate;
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +47,7 @@ public class MessRegisterActivity extends AppCompatActivity {
     EditText nameET, emailAddET, mobileNumberET, hostelNameET, passwordET; // ET stands for edittext
     String  sName , sEmail , sMobile , sHostelName, sPassword ,sDesignation = "Mess Member" , sImageUrl = "null",sUId ="null"; // s stands for string
     Boolean hasVisible = false;
+    ImageView profileImage;
     Dialog dialogSuccesfullyRegistered;
     private static int PICK_IMAGE = 1 ;
     UserClass userInfo;
@@ -58,6 +61,8 @@ public class MessRegisterActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DocumentReference documentReference;
     StorageReference storageReference;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +79,15 @@ public class MessRegisterActivity extends AppCompatActivity {
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         hostelNameET = (EditText) findViewById(R.id.hostelname);
         passwordET = (EditText) findViewById(R.id.Password);
+        profileImage = (ImageView) findViewById(R.id.image);
         dialogSuccesfullyRegistered = new Dialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         storage=FirebaseStorage.getInstance();
+        progressDialog = new ProgressDialog(MessRegisterActivity.this);
+        progressDialog.setTitle("Registering");
+        progressDialog.setMessage("Please Wait");
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +123,7 @@ public class MessRegisterActivity extends AppCompatActivity {
 
                 }
 
-                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
+//                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
 
 
                 if (currentUser != null) {
@@ -124,7 +133,11 @@ public class MessRegisterActivity extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            progressDialog.show();
                             currentUser=FirebaseAuth.getInstance().getCurrentUser();
+                            assert currentUser != null;
+                            sUId = currentUser.getUid();
+                            userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl , sUId);
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -144,6 +157,7 @@ public class MessRegisterActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onSuccess(Void unused) {
                                                                 Toast.makeText(MessRegisterActivity.this, "Url Saved", Toast.LENGTH_SHORT).show();
+                                                                progressDialog.dismiss();
                                                                 OpenDialog();
 
                                                             }
@@ -171,6 +185,7 @@ public class MessRegisterActivity extends AppCompatActivity {
                                         });
                                     }
                                     else{
+                                        progressDialog.dismiss();
                                         OpenDialog();
                                     }
                                 }
@@ -260,6 +275,8 @@ public class MessRegisterActivity extends AppCompatActivity {
             bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                profileImage.setImageBitmap(bitmap);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

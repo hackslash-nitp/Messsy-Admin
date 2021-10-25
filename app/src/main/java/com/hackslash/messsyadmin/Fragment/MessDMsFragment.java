@@ -34,14 +34,14 @@ public class MessDMsFragment extends Fragment {
     String  sName , sEmail , sMobile  ,sHostelName = "null", sDesignation = "Mess Member",sImageUrl = "null" , sUId ;
     ArrayList<UserClass> users = new ArrayList<>();
     private RecyclerView recyclerView;
-    FloatingActionButton floatingActionButton;
+//    FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mess_dm,container,false);
         recyclerView = view.findViewById(R.id.recyclerView1);
-        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+//        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         usersAdapter = new UsersAdapter(users , getContext());
 
         userInfoReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

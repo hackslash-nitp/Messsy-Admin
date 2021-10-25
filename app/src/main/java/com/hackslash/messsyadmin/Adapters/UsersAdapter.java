@@ -25,8 +25,11 @@ import com.hackslash.messsyadmin.Model.UsersAdapterClass;
 import com.hackslash.messsyadmin.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.viewHolder> {
     String name , uId;
@@ -61,15 +64,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.viewHolder> 
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()) {
                         String lastMessage = snapshot.child("lastMsg").getValue(String.class);
-//
-//                            long time = snapshot.child("lastMsgTime").getValue(Long.class);
-//                            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
-//                            holder.timeTV.setText(dateFormat.format(new Date(time)));
-
+                        String lastMessageTime = snapshot.child("lastMsgTime").getValue().toString();
+                        String lastMessageDate = snapshot.child("lastMsgdate").getValue().toString();
+                        String time = lastMessageDate + " " + lastMessageTime ;
+                        holder.timeTV.setText(time);
                         holder.lastMessageTV.setText(lastMessage);
                         }else{
                             String temp = "Tap to chat";
                             holder.lastMessageTV.setText(temp);
+                            holder.timeTV.setText(" ");
                         }
 
                     }

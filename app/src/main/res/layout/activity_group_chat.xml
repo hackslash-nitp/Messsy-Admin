@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
 
-        <ImageButton
+        <Button
             android:layout_marginTop="5dp"
             android:id="@+id/addButton"
             android:layout_width="50dp"

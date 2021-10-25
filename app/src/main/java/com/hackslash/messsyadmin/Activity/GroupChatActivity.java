@@ -1,11 +1,16 @@
 package com.hackslash.messsyadmin.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -23,13 +28,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Adapters.MessageGroupAdapter;
 import com.hackslash.messsyadmin.Model.MessageClass;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class GroupChatActivity extends AppCompatActivity {
@@ -42,8 +53,12 @@ public class GroupChatActivity extends AppCompatActivity {
     UserClass user;
     FirebaseUser currentUser;
     DocumentReference docref ;
+    FirebaseStorage storage ;
+    StorageReference storageReference;
     EditText userMessageET;
-    String senderMessage , senderUid , name , profileImageUrl;
+    private static final int PICK_IMAGE = 2;
+    Uri imageUri;
+    String senderMessage , senderUid , name , profileImageUrl , ImagePath = "null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +74,7 @@ public class GroupChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         senderUid = FirebaseAuth.getInstance().getUid();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        storage = FirebaseStorage.getInstance();
 
         docref = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
 
@@ -113,14 +129,21 @@ public class GroupChatActivity extends AppCompatActivity {
                     return;
                 }
                 senderMessage = userMessageET.getText().toString();
-                Date date = new Date();
+                String messageTime , messageDate;
+                Calendar calendar = Calendar.getInstance();
 
-                MessageClass message = new MessageClass(senderMessage , senderUid , name , profileImageUrl,date.getTime());
+                SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                messageDate = currentDate.format(calendar.getTime());
+
+                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+                messageTime = currentTime.format(calendar.getTime());
+
+                MessageClass message = new MessageClass(senderMessage , senderUid , name , profileImageUrl,messageTime , messageDate);
                 userMessageET.setText("");
                 String randomKey = database.getReference().push().getKey();
 
                 assert randomKey != null;
-                database.getReference().child("adminGroupChat")
+                database.getReference().child("globalGroupChat")
                         .child(randomKey)
                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -140,7 +163,13 @@ public class GroupChatActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GroupChatActivity.this, "Clicked on Add Button", Toast.LENGTH_SHORT).show();
+                imageUri = null;
+                Intent gallery = new Intent();
+                gallery.setType("image/*");
+                gallery.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(gallery,"Select Picture"),PICK_IMAGE);
+
             }
         });
 
@@ -151,4 +180,187 @@ public class GroupChatActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ProgressDialog loadingDialogBox = new ProgressDialog(this);
+        loadingDialogBox.setTitle("Sending Image");
+        loadingDialogBox.setMessage("Please Wait...");
+        loadingDialogBox.setCanceledOnTouchOutside(false);
+
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
+
+
+            assert data != null;
+            imageUri = data.getData();
+
+            new ProgressTask(loadingDialogBox).execute();
+        }
+
+            class ProgressTask extends AsyncTask<Void , Void ,Void> {
+            private ProgressDialog loadingDialogBox;
+
+            public ProgressTask(ProgressDialog dialog){
+                this.loadingDialogBox = dialog;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loadingDialogBox.setTitle("Sending Image");
+                loadingDialogBox.setMessage("Please Wait...");
+                loadingDialogBox.setCanceledOnTouchOutside(false);
+                loadingDialogBox.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                senderMessage = userMessageET.getText().toString();
+                String messageTime , messageDate;
+                Calendar calendar = Calendar.getInstance();
+
+                SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                messageDate = currentDate.format(calendar.getTime());
+
+                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+                messageTime = currentTime.format(calendar.getTime());
+
+                MessageClass message = new MessageClass(senderMessage , senderUid , name , profileImageUrl,messageTime ,messageDate);
+                userMessageET.setText("");
+
+                String randomKey = database.getReference().push().getKey();
+                assert randomKey != null;
+
+
+                if(imageUri != null){
+                    storageReference = storage.getReference().child("images").child(currentUser.getUid());
+                    storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    ImagePath = uri.toString();
+                                    MessageClass message = new MessageClass(senderMessage , senderUid ,name,profileImageUrl, messageTime,messageDate , ImagePath);
+                                    database.getReference().child("globalGroupChat")
+                                            .child(randomKey)
+                                            .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            ImagePath = "null";
+                                            imageUri = null;
+                                            Toast.makeText(GroupChatActivity.this, "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(GroupChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(GroupChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    return null;
+                }
+
+
+            return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                try {
+                    if(loadingDialogBox.isShowing()){
+                        loadingDialogBox.dismiss();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                finally {
+                    loadingDialogBox.dismiss();
+                }
+            }
+        }
+
+    }
+    public class ProgressTask extends AsyncTask<Void , Void ,Void> {
+        private ProgressDialog loadingDialogBox;
+
+        public ProgressTask(ProgressDialog dialog){
+            this.loadingDialogBox = dialog;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loadingDialogBox.setTitle("Sending Image");
+            loadingDialogBox.setMessage("Please Wait...");
+            loadingDialogBox.setCanceledOnTouchOutside(false);
+            loadingDialogBox.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            senderMessage = userMessageET.getText().toString();
+            String messageTime , messageDate;
+            Calendar calendar = Calendar.getInstance();
+
+            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+            messageDate = currentDate.format(calendar.getTime());
+
+            SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+            messageTime = currentTime.format(calendar.getTime());
+
+            MessageClass message = new MessageClass(senderMessage , senderUid , name , profileImageUrl,messageTime ,messageDate);
+            userMessageET.setText("");
+            String randomKey = database.getReference().push().getKey();
+
+            assert randomKey != null;
+            database.getReference().child("GroupChat")
+                    .child(randomKey)
+                    .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(GroupChatActivity.this, "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(GroupChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try {
+                if(loadingDialogBox.isShowing()){
+                    loadingDialogBox.dismiss();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            finally {
+                loadingDialogBox.dismiss();
+            }
+        }
+    }
+
 }
