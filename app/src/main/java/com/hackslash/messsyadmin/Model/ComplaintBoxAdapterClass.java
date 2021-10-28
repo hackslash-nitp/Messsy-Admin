@@ -2,76 +2,73 @@ package com.hackslash.messsyadmin.Model;
 
 public class ComplaintBoxAdapterClass {
 
-    private  String sName , sDate, sHeading, sUpvotes , sComments;
-    private int mImageResourceId , sDescription;
+    String Issue, Explanation, ImageUrl, Date;
+    String compName, compProfileImage;
+    //private  String sName , sDate, sHeading, sUpvotes , sComments, sComplainImage, sDescription;
+    //private int mImageResourceId ;
 
-    public ComplaintBoxAdapterClass(int imageResourceId , String name , String date, String heading , int description, String upvotes, String comments){
+    ComplaintBoxAdapterClass() {}
 
-        this.mImageResourceId = imageResourceId;
-        this.sName = name;
-        this.sComments =comments;
-        this.sDate = date;
-        this.sHeading = heading;
-        this.sDescription = description;
-        this.sUpvotes = upvotes;
+    public ComplaintBoxAdapterClass(String sCompName, String sCompProfileImage, String sIssue, String sExplanation, String sImageUrl, String sDate){
+
+        this.compName = sCompName;
+        this.compProfileImage = sCompProfileImage;
+        this.Issue = sIssue;
+        this.Explanation = sExplanation;
+        this.ImageUrl = sImageUrl;
+        this.Date = sDate;
 
     }
 
-    public String getsName() {
-        return sName;
+    public String getCompName() {
+        return compName;
     }
 
-    public void setsName(String sName) {
-        this.sName = sName;
+    public void setCompName(String compName) {
+        this.compName = compName;
     }
 
-    public String getsDate() {
-        return sDate;
+    public String getCompProfileImage() {
+        return compProfileImage;
     }
 
-    public void setsDate(String sDate) {
-        this.sDate = sDate;
+    public void setCompProfileImage(String compProfileImage) {
+        this.compProfileImage = compProfileImage;
     }
 
-    public String getsHeading() {
-        return sHeading;
+    public String getIssue() {
+        return Issue;
     }
 
-    public void setsHeading(String sHeading) {
-        this.sHeading = sHeading;
+    public void setIssue(String issue) {
+        Issue = issue;
     }
 
-    public int getsDescription() {
-        return sDescription;
+    public String getExplanation() {
+        return Explanation;
     }
 
-    public void setsDescription(int sDescription) {
-        this.sDescription = sDescription;
+    public void setExplanation(String explanation) {
+        Explanation = explanation;
     }
 
-    public String getsUpvotes() {
-        return sUpvotes;
+    public String getImageUrl() {
+        return ImageUrl;
     }
 
-    public void setsUpvotes(String sUpvotes) {
-        this.sUpvotes = sUpvotes;
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
     }
 
-    public String getsComments() {
-        return sComments;
+    public String getDate() {
+        return Date;
     }
 
-    public void setsComments(String sComments) {
-        this.sComments = sComments;
+    public void setDate(String date) {
+        Date = date;
     }
 
-    public int getmImageResourceId() {
-        return mImageResourceId;
-    }
 
-    public void setmImageResourceId(int mImageResourceId) {
-        this.mImageResourceId = mImageResourceId;
-    }
 }
 
 

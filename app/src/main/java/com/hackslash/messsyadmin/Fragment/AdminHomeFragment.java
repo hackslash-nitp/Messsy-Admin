@@ -35,7 +35,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
         conversationCV = (CardView) view.findViewById(R.id.card_view4);
 
         absenteesListCV.setOnClickListener(this);
-        studentTrackCV.setOnClickListener(this);
+        //studentTrackCV.setOnClickListener(this);
         createNewNoticeCV.setOnClickListener(this);
         complaintBoxCV.setOnClickListener(this);
         conversationCV.setOnClickListener(this);
@@ -54,11 +54,11 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
                 Intent absenteesIntent = new Intent(getContext(), AdminAbsenteesActivity.class);
                 startActivity(absenteesIntent);
                 break;
-            case R.id.card_view2 :
-                Toast.makeText(getActivity(), "Opening Student's track", Toast.LENGTH_SHORT).show();
-                Intent studentTrackIntent = new Intent(getContext(), AdminStudentTrackActivity.class);
-                startActivity(studentTrackIntent);
-                break;
+            //case R.id.card_view2 :
+              //  Toast.makeText(getActivity(), "Opening Student's track", Toast.LENGTH_SHORT).show();
+                //Intent studentTrackIntent = new Intent(getContext(), AdminStudentTrackActivity.class);
+                //startActivity(studentTrackIntent);
+                //break;
             case R.id.card_view3 :
                 Toast.makeText(getActivity(), "Opening Create new notice", Toast.LENGTH_SHORT).show();
                 Intent createNewNoticeIntent = new Intent(getContext(), CreateNoticeActivity.class);

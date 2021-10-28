@@ -7,15 +7,15 @@
 </item>
 
 <item android:id="@+id/activity_icon"
-    android:icon="@drawable/activity_icon_new"
+    android:icon="@drawable/chat_new_icon"
     android:iconTint="@color/white"
-    android:title="Activity"
+    android:title="Conversation"
 
     >
 </item>
 
     <item android:id="@+id/wallet_icon"
-        android:icon="@drawable/wallet_icon_new"
+        android:icon="@drawable/paper"
         android:iconTint="@color/white"
         android:title="Wallet"
 
@@ -24,7 +24,7 @@
 
     <item android:id="@+id/profile_icon"
         android:iconTint="@color/white"
-        android:icon="@drawable/profile_icon_new"
+        android:icon="@drawable/profile"
         android:title="Profile"
 
         >

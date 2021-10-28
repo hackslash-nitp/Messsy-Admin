@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AdminFeeDetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/top_panel"
+        android:layout_margin="10dp">
+
+        <Button
+            android:layout_width="80dp"
+            android:id="@+id/backButton_feedetail"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Brahmaputra"
+            android:textStyle="bold"
+            android:fontFamily="@font/josefin_sans"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:id="@+id/hostel_name_feedetail"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/hostel_image_feedetail"
+            android:src="@drawable/brahmputra_icon"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/top_panel"
+        android:background="@drawable/rectangle_absentees"
+        android:id="@+id/key_bar">
+
+        <TextView
+            android:id="@+id/student_serial"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="S. No."
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/student_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/student_roll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Roll No."
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/key_bar"
+        android:id="@id/searchbar_frame"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/search_feedetail"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rectangle_search"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:layout_margin="10dp"
+            android:hint="Search by Name/Roll No." />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchbar_frame" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="*Tap on a Name to the details of an Individual"
+            android:textSize="16dp"
+            android:layout_gravity="center"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

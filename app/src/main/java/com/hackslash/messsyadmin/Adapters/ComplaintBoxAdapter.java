@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hackslash.messsyadmin.Model.ComplaintBoxAdapterClass;
 import com.hackslash.messsyadmin.R;
 
@@ -34,13 +35,17 @@ public class ComplaintBoxAdapter extends RecyclerView.Adapter<ComplaintBoxAdapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.imageiconIV.setImageResource(data.get(position).getmImageResourceId());
-        holder.descriptionTV.setText(data.get(position).getsDescription());
-        holder.nameTV.setText(data.get(position).getsName());
-        holder.headingTV.setText(data.get(position).getsHeading());
-        holder.dateTV.setText(data.get(position).getsDate());
-        holder.upVotesTV.setText(data.get(position).getsUpvotes());
-        holder.commentTV.setText(data.get(position).getsComments());
+        Glide.with(holder.imageiconIV.getContext()).load(data.get(position).getCompProfileImage()).into(holder.imageiconIV);
+        holder.descriptionTV.setText(data.get(position).getExplanation());
+        holder.nameTV.setText(data.get(position).getCompName());
+        holder.headingTV.setText(data.get(position).getIssue());
+        holder.dateTV.setText(data.get(position).getDate());
+        holder.upVotesTV.setText("165 Upvotes");
+        holder.commentTV.setText("20 Comments");
+        if(!data.get(position).getImageUrl().equalsIgnoreCase("null"))
+        {
+            Glide.with(holder.complainImageIV.getContext()).load(data.get(position).getImageUrl()).into(holder.complainImageIV);
+        }
     }
 
 
@@ -51,7 +56,7 @@ public class ComplaintBoxAdapter extends RecyclerView.Adapter<ComplaintBoxAdapte
 
     public class viewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imageiconIV;
+        ImageView imageiconIV, complainImageIV;
         TextView nameTV , headingTV , dateTV, upVotesTV, commentTV, descriptionTV;
 
         public viewHolder( @NonNull View view){
@@ -64,6 +69,7 @@ public class ComplaintBoxAdapter extends RecyclerView.Adapter<ComplaintBoxAdapte
             upVotesTV = view.findViewById(R.id.upvotesComplaint);
             commentTV = view.findViewById(R.id.commentComplaint);
             descriptionTV = view.findViewById(R.id.descriptionComplain);
+            complainImageIV = view.findViewById(R.id.imageComplain);
 
         }
 

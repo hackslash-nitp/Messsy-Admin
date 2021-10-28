@@ -1,5 +1,6 @@
 package com.hackslash.messsyadmin.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hackslash.messsyadmin.Adapters.NoticeBoxAdapter;
+import com.hackslash.messsyadmin.Model.CreateNewNoticeClass;
 import com.hackslash.messsyadmin.Model.NoticeBoxAdapterClass;
 import com.hackslash.messsyadmin.R;
 
@@ -27,7 +35,13 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
     ArrayList<String> sortByList = new ArrayList<>();
     ArrayList<String> grouptByList = new ArrayList<>();
     FloatingActionButton floatingButton;
-    ArrayList<NoticeBoxAdapterClass> data = new ArrayList<>();
+    ArrayList<CreateNewNoticeClass> data = new ArrayList<>();
+
+    String date, description, subject, time, user;
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference notebookRef = db.collection("MessssyNotice");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +59,31 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
                 startActivity(new Intent(MessNoticeActivity.this,CreateNoticeActivity.class));
             }
         });
-        data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.brahmaputra_hostel_icon, "Brahmaputra Hostel Mess", R.string.noticeDescriptionBrahmaputraMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.brahmaputra_hostel_icon, "Brahmaputra Hostel Mess", R.string.noticeDescriptionBrahmaputraMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.brahmaputra_hostel_icon, "Brahmaputra Hostel Mess", R.string.noticeDescriptionBrahmaputraMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.ganga_hostel_icon, "Ganga Hostel Mess", R.string.noticeDescriptionGangaMess, "12-06-2021", "2:30PM"));
-        data.add(new NoticeBoxAdapterClass(R.drawable.brahmaputra_hostel_icon, "Brahmaputra Hostel Mess", R.string.noticeDescriptionBrahmaputraMess, "12-06-2021", "2:30PM"));
+
+
+
+        notebookRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    date = documentSnapshot.getString("date");
+                    description = documentSnapshot.getString("description");
+                    subject = documentSnapshot.getString("subject");
+                    time = documentSnapshot.getString("timestamp");
+                    user = documentSnapshot.getString("userInfo");
+
+                    data.add(new CreateNewNoticeClass(subject, description, user, date, time));
+                }
+                noticeBoxAdapter.notifyDataSetChanged();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MessNoticeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         noticeBoxAdapter = new NoticeBoxAdapter(data);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
