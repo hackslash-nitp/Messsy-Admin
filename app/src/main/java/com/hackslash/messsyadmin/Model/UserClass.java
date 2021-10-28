@@ -2,17 +2,28 @@ package com.hackslash.messsyadmin.Model;
 
 public class UserClass {
 
-    String  Name , Email , Mobile, HostelName, Designation , imageUrl;
+    String  Name , Email , Mobile, HostelName, Designation , imageUrl , UId;
+
 
     public UserClass(){}
 
-    public UserClass(String sName, String sEmail, String sMobile, String sHostelName, String sDesignation, String sImageUrl) {
+    public UserClass(String sName, String sEmail, String sMobile, String sHostelName, String sDesignation, String sImageUrl , String sUid) {
         this.Name = sName;
         this.Email = sEmail;
         this.Mobile = sMobile;
         this.HostelName = sHostelName;
         this.Designation = sDesignation;
         this.imageUrl = sImageUrl;
+        this.UId = sUid;
+    }
+
+    public UserClass(String name, String email, String mobile, String hostelName, String designation, String imageUrl) {
+        Name = name;
+        Email = email;
+        Mobile = mobile;
+        HostelName = hostelName;
+        Designation = designation;
+        this.imageUrl = imageUrl;
     }
 
     public UserClass(String sName, String sEmail, String sMobile, String sHostelName, String sDesignation) {
@@ -52,6 +63,13 @@ public class UserClass {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    public String getUId() {
+        return UId;
+    }
+
+    public void setUId(String UId) {
+        this.UId = UId;
     }
 
     public String getsMobile() {

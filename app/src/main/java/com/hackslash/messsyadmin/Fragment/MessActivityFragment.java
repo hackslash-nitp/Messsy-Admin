@@ -32,7 +32,7 @@ public class MessActivityFragment extends Fragment {
         SectionPageAdapter adapter = new SectionPageAdapter(getChildFragmentManager());
         adapter.addFragment(new AdminDMsFragment(),"DMs");
         adapter.addFragment(new AdminTalkFragment(),"Mess Talk");
-        adapter.addFragment(new AdminMessageMessFragment(),"Message Admins");
+//        adapter.addFragment(new AdminMessageMessFragment(),"Message Admins");
         viewPager.setAdapter(adapter);
 
     }
