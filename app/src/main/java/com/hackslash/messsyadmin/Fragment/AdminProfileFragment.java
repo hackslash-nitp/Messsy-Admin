@@ -69,13 +69,10 @@ public class AdminProfileFragment extends Fragment {
                        if(sImageUrl != null && !(sImageUrl.equalsIgnoreCase("null"))){
                        Glide.with(Objects.requireNonNull(getContext())).load(sImageUrl).into(profileImageIV);}
                    }
-
-                }else{
+                }
+                else{
                     Toast.makeText(getActivity(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

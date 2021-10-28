@@ -39,7 +39,7 @@ public class AdminActivityFragment extends Fragment {
         SectionPageAdapter adapter = new SectionPageAdapter(getChildFragmentManager());
         adapter.addFragment(new AdminDMsFragment(),"DMs");
         adapter.addFragment(new AdminTalkFragment(),"Admin's Talk");
-        adapter.addFragment(new AdminMessageMessFragment(),"Message Mess");
+//        adapter.addFragment(new AdminMessageMessFragment(),"Message Mess");
         viewPager.setAdapter(adapter);
 
     }

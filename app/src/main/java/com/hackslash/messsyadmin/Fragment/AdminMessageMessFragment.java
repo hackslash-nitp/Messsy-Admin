@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hackslash.messsyadmin.Adapters.ChatAdapter;
-import com.hackslash.messsyadmin.Model.ChatAdapterClass;
+import com.hackslash.messsyadmin.Adapters.UsersAdapter;
+import com.hackslash.messsyadmin.Model.UsersAdapterClass;
 import com.hackslash.messsyadmin.R;
 
 import java.util.ArrayList;
 
 public class AdminMessageMessFragment extends Fragment {
 
-    ChatAdapter chatAdapter;
-    ArrayList<ChatAdapterClass> data = new ArrayList<>();
+    UsersAdapter chatAdapter;
+    ArrayList<UsersAdapterClass> data = new ArrayList<>();
     private RecyclerView recyclerView;
 
 
@@ -33,12 +33,12 @@ public class AdminMessageMessFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView2);
 
-        data.add(new ChatAdapterClass("Kosi","hello","Just Now" ,R.drawable.kosi_icon));
-        data.add(new ChatAdapterClass("Ganga","Whats Up?","Just Now" ,R.drawable.ganga_icon));
-        data.add(new ChatAdapterClass("Brahmaputra","hii","Just Now" ,R.drawable.brahmputra_icon));
-        data.add(new ChatAdapterClass("Sone","What are u do'in?","12:54 P.M." ,R.drawable.sone_icon));
-
-        chatAdapter = new ChatAdapter(data);
+//        data.add(new UsersAdapterClass("Kosi","hello","Just Now" ,R.drawable.kosi_icon));
+//        data.add(new UsersAdapterClass("Ganga","Whats Up?","Just Now" ,R.drawable.ganga_icon));
+//        data.add(new UsersAdapterClass("Brahmaputra","hii","Just Now" ,R.drawable.brahmputra_icon));
+//        data.add(new UsersAdapterClass("Sone","What are u do'in?","12:54 P.M." ,R.drawable.sone_icon));
+//
+//        chatAdapter = new UsersAdapter(data);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);

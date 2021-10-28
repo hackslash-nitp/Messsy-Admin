@@ -1,17 +1,17 @@
 package com.hackslash.messsyadmin.Model;
 
-public class ChatAdapterClass {
+public class UsersAdapterClass {
 
     private String sName , sLastMessage , sTime;
-    private int mImageResourceId;
+    int sImageResourceId;
 
-    public  ChatAdapterClass(){}
+    public UsersAdapterClass(){}
 
-    public ChatAdapterClass(String sName, String sLastMessage, String sTime, int mImageResourceId) {
+    public UsersAdapterClass(String sName, String sLastMessage, String sTime, int sImageResourceId) {
         this.sName = sName;
         this.sLastMessage = sLastMessage;
         this.sTime = sTime;
-        this.mImageResourceId = mImageResourceId;
+        this.sImageResourceId = sImageResourceId;
     }
 
     public String getsName() {
@@ -38,11 +38,11 @@ public class ChatAdapterClass {
         this.sTime = sTime;
     }
 
-    public int getmImageResourceId() {
-        return mImageResourceId;
+    public int getsImageResourceId() {
+        return sImageResourceId;
     }
 
-    public void setmImageResourceId(int mImageResourceId) {
-        this.mImageResourceId = mImageResourceId;
+    public void setsImageResourceId(int sImageResourceId) {
+        this.sImageResourceId = sImageResourceId;
     }
 }
