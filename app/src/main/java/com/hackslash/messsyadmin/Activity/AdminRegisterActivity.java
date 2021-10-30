@@ -14,8 +14,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +26,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
@@ -32,7 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminRegisterActivity extends AppCompatActivity {
+public class AdminRegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, passwordET;
     String  sName , sEmail , sMobile , sPassword ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null";
@@ -43,12 +48,18 @@ public class AdminRegisterActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
+    Spinner spinner;
+    String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
+    String data;
+    DatabaseReference databaseReference;
+    UserClass userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_register);
 
-        Intent intent = getIntent();
+        Intent intent = getIntent(
+        );
 
         loginButton = (Button) findViewById(R.id.login);
         addImageButton = (Button) findViewById(R.id.addImage);
@@ -62,6 +73,15 @@ public class AdminRegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        spinner = findViewById(R.id.enter_hostelName);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("sHostelName");
+        spinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,hostellist);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +91,7 @@ public class AdminRegisterActivity extends AppCompatActivity {
                 sEmail = emailAddET.getText().toString();
                 sMobile = mobileNumberET.getText().toString();
                 sPassword = passwordET.getText().toString();
+                sHostelName = spinner.getSelectedItem().toString();
 
                 if (sName.isEmpty()) {
                     nameET.setError("Name is required");
@@ -93,7 +114,18 @@ public class AdminRegisterActivity extends AppCompatActivity {
 
                 }
 
-                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
+                if(data == "Select Your Hostel") {
+                    Toast.makeText(AdminRegisterActivity.this, "Please Select Your Hostel", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    String id= databaseReference.push().getKey();
+                    databaseReference.child(id).setValue(userInfo);
+                    Toast.makeText(AdminRegisterActivity.this,"",Toast.LENGTH_SHORT).show();
+                    }
+
+
+                userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
 
                 if (currentUser != null) {
                     Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
@@ -205,6 +237,16 @@ public class AdminRegisterActivity extends AppCompatActivity {
             }
         }
 
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

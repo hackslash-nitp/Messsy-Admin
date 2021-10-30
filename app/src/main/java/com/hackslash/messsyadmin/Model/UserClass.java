@@ -5,7 +5,6 @@ public class UserClass {
     String  Name , Email , Mobile, HostelName, Designation , imageUrl;
 
     public UserClass(){}
-
     public UserClass(String sName, String sEmail, String sMobile, String sHostelName, String sDesignation, String sImageUrl) {
         this.Name = sName;
         this.Email = sEmail;
