@@ -37,7 +37,7 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
     FloatingActionButton floatingButton;
     ArrayList<CreateNewNoticeClass> data = new ArrayList<>();
 
-    String date, description, subject, time, user;
+    String date, description, subject, time, user, hostel, designation;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference notebookRef = db.collection("MessssyNotice");
@@ -72,8 +72,10 @@ public class MessNoticeActivity extends AppCompatActivity implements AdapterView
                     subject = documentSnapshot.getString("subject");
                     time = documentSnapshot.getString("timestamp");
                     user = documentSnapshot.getString("userInfo");
+                    hostel = documentSnapshot.getString("hostel");
+                    designation = documentSnapshot.getString("designation");
 
-                    data.add(new CreateNewNoticeClass(subject, description, user, date, time));
+                    data.add(new CreateNewNoticeClass(subject, description, date, time, designation, hostel));
                 }
                 noticeBoxAdapter.notifyDataSetChanged();
             }
