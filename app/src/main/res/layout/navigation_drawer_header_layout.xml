@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_navigation_drawer"
-            android:layout_marginTop="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/header_image_navigation_drawer2" />
+            android:src="@drawable/header_image_navigation_drawer2" />
 
         <TextView
             android:id="@+id/name_navigation_drawer"

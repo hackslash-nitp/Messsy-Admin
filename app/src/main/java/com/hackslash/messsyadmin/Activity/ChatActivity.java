@@ -69,6 +69,7 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        messageClassArrayList.clear();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
@@ -188,10 +189,8 @@ public class ChatActivity extends AppCompatActivity {
                                 Toast.makeText(ChatActivity.this, "Message Updated On firebase" + "Image path = " + ImagePath, Toast.LENGTH_SHORT).show();
                             }
                         });
-
                     }
                 });
-
             }
         });
 
@@ -235,9 +234,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     class ProgressTask extends AsyncTask<Void , Void ,Void>{
-    private ProgressDialog loadingDialogBox;
-
-
+    private final ProgressDialog loadingDialogBox;
 
          public ProgressTask(ProgressDialog dialog){
         this.loadingDialogBox = dialog;

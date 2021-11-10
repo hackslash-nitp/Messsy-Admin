@@ -14,13 +14,13 @@
     >
 </item>
 
-    <item android:id="@+id/wallet_icon"
-        android:icon="@drawable/paper"
-        android:iconTint="@color/white"
-        android:title="Wallet"
+<!--    <item android:id="@+id/wallet_icon"-->
+<!--        android:icon="@drawable/paper"-->
+<!--        android:iconTint="@color/white"-->
+<!--        android:title="Wallet"-->
 
-        >
-    </item>
+<!--        >-->
+<!--    </item>-->
 
     <item android:id="@+id/profile_icon"
         android:iconTint="@color/white"

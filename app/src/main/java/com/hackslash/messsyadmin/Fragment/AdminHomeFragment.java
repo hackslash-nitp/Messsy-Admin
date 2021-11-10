@@ -29,16 +29,16 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_home, container, false);
         absenteesListCV = (CardView)view.findViewById(R.id.card_view1);
-        studentTrackCV = (CardView) view.findViewById(R.id.card_view2);
+//        studentTrackCV = (CardView) view.findViewById(R.id.card_view2);
         createNewNoticeCV = (CardView) view.findViewById(R.id.card_view3);
         complaintBoxCV = (CardView) view.findViewById(R.id.card_view5);
-        conversationCV = (CardView) view.findViewById(R.id.card_view4);
+//        conversationCV = (CardView) view.findViewById(R.id.card_view4);
 
         absenteesListCV.setOnClickListener(this);
         //studentTrackCV.setOnClickListener(this);
         createNewNoticeCV.setOnClickListener(this);
         complaintBoxCV.setOnClickListener(this);
-        conversationCV.setOnClickListener(this);
+//        conversationCV.setOnClickListener(this);
 
 
         return view;
@@ -64,11 +64,11 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
                 Intent createNewNoticeIntent = new Intent(getContext(), CreateNoticeActivity.class);
                  startActivity(createNewNoticeIntent);
                 break;
-            case R.id.card_view4 :
-                Toast.makeText(getActivity(), "Opening conversations", Toast.LENGTH_SHORT).show();
-                Intent conversationIntent = new Intent(getContext(), AdminConversationActivity.class);
-                startActivity(conversationIntent);
-                break;
+//            case R.id.card_view4 :
+//                Toast.makeText(getActivity(), "Opening conversations", Toast.LENGTH_SHORT).show();
+//                Intent conversationIntent = new Intent(getContext(), AdminConversationActivity.class);
+//                startActivity(conversationIntent);
+//                break;
             case R.id.card_view5 :
                 Toast.makeText(getActivity(), "Opening complaint Box", Toast.LENGTH_SHORT).show();
                 Intent complaintBoxIntent = new Intent(getContext(), AdminComplaintActivity.class);

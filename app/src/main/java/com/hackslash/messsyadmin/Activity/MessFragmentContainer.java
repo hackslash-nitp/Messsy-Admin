@@ -12,21 +12,41 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
 import com.hackslash.messsyadmin.Fragment.MessHomeFragment;
 import com.hackslash.messsyadmin.Fragment.MessProfileFragment;
 import com.hackslash.messsyadmin.Fragment.MessWalletFragment;
+import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
+
+import java.util.Objects;
 
 public class MessFragmentContainer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    View navigationHeader;
+    ImageView headerImageView;
+    TextView headerName;
+    DocumentReference docref ;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+    UserClass user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +63,52 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
 
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.navigationView);
+
+        View hView = navigationView.inflateHeaderView(R.layout.navigation_drawer_header_layout);
+//        navigationHeader = navigationView.getHeaderView(R.layout.navigation_drawer_header_layout);
+        headerImageView = (ImageView) hView.findViewById(R.id.image_navigation_drawer);
+        headerName = (TextView) hView.findViewById(R.id.name_navigation_drawer);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        docref = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
+        String url = "https://th.bing.com/th/id/OIP.vxVLwAKkFacSqbweyL_-twAAAA?pid=ImgDet&w=280&h=280&rs=1";
+
+        if(headerImageView!=null) {
+            Glide.with(Objects.requireNonNull(getApplicationContext())).load(url).into(headerImageView);
+        }
+
+        Glide.with(Objects.requireNonNull(getApplicationContext())).load(url).into(headerImageView);
+
+        docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    user = documentSnapshot.toObject(UserClass.class);
+
+                    if(user != null) {
+                        if(user.getsName() != null) {
+                            headerName.setText(user.getsName());
+                        }
+                        String sImageUrl = user.getImageUrl();
+                        if(sImageUrl != null && !(sImageUrl.equalsIgnoreCase("null"))){
+                            Glide.with(Objects.requireNonNull(getApplicationContext())).load(sImageUrl).into(headerImageView);}
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -74,9 +140,9 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
                 case R.id.activity_icon :
                     selectedFragment = new MessActivityFragment();
                     break;
-                case R.id.wallet_icon :
-                    selectedFragment = new MessWalletFragment();
-                    break;
+//                case R.id.wallet_icon :
+//                    selectedFragment = new MessWalletFragment();
+//                    break;
                 case R.id.profile_icon :
                     selectedFragment = new MessProfileFragment();
                     break;

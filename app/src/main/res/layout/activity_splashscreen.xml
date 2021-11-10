@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashscreenActivity">
+    tools:context=".Activity.SplashscreenActivity">
 
     <ImageView
-        android:contentDescription="@null"
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
         app:srcCompat="@drawable/ss1" />
 </RelativeLayout>
