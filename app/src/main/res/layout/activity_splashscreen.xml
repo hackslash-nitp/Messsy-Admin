@@ -10,6 +10,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:contentDescription="@null"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/ss1" />
 </RelativeLayout>
