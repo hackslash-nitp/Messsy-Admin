@@ -62,15 +62,16 @@ public class SplashscreenActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     UserClass userClass = documentSnapshot.toObject(UserClass.class);
-                                    Designation = userClass.getsDesignation();
+                                    if (!userClass.getsDesignation().equals(null)) {
+                                        Designation = userClass.getsDesignation();
 
-                                    if (Designation.equalsIgnoreCase("Admin")){
-                                        startActivity(new Intent(SplashscreenActivity.this, AdminFragmentContainer.class));
-                                        finish();
-                                    }
-                                    else{
-                                        startActivity(new Intent(SplashscreenActivity.this, MessFragmentContainer.class));
-                                        finish();
+                                        if (Designation.equalsIgnoreCase("Admin")) {
+                                            startActivity(new Intent(SplashscreenActivity.this, AdminFragmentContainer.class));
+                                            finish();
+                                        } else {
+                                            startActivity(new Intent(SplashscreenActivity.this, MessFragmentContainer.class));
+                                            finish();
+                                        }
                                     }
                                 }
                             });
