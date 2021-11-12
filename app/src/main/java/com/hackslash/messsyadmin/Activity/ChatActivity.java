@@ -8,21 +8,16 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,8 +28,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,11 +35,9 @@ import com.hackslash.messsyadmin.Adapters.MessageAdapter;
 import com.hackslash.messsyadmin.Model.MessageClass;
 import com.hackslash.messsyadmin.R;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -66,10 +57,11 @@ public class ChatActivity extends AppCompatActivity {
     StorageReference storageReference;
     RecyclerView recyclerView;
     FirebaseUser user;
+    ProgressDialog loadingDialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        messageClassArrayList.clear();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
@@ -81,7 +73,10 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewMessage) ;
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
-
+//        loadingDialogBox = new ProgressDialog(this);
+//        loadingDialogBox.setTitle("Sending Image");
+//        loadingDialogBox.setMessage("Please Wait...");
+//        loadingDialogBox.setCanceledOnTouchOutside(false);
 
         setSupportActionBar(toolbar);
 
@@ -129,7 +124,7 @@ public class ChatActivity extends AppCompatActivity {
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
 
                 startActivityForResult(Intent.createChooser(gallery,"Select Picture"),PICK_IMAGE);
-                Toast.makeText(ChatActivity.this, "Image uri = " +imageUri, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ChatActivity.this, "Image uri = " +imageUri, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -186,7 +181,7 @@ public class ChatActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
 
-                                Toast.makeText(ChatActivity.this, "Message Updated On firebase" + "Image path = " + ImagePath, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ChatActivity.this, "Message Updated On firebase" + "Image path = " + ImagePath, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -215,43 +210,16 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ProgressDialog loadingDialogBox = new ProgressDialog(this);
-        loadingDialogBox.setTitle("Sending Image");
-        loadingDialogBox.setMessage("Please Wait...");
-        loadingDialogBox.setCanceledOnTouchOutside(false);
+
 
         if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
 
 
             assert data != null;
             imageUri = data.getData();
+            loadingDialogBox = ProgressDialog.show(ChatActivity.this , "Sending Image" ,"Please Wait..." ,true ,false);
 
-            new ProgressTask(loadingDialogBox).execute();
-        }
-
-
-
-
-    }
-    class ProgressTask extends AsyncTask<Void , Void ,Void>{
-    private final ProgressDialog loadingDialogBox;
-
-         public ProgressTask(ProgressDialog dialog){
-        this.loadingDialogBox = dialog;
-         }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadingDialogBox.setTitle("Sending Image");
-            loadingDialogBox.setMessage("Please Wait...");
-            loadingDialogBox.setCanceledOnTouchOutside(false);
-            loadingDialogBox.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
+//            new ProgressTask().execute();
             String messageText = messageET.getText().toString();
 
             String messageTime , messageDate;
@@ -278,70 +246,50 @@ public class ChatActivity extends AppCompatActivity {
             database.getReference().child("chats").child(receiverRoom).updateChildren(lastMsgObj);
             String randomKey = database.getReference().push().getKey();
 
-
-            if(imageUri != null){
-                storageReference = storage.getReference().child("images").child(user.getUid());
-                storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                ImagePath = uri.toString();
-                                MessageClass message = new MessageClass(messageText , senderUid , messageTime,messageDate , ImagePath);
-                                database.getReference().child("chats")
-                                        .child(senderRoom)
-                                        .child("messages")
-                                        .child(randomKey)
-                                        .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        database.getReference().child("chats")
-                                                .child(receiverRoom)
-                                                .child("messages")
-                                                .child(randomKey)
-                                                .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                ImagePath = "null";
-                                                imageUri = null;
-                                                Toast.makeText(ChatActivity.this, "Image uploaded on firebase", Toast.LENGTH_SHORT).show();
-
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            else {
-                return null;
-            }
-            return null;
-         }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try {
-                if(loadingDialogBox.isShowing()){
-                    loadingDialogBox.dismiss();
+                if (imageUri != null) {
+                    storageReference = storage.getReference().child("images").child(user.getUid());
+                    storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    ImagePath = uri.toString();
+                                    MessageClass message = new MessageClass(messageText, senderUid, messageTime, messageDate, ImagePath);
+                                    database.getReference().child("chats")
+                                            .child(senderRoom)
+                                            .child("messages")
+                                            .child(randomKey)
+                                            .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            database.getReference().child("chats")
+                                                    .child(receiverRoom)
+                                                    .child("messages")
+                                                    .child(randomKey)
+                                                    .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    ImagePath = "null";
+                                                    imageUri = null;
+                                                    loadingDialogBox.dismiss();
+                                                    Toast.makeText(ChatActivity.this, "Image uploaded on firebase", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
-            finally {
-                loadingDialogBox.dismiss();
-            }
+
+        }
         }
     }
-
-}

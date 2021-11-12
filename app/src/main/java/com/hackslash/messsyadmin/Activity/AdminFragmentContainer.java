@@ -8,7 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,12 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firestore.v1.DocumentMask;
-import com.hackslash.messsyadmin.Adapters.SectionPageAdapter;
-import com.hackslash.messsyadmin.Fragment.AdminActivityFragment;
+import com.hackslash.messsyadmin.Fragment.AdminConversationFragment;
 import com.hackslash.messsyadmin.Fragment.AdminHomeFragment;
 import com.hackslash.messsyadmin.Fragment.AdminProfileFragment;
-import com.hackslash.messsyadmin.Fragment.AdminWalletFragment;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
@@ -140,7 +136,7 @@ public class AdminFragmentContainer extends AppCompatActivity implements Navigat
                     selectedFragment = new AdminHomeFragment();
                     break;
                 case R.id.activity_icon :
-                    selectedFragment = new AdminActivityFragment();
+                    selectedFragment = new AdminConversationFragment();
                     break;
 //                case R.id.wallet_icon :
 //                    selectedFragment = new AdminWalletFragment();

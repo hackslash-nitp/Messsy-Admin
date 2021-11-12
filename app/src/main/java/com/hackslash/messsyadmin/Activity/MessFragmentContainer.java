@@ -27,10 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.hackslash.messsyadmin.Fragment.MessActivityFragment;
+import com.hackslash.messsyadmin.Fragment.MessConversationFragment;
 import com.hackslash.messsyadmin.Fragment.MessHomeFragment;
 import com.hackslash.messsyadmin.Fragment.MessProfileFragment;
-import com.hackslash.messsyadmin.Fragment.MessWalletFragment;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
@@ -138,7 +137,7 @@ public class MessFragmentContainer extends AppCompatActivity implements Navigati
                     selectedFragment = new MessHomeFragment();
                     break;
                 case R.id.activity_icon :
-                    selectedFragment = new MessActivityFragment();
+                    selectedFragment = new MessConversationFragment();
                     break;
 //                case R.id.wallet_icon :
 //                    selectedFragment = new MessWalletFragment();
