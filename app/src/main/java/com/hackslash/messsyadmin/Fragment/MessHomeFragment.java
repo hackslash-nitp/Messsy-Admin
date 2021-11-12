@@ -26,12 +26,12 @@ public class MessHomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mess_home, container, false);
-        conversation = (CardView) view.findViewById(R.id.card_view1);
+//        conversation = (CardView) view.findViewById(R.id.card_view1); -->no need of this
         viewNotice = (CardView) view.findViewById(R.id.card_view2);
         ReportIssue = (CardView) view.findViewById(R.id.card_view3);
         Menu = (CardView) view.findViewById(R.id.card_view4);
 
-        conversation.setOnClickListener(this);
+//        conversation.setOnClickListener(this);
         viewNotice.setOnClickListener(this);
         ReportIssue.setOnClickListener(this);
         Menu.setOnClickListener(this);
@@ -44,12 +44,12 @@ public class MessHomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-            case R.id.card_view1:
-                Toast.makeText(getActivity(), "Opening Conversations", Toast.LENGTH_SHORT).show();
-                Intent i1 = new Intent(getContext(), MessConversationActivity.class);
-                startActivity(i1);
-                break;
+//      --> no need of this
+//            case R.id.card_view1:
+//                Toast.makeText(getActivity(), "Opening Conversations", Toast.LENGTH_SHORT).show();
+//                Intent i1 = new Intent(getContext(), MessConversationActivity.class);
+//                startActivity(i1);
+//                break;
             case R.id.card_view2:
                 Toast.makeText(getActivity(), "Opening Notice", Toast.LENGTH_SHORT).show();
                 Intent i2 = new Intent(getContext(), MessNoticeActivity.class);

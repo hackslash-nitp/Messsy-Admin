@@ -44,7 +44,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class MessTalkFragment extends Fragment {
+public class MessGroupTalkFragment extends Fragment {
     private static final int RESULT_OK = -1;
     List<MessageClass> messageClassArrayList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -60,6 +60,7 @@ public class MessTalkFragment extends Fragment {
     StorageReference storageReference;
     private static final int PICK_IMAGE = 2;
     Uri imageUri;
+    ProgressDialog loadingDialogBox;
 
 
     @Nullable
@@ -183,112 +184,72 @@ public class MessTalkFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ProgressDialog loadingDialogBox = new ProgressDialog(getActivity());
-        loadingDialogBox.setTitle("Sending Image");
-        loadingDialogBox.setMessage("Please Wait...");
-        loadingDialogBox.setCanceledOnTouchOutside(false);
-
         if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
 
 
-            assert data != null;
-            imageUri = data.getData();
 
-            new ProgressTask(loadingDialogBox).execute();
-        }
-    }
+            if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
+                assert data != null;
+                imageUri = data.getData();
+                loadingDialogBox = ProgressDialog.show(getContext(), "Sending Image", "Please Wait...", true, false);
 
-    class ProgressTask extends AsyncTask<Void , Void ,Void> {
+                senderMessage = userMessageET.getText().toString();
+                String messageTime, messageDate;
+                Calendar calendar = Calendar.getInstance();
 
-        private final ProgressDialog loadingDialogBox;
+                SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+                messageDate = currentDate.format(calendar.getTime());
 
-        public ProgressTask(ProgressDialog dialog){
-            this.loadingDialogBox = dialog;
-        }
+                SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+                messageTime = currentTime.format(calendar.getTime());
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadingDialogBox.setTitle("Sending Image");
-            loadingDialogBox.setMessage("Please Wait...");
-            loadingDialogBox.setCanceledOnTouchOutside(false);
-            loadingDialogBox.show();
-        }
+                MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime, messageDate);
+                userMessageET.setText("");
 
-        @Override
-        protected Void doInBackground(Void... voids) {
+                String randomKey = database.getReference().push().getKey();
+                assert randomKey != null;
 
-            senderMessage = userMessageET.getText().toString();
-            String messageTime , messageDate;
-            Calendar calendar = Calendar.getInstance();
 
-            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-            messageDate = currentDate.format(calendar.getTime());
-
-            SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-            messageTime = currentTime.format(calendar.getTime());
-
-            userMessageET.setText("");
-            String randomKey = database.getReference().push().getKey();
-            assert randomKey != null;
-
-            if(imageUri != null) {
-                if(currentUser != null)
+                if (imageUri != null) {
                     storageReference = storage.getReference().child("images").child(currentUser.getUid());
-                storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                ImagePath = uri.toString();
-                                MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime ,messageDate, ImagePath);
-                                database.getReference().child("globalGroupChat")
-                                        .child(randomKey)
-                                        .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        ImagePath = "null";
-                                        imageUri = null;
-                                        Toast.makeText(getActivity(), "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
+                    storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    ImagePath = uri.toString();
+                                    MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime, messageDate, ImagePath);
+                                    database.getReference().child("globalGroupChat")
+                                            .child(randomKey)
+                                            .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            ImagePath = "null";
+                                            imageUri = null;
+                                            loadingDialogBox.dismiss();
+                                            Toast.makeText(getContext(), "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
 
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-            }
-            return  null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try {
-                if(loadingDialogBox.isShowing()){
-                    loadingDialogBox.dismiss();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
-            finally {
-                loadingDialogBox.dismiss();
-            }
-        }
-    }
 
-}
+            }}}}
+
+
+

@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity
     private FirebaseUser currUser;
     ProgressDialog dialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +59,7 @@ public class LoginActivity extends AppCompatActivity
         createOneTV = (TextView) findViewById(R.id.create_one);
         forAdminTV = (TextView) findViewById(R.id.admin);
         dialog=new ProgressDialog(this);
+        currUser = firebaseAuth.getCurrentUser();
         dialog.setMessage("Logging in...");
         dialog.setCancelable(false);
 
@@ -143,8 +143,6 @@ public class LoginActivity extends AppCompatActivity
 
                         //Login Successful
                         dialog.setMessage("Getting your profile...");
-
-
                         currUser = firebaseAuth.getCurrentUser();
                         final String user_id = currUser.getUid();
                         Task<DocumentSnapshot> userDetails = db.collection("UserInformation").document(user_id).get();
@@ -246,14 +244,25 @@ public class LoginActivity extends AppCompatActivity
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null)
         {
-            if (hasLoginAdmin){
-                startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
-                finish();
-            }
-            else{
-                startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
-                finish();
-            }
+            Task<DocumentSnapshot> userDetails = db.collection("UserInformation").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
+            userDetails.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    UserClass userClass = documentSnapshot.toObject(UserClass.class);
+                    Designation = userClass.getsDesignation();
+
+                    if (Designation.equalsIgnoreCase("Admin")){
+                        startActivity(new Intent(LoginActivity.this, AdminFragmentContainer.class));
+                        finish();
+                    }
+                    else{
+                        startActivity(new Intent(LoginActivity.this, MessFragmentContainer.class));
+                        finish();
+                    }
+                }
+            });
+
+
         }
 
     }

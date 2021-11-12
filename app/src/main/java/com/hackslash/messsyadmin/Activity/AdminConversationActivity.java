@@ -15,5 +15,7 @@ public class AdminConversationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_conversation);
         Intent conversationIntent = getIntent();
 
+        
+
     }
 }

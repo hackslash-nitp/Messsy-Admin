@@ -9,73 +9,75 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:layout_height="485dp"
         android:layout_centerInParent="true">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view1"
-            android:layout_width="155dp"
-            android:layout_height="195dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginRight="35dp"
-            app:cardCornerRadius="35dp"
-            app:cardElevation="10dp">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/card_view1"-->
+<!--            android:layout_width="155dp"-->
+<!--            android:layout_height="195dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="45dp"-->
+<!--            android:layout_marginRight="35dp"-->
+<!--            app:cardCornerRadius="35dp"-->
+<!--            app:cardElevation="10dp">-->
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
 
-                android:background="@color/white">
-
-
-                <RelativeLayout
-                    android:id="@+id/conversations"
-                    android:layout_width="match_parent"
-                    android:layout_height="99dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginRight="19dp"
-                    android:background="@drawable/ellipse_conversations">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/chat" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/conversations"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center_horizontal"
-                    android:text="Conversations"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+<!--                android:background="@color/white">-->
 
 
-            </RelativeLayout>
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/conversations"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="99dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_marginLeft="19dp"-->
+<!--                    android:layout_marginTop="19dp"-->
+<!--                    android:layout_marginRight="19dp"-->
+<!--                    android:background="@drawable/ellipse_conversations">-->
 
-        </androidx.cardview.widget.CardView>
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:src="@drawable/chat" />-->
+
+<!--                </RelativeLayout>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/conversations"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:layout_marginTop="13dp"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:fontFamily="@font/roboto"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:text="Conversations"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18sp" />-->
+
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view2"
             android:layout_width="155dp"
             android:layout_height="195dp"
-            android:layout_alignTop="@id/card_view1"
-            android:layout_marginRight="25dp"
-            android:layout_toRightOf="@+id/card_view1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="35dp"
             app:cardCornerRadius="35dp"
             app:cardElevation="10dp">
 
@@ -130,9 +132,9 @@
             android:id="@+id/card_view3"
             android:layout_width="155dp"
             android:layout_height="195dp"
-            android:layout_below="@+id/card_view1"
-            android:layout_alignLeft="@id/card_view1"
-            android:layout_alignRight="@id/card_view1"
+            android:layout_below="@+id/card_view2"
+            android:layout_alignLeft="@id/card_view2"
+            android:layout_alignRight="@id/card_view2"
             android:layout_marginTop="35dp"
             app:cardCornerRadius="35dp"
             app:cardElevation="10dp">
@@ -190,10 +192,9 @@
             android:layout_width="155dp"
             android:layout_height="195dp"
             android:layout_below="@id/card_view2"
-            android:layout_alignLeft="@id/card_view2"
-            android:layout_alignRight="@id/card_view2"
-            android:layout_marginTop="35dp"
-            android:layout_toRightOf="@id/card_view3"
+            android:layout_alignTop="@id/card_view2"
+            android:layout_marginRight="25dp"
+            android:layout_toRightOf="@+id/card_view2"
             app:cardCornerRadius="35dp"
             app:cardElevation="10dp">
 
