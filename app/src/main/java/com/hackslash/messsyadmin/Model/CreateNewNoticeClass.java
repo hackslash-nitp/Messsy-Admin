@@ -5,17 +5,16 @@ public class CreateNewNoticeClass {
     private String Description;
 
     String timestamp;
-    private String UserInfo;
-    private String date;
+    private String date, designation, hostel;
 
-
-    public CreateNewNoticeClass(String subject, String Description, String UserInfo, String date, String timestamp){
+    public CreateNewNoticeClass(String subject, String Description, String date, String timestamp, String designation, String hostel){
 
         this.subject=subject;
         this.Description= Description;
-        this.UserInfo=UserInfo;
         this.date=date;
         this.timestamp=timestamp;
+        this.designation=designation;
+        this.hostel=hostel;
 
     }
     public CreateNewNoticeClass(){
@@ -33,12 +32,6 @@ public class CreateNewNoticeClass {
     public void setDescription(String Description){
         this.Description=Description;
     }
-    public String getUserInfo(){
-        return UserInfo;
-    }
-    public void setUserInfo(String UserInfo){
-        this.subject=subject;
-    }
     public String getDate(){
         return date;
     }
@@ -53,4 +46,20 @@ public class CreateNewNoticeClass {
         this.timestamp = timestamp;
     }
 
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getHostel() {
+        return hostel;
+    }
+
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
+    }
 }

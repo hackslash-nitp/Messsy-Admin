@@ -36,8 +36,28 @@ public class NoticeBoxAdapter extends RecyclerView.Adapter<NoticeBoxAdapter.view
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         holder.subject.setText(data.get(position).getSubject());
         holder.description.setText(data.get(position).getDescription());
-        holder.hostelMessName.setText(data.get(position).getUserInfo());
-        holder.imageView.setImageResource(R.drawable.brahmaputra_hostel_icon);
+        holder.hostelMessName.setText(data.get(position).getHostel() + " " + data.get(position).getDesignation());
+        String hostel = data.get(position).getHostel().toString();
+        if("brahmputra".equalsIgnoreCase(hostel))
+        {
+            holder.imageView.setImageResource(R.drawable.brahmaputra_hostel_icon);
+        }
+        else if("kosi".equalsIgnoreCase(hostel))
+        {
+            holder.imageView.setImageResource(R.drawable.kosi_icon);
+        }
+        else if("ganga".equalsIgnoreCase(hostel))
+        {
+            holder.imageView.setImageResource(R.drawable.ganga_hostel_icon);
+        }
+        else if("sone".equalsIgnoreCase(hostel))
+        {
+            holder.imageView.setImageResource(R.drawable.sone_icon);
+        }
+        else
+        {
+            holder.imageView.setImageResource(R.drawable.admin_profile_fragment_img);
+        }
         holder.date.setText(data.get(position).getDate());
         holder.time.setText(data.get(position).getTimestamp());
     }

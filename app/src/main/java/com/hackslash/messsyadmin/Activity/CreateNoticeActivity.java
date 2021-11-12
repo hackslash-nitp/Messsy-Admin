@@ -14,20 +14,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
+    import com.bumptech.glide.Glide;
+    import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
+    import com.google.firebase.auth.FirebaseAuth;
+    import com.google.firebase.auth.FirebaseUser;
+    import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+    import com.google.firebase.firestore.DocumentSnapshot;
+    import com.google.firebase.firestore.FirebaseFirestore;
 import com.hackslash.messsyadmin.Model.CreateNewNoticeClass;
-import com.hackslash.messsyadmin.R;
+    import com.hackslash.messsyadmin.Model.UserClass;
+    import com.hackslash.messsyadmin.R;
 
 import java.text.DateFormat;
     import java.text.SimpleDateFormat;
     import java.util.Calendar;
     import java.util.Date;
     import java.util.Locale;
+    import java.util.Objects;
 
     public class CreateNoticeActivity extends AppCompatActivity  {
     private Button backButton,createNotice;
@@ -35,6 +41,17 @@ import java.text.DateFormat;
     String subject,description;
     EditText subEdit,desEdit;
     FirebaseFirestore db;
+
+
+    String designation, hostel;
+
+    DocumentReference docref ;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
+
+    String UID;
+
+    UserClass user;
 
 
     @Override
@@ -47,6 +64,47 @@ import java.text.DateFormat;
         subEdit=findViewById(R.id.subject_edit_text);
         desEdit=findViewById(R.id.notice_description_edit);
         dialog = new Dialog(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        docref = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
+
+        UID = currentUser.getUid().toString();
+
+
+
+
+
+        docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    user = documentSnapshot.toObject(UserClass.class);
+
+                    if(user != null)
+                    {
+                        designation = user.getsDesignation().toString();
+                        hostel = user.getsHostelName().toString();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
+                        hostel = "Not"; //unknown
+                        designation = "Known"; //unknown
+                    }
+                }
+
+        }
+    }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                hostel = "Not"; //unknown
+                designation = "Known"; //unknown
+            }
+        });
+
+
+
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +159,7 @@ import java.text.DateFormat;
 
         // String userInfo = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         CollectionReference dbNotice = db.collection("MessssyNotice");
-        CreateNewNoticeClass Notice = new CreateNewNoticeClass(subject,description,"Brahmputra Hostel Mess",date,currentTime);
+        CreateNewNoticeClass Notice = new CreateNewNoticeClass(subject,description,date,currentTime, designation, hostel);
         System.out.println(subject);
         System.out.println(description);
         System.out.println(date);

@@ -8,6 +8,7 @@ public class UserClass {
     public UserClass(){}
 
     public UserClass(String sName, String sEmail, String sMobile, String sHostelName, String sDesignation, String sImageUrl , String sUid) {
+
         this.Name = sName;
         this.Email = sEmail;
         this.Mobile = sMobile;
