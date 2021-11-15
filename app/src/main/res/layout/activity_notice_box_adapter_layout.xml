@@ -34,7 +34,7 @@
                 android:id="@+id/hostelMessName"
                 android:layout_marginTop="14dp"
                 android:textColor="#3F3F3F"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:fontFamily="@font/josefin_sans_semibold"
                 android:layout_marginRight="22dp"
                 android:layout_toRightOf="@id/imageIcon"

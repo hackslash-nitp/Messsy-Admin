@@ -63,7 +63,7 @@
         android:textColor="#000000"
         android:fontFamily="@font/josefin_sans"
         android:layout_marginTop="10dp"
-        android:text="Mess in-charge\nGanga Hostel"/>
+        android:text="Mess Member"/>
 
     <LinearLayout
         android:id="@+id/info"

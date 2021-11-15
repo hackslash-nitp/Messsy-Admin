@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -96,7 +97,6 @@ public class AdminAbsenteesActivity extends AppCompatActivity {
                     SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yy");
 
                     currentDate=sdf.format(c);
-
 
                     try {
                          date= sdf.parse(currentDate);
