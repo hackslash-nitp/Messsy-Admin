@@ -16,8 +16,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,7 +41,7 @@ import com.hackslash.messsyadmin.R;
 import java.io.IOException;
 import java.util.UUID;
 
-public class AdminEditProfile extends AppCompatActivity {
+public class AdminEditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button saveDetails,backButton;
     Dialog dialog;
     private static final int PICK_IMAGE = 1;
@@ -55,6 +59,10 @@ public class AdminEditProfile extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference;
 
+    Spinner spinner;
+    String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
+    String data;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,7 @@ public class AdminEditProfile extends AppCompatActivity {
         nameTV = (TextView) findViewById(R.id.etName);
         emailTV = (TextView) findViewById(R.id.etEmail);
         passwordTV = (TextView) findViewById(R.id.etPassword);
+        spinner = findViewById(R.id.hostel_edit_spinner);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -72,6 +81,9 @@ public class AdminEditProfile extends AppCompatActivity {
         documentReference = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
         storageReference = storage.getReference().child("images").child(currentUser.getUid());
 
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,hostellist);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
 
 
 
@@ -85,6 +97,7 @@ public class AdminEditProfile extends AppCompatActivity {
             public void onClick(View v) {sName = nameTV.getText().toString();
                 sEmail = emailTV.getText().toString();
                 sPassword = passwordTV.getText().toString();
+                data = spinner.getSelectedItem().toString();
 
 
 
@@ -100,6 +113,11 @@ public class AdminEditProfile extends AppCompatActivity {
                     passwordTV.setError("Write new password");
                     return;
                 }
+                if(data.equals("Select Your Hostel"))
+                {
+                    Toast.makeText(AdminEditProfile.this,"Please Select Your Hostel", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 currentUser.updateEmail(sEmail).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -112,6 +130,8 @@ public class AdminEditProfile extends AppCompatActivity {
                         Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
 
                 currentUser.updatePassword(sPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -141,6 +161,18 @@ public class AdminEditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AdminEditProfile.this, "Email updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                documentReference.update("sHostelName", data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AdminEditProfile.this, "Hostel Updated", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -248,5 +280,15 @@ public class AdminEditProfile extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
