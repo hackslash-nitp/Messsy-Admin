@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +31,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hackslash.messsyadmin.Model.UserClass;
 import com.hackslash.messsyadmin.R;
 
@@ -36,17 +44,30 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class AdminRegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button loginButton, addImageButton, registerButton, visibilityButton;
     EditText nameET, emailAddET, mobileNumberET, passwordET;
-    String  sName , sEmail , sMobile , sPassword ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null";
+    ImageView profileImage;
+    String  sName , sEmail , sMobile , sPassword ,sHostelName = "null", sDesignation = "Admin",sImageUrl = "null" , sUId;
     Boolean hasVisible = false;
     private static int PICK_IMAGE = 1 ;
     Dialog dialogSuccesfullyRegistered;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    UserClass userInfo;
+
+    Uri selectedImage;
+    FirebaseStorage storage;
+    String ImagePath;
+    Bitmap bitmap;
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DocumentReference documentReference;
+    StorageReference storageReference;
+
+    ProgressDialog progressDialog;
 
     Spinner spinner;
     String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
@@ -69,6 +90,7 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
         emailAddET = (EditText) findViewById(R.id.EmailAddress);
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
         passwordET = (EditText) findViewById(R.id.Password);
+        profileImage = (ImageView) findViewById(R.id.image);
         dialogSuccesfullyRegistered = new Dialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,6 +103,11 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,hostellist);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
+
+        storage=FirebaseStorage.getInstance();
+        progressDialog = new ProgressDialog(AdminRegisterActivity.this);
+        progressDialog.setTitle("Registering");
+        progressDialog.setMessage("Please Wait");
 
 
 
@@ -114,7 +141,8 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
 
                 }
 
-                if(data == "Select Your Hostel") {
+
+                if(sHostelName == "Select Your Hostel") {
                     Toast.makeText(AdminRegisterActivity.this, "Please Select Your Hostel", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -127,6 +155,7 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
 
                 userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
 
+
                 if (currentUser != null) {
                     Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
                     startActivity(sendToAdminFragmentContainerIntent);
@@ -134,12 +163,62 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
                     firebaseAuth.createUserWithEmailAndPassword(sEmail, sPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                        currentUser=FirebaseAuth.getInstance().getCurrentUser();
+                            progressDialog.show();
+                            currentUser=FirebaseAuth.getInstance().getCurrentUser();
+                            assert currentUser != null;
+                            sUId = currentUser.getUid();
+                            userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl , sUId);
+
                             firebaseFirestore.collection("UserInformation").document(currentUser.getUid()).set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    OpenDialog();
+                                    Toast.makeText(AdminRegisterActivity.this, "Information uploaded on firebase", Toast.LENGTH_SHORT).show();
+                                    if(selectedImage != null){
+                                    storageReference = storage.getReference().child("images").child(currentUser.getUid());
+                                    documentReference = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
+                                    storageReference.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            Toast.makeText(AdminRegisterActivity.this, "Image Saved", Toast.LENGTH_SHORT).show();
+                                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    ImagePath = uri.toString();
+                                                    documentReference.update("imageUrl", ImagePath).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Toast.makeText(AdminRegisterActivity.this, "Url Saved", Toast.LENGTH_SHORT).show();
+                                                            progressDialog.dismiss();
+                                                            OpenDialog();
 
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    });
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                                }
+                                    else{
+                                        progressDialog.dismiss();
+                                        OpenDialog();
+                                    }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -155,6 +234,7 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
                             Toast.makeText(AdminRegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
 
                 }
 
@@ -187,12 +267,13 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminRegisterActivity.this, "Adding Image", Toast.LENGTH_SHORT).show();
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), PICK_IMAGE);
+                Intent intent1= new Intent();
+                intent1.setType("image/*");
+                intent1.setAction(Intent.ACTION_GET_CONTENT);
 
+                startActivityForResult(Intent.createChooser(intent1,"Add Image"),PICK_IMAGE);
             }
         });
-
 
     }
 
@@ -220,19 +301,16 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-        //Detects request codes
         if(requestCode== PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+            selectedImage = data.getData();
+            bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                profileImage.setImageBitmap(bitmap);
+
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
