@@ -83,8 +83,8 @@ import java.text.DateFormat;
 
                     if(user != null)
                     {
-                        designation = user.getsDesignation().toString();
-                        hostel = user.getsHostelName().toString();
+                        designation = user.getsDesignation();
+                        hostel = user.getsHostelName();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Information doesn't exists ", Toast.LENGTH_SHORT).show();
@@ -196,10 +196,17 @@ import java.text.DateFormat;
             Done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(dialog != null && dialog.isShowing()){
-                    dialog.dismiss();
-                    Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
-                    startActivity(sendToAdminFragmentContainerIntent);}
+                    if(dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+
+                        if (designation.equalsIgnoreCase("Admin")) {
+                            Intent sendToAdminFragmentContainerIntent = new Intent(getApplicationContext(), AdminFragmentContainer.class);
+                            startActivity(sendToAdminFragmentContainerIntent);
+                        } else {
+                            Intent sendToMessFragmentContainerIntent = new Intent(getApplicationContext(), MessFragmentContainer.class);
+                            startActivity(sendToMessFragmentContainerIntent);
+                        }
+                    }
                 }
             });
             dialog.show();
