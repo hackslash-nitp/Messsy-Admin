@@ -14,27 +14,32 @@ import com.google.android.material.tabs.TabLayout;
 import com.hackslash.messsyadmin.Adapters.SectionPageAdapter;
 import com.hackslash.messsyadmin.R;
 
-public class MessActivityFragment extends Fragment {
+public class AdminConversationFragment extends Fragment {
     private SectionPageAdapter sectionPageAdapter;
+
+
     @Nullable
     @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mess_activity,container,false);
+
+        View view = inflater.inflate(R.layout.fragment_admin_activity,container,false);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.container);
         setupViewPager(viewPager);
 
         TabLayout tabs = (TabLayout) view.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        return view;
+           return view;
     }
+
+
     private void setupViewPager(ViewPager viewPager){
 
         SectionPageAdapter adapter = new SectionPageAdapter(getChildFragmentManager());
         adapter.addFragment(new AdminDMsFragment(),"DMs");
-        adapter.addFragment(new AdminTalkFragment(),"Mess Talk");
-//        adapter.addFragment(new AdminMessageMessFragment(),"Message Admins");
+        adapter.addFragment(new AdminGroupTalkFragment(),"Group Talk");
+//        adapter.addFragment(new AdminMessageMessFragment(),"Message Mess");
         viewPager.setAdapter(adapter);
 
     }
-
 }

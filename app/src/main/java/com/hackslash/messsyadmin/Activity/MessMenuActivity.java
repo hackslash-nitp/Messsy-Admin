@@ -36,17 +36,17 @@ public class MessMenuActivity extends Activity {
         data.add(new MessMenuAdapterClass("Day        " ,"Monday", "Tuesday",
                 "Wednesday",  "Thursday","Friday","Saturday","Sunday"));
 
-        data.add(new MessMenuAdapterClass("Breakfast    " ,"abcde", "abcde",
-                "abcde",  "abcde","abcde","abcde","abcde"));
+        data.add(new MessMenuAdapterClass("Breakfast    " ,"Paratha", "Dosa",
+                "Bread-Jam",  "Maggi & Tea","Uttapam","Chole-Bhature","Poha"));
 
-        data.add(new MessMenuAdapterClass("Lunch      " ,"abcde", "abcde",
-                "abcde",  "abcde","abcde","abcde","abcde"));
+        data.add(new MessMenuAdapterClass("Lunch      " ,"Paneer Chilli", "Mix Veg",
+                "Biryani",  "Malai Kofta","Rajma-Chawal","Aaloo Dumm","Paneer Do Pyaaza"));
 
-        data.add(new MessMenuAdapterClass("Snacks     " ,"abcde", "abcde",
-                "abcde",  "abcde","abcde","abcde","abcde"));
+        data.add(new MessMenuAdapterClass("Snacks     " ,"Biscuit & Maggi", "Tea/Coffee",
+                "Noodles",  "Raj-Kachori","Pakoda","Samosa","Kachori"));
 
-        data.add(new MessMenuAdapterClass("Dinner     " ,"abcde", "abcde",
-                "abcde",  "abcde","abcde","abcde","abcde"));
+        data.add(new MessMenuAdapterClass("Dinner     " ,"Matar Paneer", "Kaju Curry",
+                "Dal Makhni",  "Veg Pulao","Dosa","Mushroom Chilli","Malai Kofta"));
 
 
 

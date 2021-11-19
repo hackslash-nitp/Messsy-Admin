@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AdminTalkFragment extends Fragment {
+public class AdminGroupTalkFragment extends Fragment {
     private static final int RESULT_OK = -1;
     List<MessageClass> messageClassArrayList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -61,6 +62,8 @@ public class AdminTalkFragment extends Fragment {
     StorageReference storageReference;
     private static final int PICK_IMAGE = 2;
     Uri imageUri;
+    ProgressDialog loadingDialogBox;
+
 
 
     @Nullable
@@ -110,6 +113,8 @@ public class AdminTalkFragment extends Fragment {
 
                         for(DataSnapshot snapshot1 : snapshot.getChildren()){
                             MessageClass message =  snapshot1.getValue(MessageClass.class);
+                            Log.e("Message :" , message.getMessage());
+                            Log.e("Image Url :" , message.getImageUrl());
                             messageClassArrayList.add(message);
 
                         }
@@ -185,45 +190,14 @@ public class AdminTalkFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ProgressDialog loadingDialogBox = new ProgressDialog(getActivity());
-        loadingDialogBox.setTitle("Sending Image");
-        loadingDialogBox.setMessage("Please Wait...");
-        loadingDialogBox.setCanceledOnTouchOutside(false);
 
         if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
-
-
             assert data != null;
             imageUri = data.getData();
-
-            new ProgressTask(loadingDialogBox).execute();
-        }
-
-
-    }
-
-    class ProgressTask extends AsyncTask<Void , Void ,Void> {
-
-        private final ProgressDialog loadingDialogBox;
-
-        public ProgressTask(ProgressDialog dialog){
-            this.loadingDialogBox = dialog;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadingDialogBox.setTitle("Sending Image");
-            loadingDialogBox.setMessage("Please Wait...");
-            loadingDialogBox.setCanceledOnTouchOutside(false);
-            loadingDialogBox.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
+            loadingDialogBox = ProgressDialog.show(getContext(), "Sending Image", "Please Wait...", true, false);
 
             senderMessage = userMessageET.getText().toString();
-            String messageTime , messageDate;
+            String messageTime, messageDate;
             Calendar calendar = Calendar.getInstance();
 
             SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
@@ -232,12 +206,14 @@ public class AdminTalkFragment extends Fragment {
             SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
             messageTime = currentTime.format(calendar.getTime());
 
+            MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime, messageDate);
             userMessageET.setText("");
+
             String randomKey = database.getReference().push().getKey();
             assert randomKey != null;
 
-            if(imageUri != null) {
-                if(currentUser != null)
+
+            if (imageUri != null) {
                 storageReference = storage.getReference().child("images").child(currentUser.getUid());
                 storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -246,7 +222,7 @@ public class AdminTalkFragment extends Fragment {
                             @Override
                             public void onSuccess(Uri uri) {
                                 ImagePath = uri.toString();
-                                MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime ,messageDate, ImagePath);
+                                MessageClass message = new MessageClass(senderMessage, senderUid, name, profileImageUrl, messageTime, messageDate, ImagePath);
                                 database.getReference().child("globalGroupChat")
                                         .child(randomKey)
                                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -254,13 +230,14 @@ public class AdminTalkFragment extends Fragment {
                                     public void onSuccess(Void aVoid) {
                                         ImagePath = "null";
                                         imageUri = null;
-                                        Toast.makeText(getActivity(), "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
+                                        loadingDialogBox.dismiss();
+                                        Toast.makeText(getContext(), "Message Uploaded On Realtime Database", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -269,30 +246,11 @@ public class AdminTalkFragment extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-            }
-            return  null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try {
-                if(loadingDialogBox.isShowing()){
-                    loadingDialogBox.dismiss();
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
-            finally {
-                loadingDialogBox.dismiss();
-            }
-        }
-    }
+    }}}
 
-}

@@ -15,6 +15,7 @@ public class NavigationDrawerReportIssueActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation_drawer_report_issue);
         Intent navigationDrawerReportIssueIntent = new Intent(getApplicationContext(), MessReportIssueActivity.class);
         startActivity(navigationDrawerReportIssueIntent);
+        finish();
 
     }
 }
