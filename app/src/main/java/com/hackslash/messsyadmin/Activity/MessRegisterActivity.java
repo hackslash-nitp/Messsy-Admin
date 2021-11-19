@@ -15,9 +15,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +42,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MessRegisterActivity extends AppCompatActivity {
+public class MessRegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -63,6 +66,10 @@ public class MessRegisterActivity extends AppCompatActivity {
     StorageReference storageReference;
     ProgressDialog progressDialog;
 
+    Spinner spinner;
+    String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +84,23 @@ public class MessRegisterActivity extends AppCompatActivity {
         nameET = (EditText) findViewById(R.id.name);
         emailAddET = (EditText) findViewById(R.id.EmailAddress);
         mobileNumberET = (EditText) findViewById(R.id.mobilenumber);
-        hostelNameET = (EditText) findViewById(R.id.hostelname);
+        //hostelNameET = (EditText) findViewById(R.id.hostelname);
         passwordET = (EditText) findViewById(R.id.Password);
         profileImage = (ImageView) findViewById(R.id.image);
         dialogSuccesfullyRegistered = new Dialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        spinner = findViewById(R.id.hostelname);
 
         storage=FirebaseStorage.getInstance();
         progressDialog = new ProgressDialog(MessRegisterActivity.this);
         progressDialog.setTitle("Registering");
         progressDialog.setMessage("Please Wait");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,hostellist);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +108,9 @@ public class MessRegisterActivity extends AppCompatActivity {
                 sName = nameET.getText().toString();
                 sEmail = emailAddET.getText().toString();
                 sMobile = mobileNumberET.getText().toString();
-                sHostelName = hostelNameET.getText().toString();
+                //sHostelName = hostelNameET.getText().toString();
                 sPassword = passwordET.getText().toString();
+                sHostelName = spinner.getSelectedItem().toString();
 
                 if (sName.isEmpty()) {
                     nameET.setError("Name is required");
@@ -112,15 +126,19 @@ public class MessRegisterActivity extends AppCompatActivity {
                     return;
 
                 }
-                if (sHostelName.isEmpty()) {
-                    hostelNameET.setError("Hostel Name is required");
-                    return;
+                //if (sHostelName.isEmpty()) {
+                    //hostelNameET.setError("Hostel Name is required");
+                    //return;
 
-                }
+                //}
                 if (sPassword.isEmpty()) {
                     passwordET.setError("Not a valid Password");
                     return;
 
+                }
+                if(sHostelName.equals("Select Your Hostel")){
+                    Toast.makeText(MessRegisterActivity.this, "Please Select Your Hostel", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
 //                UserClass userInfo = new UserClass(sName, sEmail, sMobile, sHostelName, sDesignation, sImageUrl);
@@ -284,6 +302,16 @@ public class MessRegisterActivity extends AppCompatActivity {
             }
         }
 
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

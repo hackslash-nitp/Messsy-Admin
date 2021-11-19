@@ -13,8 +13,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,7 @@ import com.hackslash.messsyadmin.R;
 
 import java.io.IOException;
 
-public class MessEditProfile extends AppCompatActivity {
+public class MessEditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button saveDetails,backBtn;
     Dialog dialog;
     private TextView nameTV , emailTV , passwordTV;
@@ -49,6 +52,9 @@ public class MessEditProfile extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference;
 
+    Spinner spinner;
+    String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
+    String sHostelName;
 
 
     @Override
@@ -60,14 +66,16 @@ public class MessEditProfile extends AppCompatActivity {
         nameTV = (TextView) findViewById(R.id.etName);
         emailTV = (TextView) findViewById(R.id.etEmail);
         passwordTV = (TextView) findViewById(R.id.etPassword);
+        spinner = findViewById(R.id.hostel_mess_edit);
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         documentReference = FirebaseFirestore.getInstance().collection("UserInformation").document(currentUser.getUid());
         storageReference = storage.getReference().child("images").child(currentUser.getUid());
 
-
-
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,hostellist);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
 
 
         Button AddImage;
@@ -84,6 +92,7 @@ public class MessEditProfile extends AppCompatActivity {
                 sName = nameTV.getText().toString();
                 sEmail = emailTV.getText().toString();
                 sPassword = passwordTV.getText().toString();
+                sHostelName = spinner.getSelectedItem().toString();
 
 
 
@@ -97,6 +106,11 @@ public class MessEditProfile extends AppCompatActivity {
                 }
                 if(sPassword.isEmpty()){
                     passwordTV.setError("Write new password");
+                    return;
+                }
+                if(sHostelName.equals("Select Your Hostel"))
+                {
+                    Toast.makeText(MessEditProfile.this, "Please Select Your Hostel", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -140,6 +154,18 @@ public class MessEditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(MessEditProfile.this, "Email updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MessEditProfile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                documentReference.update("sHostelName",sHostelName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(MessEditProfile.this, "Hostel Updated", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -254,5 +280,15 @@ public class MessEditProfile extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

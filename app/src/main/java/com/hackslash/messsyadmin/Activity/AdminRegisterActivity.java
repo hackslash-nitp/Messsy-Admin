@@ -73,6 +73,7 @@ public class AdminRegisterActivity extends AppCompatActivity implements AdapterV
     String[] hostellist={"Select Your Hostel", "Brahmaputra", "Ganga", "Kosi", "Sone"};
     String data;
     DatabaseReference databaseReference;
+    //UserClass userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

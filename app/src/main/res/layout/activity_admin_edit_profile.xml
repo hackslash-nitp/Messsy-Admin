@@ -141,6 +141,14 @@
             android:padding="7dp"
             android:textSize="18sp" />
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:id="@+id/hostel_edit_spinner"
+            />
+
+
     </LinearLayout>
 
     <Button
